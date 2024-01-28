@@ -9,14 +9,13 @@ import Image from "next/image";
 const Cta = () => {
   return (
     <section className="p-4 relative">
-      <div className="absolute -top-[172px] left-[2px] z-0 lg:flex hidden">
-    
+      <div className="absolute -top-[220px] left-[0px] z-0 lg:flex hidden">
         <Image src={img1} alt="img1" width={428} height={428}/>
       </div>
-      <div className="absolute -top-[204px] -right-[80px] z-0 lg:flex hidden">
+      <div className="absolute -top-[212px] -right-[90px] z-0 lg:flex hidden">
       <Image src={img2} alt="img2" width={500} height={500}/>
       </div>
-      <div className="absolute -bottom-[160px] left-28 z-0 lg:flex hidden">
+      <div className="absolute -bottom-[120px] left-40 z-0 lg:flex hidden">
       <Image src={img3} alt="img3" width={240} height={240}/>
       </div>
       <div className="absolute -bottom-12 right-20 z-0 lg:flex hidden">

@@ -4,6 +4,7 @@ import Services from "@/components/services"
 import ValueProps from "@/components/valueProps";
 import Faq from "@/components/faq";
 import Cta from "@/components/cta";
+import Footer from "@/components/footer";
 
 
 const Home = () => {
@@ -15,6 +16,7 @@ const Home = () => {
       <ValueProps/>
       <Faq/>
       <Cta/>
+      <Footer/>
     </section>
   );
 };
