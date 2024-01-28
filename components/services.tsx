@@ -1,5 +1,8 @@
 import SectionTitle from "./sectionTitle"
 import {Card, CardBody, CardFooter, CardHeader} from "@nextui-org/react"
+import Image from "next/image"
+import img1 from "../public/servicesImg1.png"
+import img2 from "../public/servicesImg2.png"
 
 const services = [
    {
@@ -75,13 +78,20 @@ const services = [
 
 const Services  = () => {
     return (
-        <section className="p-4">
+        <section className="p-4 relative z-0">
+            <div className="absolute -top-[200px] right-0 lg:flex hidden z-10">
+                <Image src={img1} alt="img1" width={540} height={540} className="z-20"/>
+            </div>
+            <div className="absolute -bottom-[320px] -left-20 lg:flex hidden z-10">
+                <Image src={img2} alt="img1" width={540} height={540} className="z-20"/>
+            </div>
+
             <SectionTitle title="Our Services">
                 Dawn&apos;s complete suite of blockchain-scaling solutions.
             </SectionTitle>
             <div className="grid grid-flow-row lg:grid-cols-3 lg:grid-rows-2 grid-cols-1 grid-rows-6 lg:gap-[16px] gap-4 ">
             {services.map((service, i) => (
-               <Card key={i} className=" lg:h-[334px] h-[380px] col-span-1 row-span-1 px-[25px] relative ">
+               <Card key={i} className=" lg:h-[334px] h-[380px] col-span-1 row-span-1 px-[25px] relative z-30 ">
                  {/* <div className="absolute top-0 right-0">
                         {service.color}
                     </div> */}
@@ -91,7 +101,7 @@ const Services  = () => {
                 </CardHeader>
                 <CardBody className="gap-[16px]">
                 <h3 className="font-bold text-3xl">{service.title}</h3>
-                <p className="text-[18px]">{service.description}</p>
+                <p className="text-[17px]">{service.description}</p>
                 </CardBody>   
                 
                     

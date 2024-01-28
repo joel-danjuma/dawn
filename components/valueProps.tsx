@@ -1,16 +1,15 @@
 import Image from "next/image"
 import SectionTitle from "./sectionTitle"
-import img1 from "../public/valuePropImg1.png"
-import img2 from "../public/valuePropImg2.png"
-import img3 from "../public/valuePropImg3.png"
-import img4 from "../public/valuePropImg4.png"
-// import { ValuePropImg1 } from "@/public/icons/valuePropImg1"
-// import { ValuePropImg2 } from "@/public/icons/valuePropImg2"
-// import { ValuePropImg3 } from "@/public/icons/valuePropImg3"
-// import { ValuePropImg4 } from "@/public/icons/valuePropImg4"
+import i1 from "../public/valuePropImg1.png"
+import i2 from "../public/valuePropImg2.png"
+import i3 from "../public/valuePropImg3.png"
+import i4 from "../public/valuePropImg4.png"
 
 
-
+const img1 = process.env.VALUE_PROP_IMG_1 || i1
+const img2 = process.env.VALUE_PROP_IMG_2 || i2
+const img3 = process.env.VALUE_PROP_IMG_3 || i3
+const img4 = process.env.VALUE_PROP_IMG_4 || i4
 
 const ValueProps = () => {
   return (

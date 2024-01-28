@@ -1,7 +1,9 @@
 import { Button } from "@nextui-org/react";
 // import heroImg from "../public/hero.svg";
 import Image from "next/image";
-import logo from "../public/hero-img.png"
+import img from "../public/hero-img.png"
+
+const heroImg = process.env.HERO_IMG || img
 
 const features = [
   { headline: "10k", subtitle: "active students enrolled" },
@@ -45,9 +47,9 @@ const Hero = () => {
         </div>
       </div>
       <div className="w-full flex justify-center items-center relative">
-        {/* <Image src={heroImg} alt="img" height={974} width={894} /> */}
-        <Image src={logo} alt="img" height={974} width={894} className="z-10"/>
-        {/* <HeroImg/> */}
+
+        <Image src={heroImg} alt="img" height={974} width={894} className="z-10"/>
+     
       </div>
     </section>
   );
