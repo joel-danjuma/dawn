@@ -1,7 +1,7 @@
 export type SiteConfig = typeof siteConfig;
 
 export const siteConfig = {
-  name: "DAWN | Revolutionizing Learning with Blockchain-Powered EDtech",
+  name: "DAWN AI | Revolutionizing Learning with Blockchain-Powered EDtech",
   description:
     "Experience a paradigm shift in education with DAWN, an innovative EDtech platform leveraging blockchain and AI. Unleash learning without boundaries, making education inclusive for all, irrespective of location, language, or abilities.",
   navItems: [

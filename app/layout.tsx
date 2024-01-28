@@ -28,7 +28,7 @@ export const metadata = {
       title: siteConfig.name,
       description: siteConfig.description,
       type: "website",
-      siteName: "DAWN - AI",
+      siteName: "DAWN AI",
       url: `${process.env.NEXT_PUBLIC_URL}`,
   },
   robots: {
