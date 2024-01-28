@@ -13,7 +13,7 @@ const Footer = () => {
                 <div className="px-4 py-2 mx-auto max-w-7xl sm:px-6 md:flex md:items-center md:justify-between lg:px-8">
                   <div className="flex justify-center space-x-6 md:order-2">
                     <span className="flex justify-between w-full gap-3 lg:ml-auto md:justify-start md:w-auto">
-                      <ul className="flex flex-row justify-between gap-4">
+                      <ul className="lg:flex hidden flex-row justify-between gap-4">
                         <li> <a className="w-6 h-6 transition hover:text-blue-500">
                         <span className="">
                           <h3 className="text-white" >Community</h3 >
@@ -74,8 +74,6 @@ const Footer = () => {
                           Discord
                         </span>
                         <Discord/>
-
-
 
                       </a>
                       <a className="w-6 h-6 transition fill-black hover:text-blue-500">
