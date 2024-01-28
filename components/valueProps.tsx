@@ -20,7 +20,7 @@ const ValueProps = () => {
         </SectionTitle>
         <div className="w-full h-full lg:space-y-[60px] space-y-0">
         <div className="w-full h-[568px] flex lg:flex-row flex-col justify-between ">
-            <div className="w-full h-full flex-col space-y-4 justify-center items-center lg:py-14 py-8"><h3 className="text-[52px]">Built For <br />Educators</h3>
+            <div className="w-full h-full flex-col space-y-4 lg:text-start text-justify justify-center items-center lg:py-14 py-8"><h3 className="text-[52px]">Built For <br />Educators</h3>
                 <p className="text-[#808080]">As an Educator You Can:</p>
                 <ul className="space-y-4">
                     <li> - Access course creation tool</li>
@@ -40,7 +40,7 @@ const ValueProps = () => {
                 
                
             </div>
-            <div className="w-full h-full text-end flex-col space-y-4 justify-center items-center lg:py-14 py-8"><h3 className="text-[52px]">Tailored For <br />Learners</h3>
+            <div className="w-full h-full lg:text-end text-justify flex-col space-y-4 justify-center items-center lg:py-14 py-8"><h3 className="text-[52px]">Tailored For <br />Learners</h3>
                 <p className="text-[#808080]">As a Learner You Can:</p>
                 <ul className="space-y-4">
                     <li> - Track progress and earn badges</li>
@@ -51,14 +51,15 @@ const ValueProps = () => {
             
         </div>
         <div className="w-full h-[568px] flex lg:flex-row flex-col  justify-between">
-            <div className="w-full h-full flex-col space-y-4  justify-center items-center lg:py-14 py-8"><h3 className="text-[52px]">Oppurtunity For <br />Affiliates</h3>
+            <div className="w-full h-full flex-col space-y-4 lg:text-start text-justify justify-center items-center lg:py-14 py-8"><h3 className="text-[52px]">Oppurtunity For <br />Affiliates</h3>
                 <p className="text-[#808080]">As an Affliate Marketer, you can::</p>
                 <ul className="space-y-4">
                     <li> - Access a referral link and marketing materials</li>
                     <li> - Earn tokens by referring new users to our platform</li>
                     <li> - View insights and analytics on referral performance</li>
                     <li> - View insights and analytics on referral performance</li>
-                </ul></div>
+                </ul>
+            </div>
             <div className="w-full lg:flex hidden relative">
             
                 <div className="absolute -top-[160px] -right-20"><Image src={img3} alt="img1" width={637} height={637}/></div>
@@ -72,7 +73,7 @@ const ValueProps = () => {
                 {/* <div className="absolute -top-[160px] -left-20"> <ValuePropImg4/></div> */}
                
             </div>
-            <div className="w-full h-full flex-col space-y-4 text-end justify-center items-center lg:py-14 py-8"><h3 className="text-[52px]">Vacancy For <br />Job Seekers</h3>
+            <div className="w-full h-full flex-col space-y-4 lg:text-end text-justify justify-center items-center lg:py-14 py-8"><h3 className="text-[52px]">Vacancy For <br />Job Seekers</h3>
                 <p className="text-[#808080]">As a Job seeker, you can:</p>
                 <ul className="space-y-4">
                     <li> - Create a profile and upload a resume</li>
