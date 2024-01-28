@@ -7,6 +7,7 @@ import {
 } from "@nextui-org/react";
 import Image from "next/image";
 import logo from "../public/logo.svg";
+import Link from "next/link";
 
 const Nav = () => {
   return (
@@ -21,7 +22,11 @@ const Nav = () => {
 
         <NavbarContent justify="end" className="gap-4">
         <NavbarItem>
-            <Button className="bg-white text-black p-2">Join Waitlist</Button>
+            <Button className="bg-white text-black p-2">
+              <Link href="#cta">
+              Join Waitlist
+            </Link>
+            </Button>
           </NavbarItem>
           <NavbarMenuToggle />
           

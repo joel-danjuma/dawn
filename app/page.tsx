@@ -9,7 +9,7 @@ import Footer from "@/components/footer";
 
 const Home = () => {
   return (
-    <section className="container mx-auto lg:space-y-[100px] space-y-[90px]">
+    <section className="container mx-auto lg:space-y-[100px] space-y-[40px]">
       <Hero />
       <SocialProof/>
       <Services/>

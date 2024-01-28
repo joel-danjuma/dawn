@@ -11,7 +11,7 @@ const features = [
 
 const Hero = () => {
   return (
-    <section className="flex lg:flex-row flex-col p-4 justify-between lg:gap-[180px] gap-[20px]">
+    <section className="flex lg:flex-row flex-col p-4 justify-between lg:gap-[180px] gap-[60px]">
       <div className="w-full text-start flex-col space-y-[32px]">
         <h1 className="font-bold text-[18px]">INTRODUCING DAWN AI</h1>
         <h2 className="lg:text-7xl text-3xl font-bold">
