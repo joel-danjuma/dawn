@@ -1,10 +1,16 @@
-import SectionTitle from "./sectionTitle"
-import { ValuePropImg1 } from "@/public/icons/valuePropImg1"
-import { ValuePropImg2 } from "@/public/icons/valuePropImg2"
-import { ValuePropImg3 } from "@/public/icons/valuePropImg3"
-import { ValuePropImg4 } from "@/public/icons/valuePropImg4"
 import Image from "next/image"
-import img from "@/public/ValuePropImg.svg"
+import SectionTitle from "./sectionTitle"
+import img1 from "../public/valuePropImg1.png"
+import img2 from "../public/valuePropImg2.png"
+import img3 from "../public/valuePropImg3.png"
+import img4 from "../public/valuePropImg4.png"
+// import { ValuePropImg1 } from "@/public/icons/valuePropImg1"
+// import { ValuePropImg2 } from "@/public/icons/valuePropImg2"
+// import { ValuePropImg3 } from "@/public/icons/valuePropImg3"
+// import { ValuePropImg4 } from "@/public/icons/valuePropImg4"
+
+
+
 
 const ValueProps = () => {
   return (
@@ -23,13 +29,15 @@ const ValueProps = () => {
                     <li> - View insights and analytics on course performance</li>
                 </ul></div>
             <div className="w-full lg:flex hidden relative">
-                <div className="absolute -top-[160px] -right-20"> <ValuePropImg1/></div>
+                <div className="absolute -top-[160px] -right-20"><Image src={img1} alt="img1" width={637} height={637}/></div>
+                
                
             </div>
         </div>
         <div className="w-full h-[568px] flex lg:flex-row flex-col  justify-between ">
             <div className="w-full lg:flex hidden relative">
-                <div className="absolute -top-[160px] -left-20"> <ValuePropImg2/></div>
+                <div className="absolute -top-[160px] -left-20"> <Image src={img2} alt="img1" width={637} height={637}/></div>
+                
                
             </div>
             <div className="w-full h-full text-end flex-col space-y-4 justify-center items-center lg:py-14 py-8"><h3 className="text-[52px]">Tailored For <br />Learners</h3>
@@ -52,13 +60,16 @@ const ValueProps = () => {
                     <li> - View insights and analytics on referral performance</li>
                 </ul></div>
             <div className="w-full lg:flex hidden relative">
-                <div className="absolute -top-[160px] -right-20"> <ValuePropImg3/></div>
+            
+                <div className="absolute -top-[160px] -right-20"><Image src={img3} alt="img1" width={637} height={637}/></div>
                
             </div>
         </div>
         <div className="w-full h-[568px] flex lg:flex-row flex-col  justify-between ">
             <div className="w-full lg:flex hidden relative">
-                <div className="absolute -top-[160px] -left-20"> <ValuePropImg4/></div>
+            
+                <div className="absolute -top-[160px] -left-20"><Image src={img4} alt="img1" width={637} height={637}/></div>
+                {/* <div className="absolute -top-[160px] -left-20"> <ValuePropImg4/></div> */}
                
             </div>
             <div className="w-full h-full flex-col space-y-4 text-end justify-center items-center lg:py-14 py-8"><h3 className="text-[52px]">Vacancy For <br />Job Seekers</h3>
