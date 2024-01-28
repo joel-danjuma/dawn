@@ -21,7 +21,7 @@ const Cta = () => {
       <div className="absolute -bottom-12 right-32 z-0 lg:flex hidden">
       <Image src={img4} alt="img4" width={252} height={252}/>
       </div>
-    <div className="w-full h-[420px] flex flex-col justify-center items-center text-center space-y-[64px] z-20">
+    <div className="w-full lg:h-[420px] h-fit flex flex-col justify-center items-center text-center space-y-[64px] z-20">
       <p className="lg:text-7xl text-2xl z-10">
       Join our waitlist to be the first <br />
        to know when DAWN is <br />

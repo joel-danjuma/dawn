@@ -8,7 +8,7 @@ import { Facebook } from "@/public/icons/facebook"
 
 const Footer = () => {
   return (
-    <section className='w-full h-full py-8 flex flex-col justify-between'>
+    <section className='w-full h-full p-4 flex flex-col justify-between'>
        <footer className="w-full flex-col space-y-2 " >
                 <div className="px-4 py-4 mx-auto max-w-7xl sm:px-6 md:flex md:items-center md:justify-between lg:px-8">
                 <div className="mt-8 md:mt-0 order-1 flex lg:justify-start justify-center">

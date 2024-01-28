@@ -17,7 +17,7 @@ description : "some text"
 
 const Faq = () => {
   return (
-    <section id="faq" className="w-full h-full p-4 pb-20 ">
+    <section id="faq" className="w-full h-full p-4  ">
       <SectionTitle title="FAQs">
         The most common questions answered.
       </SectionTitle>
