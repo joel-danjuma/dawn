@@ -26,15 +26,14 @@ const Footer = () => {
                     <span className="inline-flex justify-center w-full gap-3 lg:ml-auto md:justify-start md:w-auto">
                       <ul className="lg:flex lg:flex-row  grid grid-flow-row grid-cols-3 grid-rows-2 justify-between lg:gap-4 gap-2">
                         <li>
-                          <a className="w-6 h-6 transition hover:text-blue-500">
-                          <span className="">
+                          <a href="#" className="w-6 h-6 transition hover:text-blue-500">
+                          <>
                             <h3 className="text-white" >Community</h3 >
-                          </span>
-                    
+                          </>
                           </a>
                         </li>
                         <li>
-                          <a className="w-6 h-6 transition fill-black hover:text-blue-500">
+                          <a href="#" className="w-6 h-6 transition fill-black hover:text-blue-500">
                           <span className="">
                           <h3 className="text-white">Technology</h3 >
                           </span>
@@ -42,14 +41,14 @@ const Footer = () => {
                           </a>
                         </li>
                         <li>
-                          <a className="w-6 h-6 transition fill-black hover:text-blue-500">
+                          <a href="#" className="w-6 h-6 transition fill-black hover:text-blue-500">
                           <span className="">
                             <h3 className="text-white" >About Us</h3 >
                           </span>
                           </a>
                         </li>
                         <li>
-                          <a className="w-6 h-6 transition fill-black hover:text-blue-500">
+                          <a href="#" className="w-6 h-6 transition fill-black hover:text-blue-500">
                           <span className="">
                           <h3 className="text-white">Blog</h3 >
                           </span>
@@ -57,7 +56,7 @@ const Footer = () => {
                           </a>
                         </li>
                         <li> 
-                            <a className="w-6 h-6 transition fill-black hover:text-blue-500">
+                            <a href="#" className="w-6 h-6 transition fill-black hover:text-blue-500">
                           <span className="">
                           <h3 className="text-white">Careers</h3 >
                           </span>
@@ -65,7 +64,7 @@ const Footer = () => {
                           </a>
                         </li>
                         <li>
-                          <a className="w-6 h-6 transition fill-black hover:text-blue-500">
+                          <a href="#" className="w-6 h-6 transition fill-black hover:text-blue-500">
                           <span className="">
                           <h3 className="text-white" >Contact</h3 >
                           </span>
@@ -81,14 +80,14 @@ const Footer = () => {
                 <div className="px-4 py-2 mx-auto max-w-7xl sm:px-6 md:flex md:items-center md:justify-between lg:px-8">
                   <div className="flex justify-center space-x-6 md:order-2">
                     <span className="inline-flex justify-center w-full gap-3 lg:ml-auto md:justify-start md:w-auto">
-                      <a className="w-6 h-6 transition fill-black hover:text-blue-500">
+                      <a href="#" className="w-6 h-6 transition fill-black hover:text-blue-500">
                         <span className="sr-only">
                           Discord
                         </span>
                         <Discord/>
 
                       </a>
-                      <a className="w-6 h-6 transition fill-black hover:text-blue-500">
+                      <a href="#" className="w-6 h-6 transition fill-black hover:text-blue-500">
                         <span className="sr-only">
                           Twitter
                         </span>
@@ -96,7 +95,7 @@ const Footer = () => {
 
 
                       </a>
-                      <a className="w-6 h-6 transition fill-black hover:text-blue-500">
+                      <a href="#" className="w-6 h-6 transition fill-black hover:text-blue-500">
                         <span className="sr-only">
                           Instagram
                         </span>
@@ -104,7 +103,7 @@ const Footer = () => {
       
 
                       </a>
-                      <a className="w-6 h-6 transition fill-black hover:text-blue-500">
+                      <a href="#" className="w-6 h-6 transition fill-black hover:text-blue-500">
                         <span className="sr-only">
                           Telegram
                         </span>
@@ -112,7 +111,7 @@ const Footer = () => {
           
 
                       </a>
-                      <a className="w-6 h-6 transition fill-black hover:text-blue-500">
+                      <a href="#" className="w-6 h-6 transition fill-black hover:text-blue-500">
                         <span className="sr-only">
                           Facebook
                         </span>
@@ -124,7 +123,7 @@ const Footer = () => {
                     <p className="text-base text-center text-gray-400">
                       <span className="mx-auto mt-2 text-sm text-gray-500">
               
-                        <a href="#" className=" hover:text-violet-500 text-gray-500" rel="noopener noreferrer">
+                        <a href="#" className=" hover:text-violet-500 text-white" rel="noopener noreferrer">
                         © 2023 Dawn AI. All rights reserved.
                         </a>
                        
