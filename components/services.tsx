@@ -79,7 +79,7 @@ const services = [
 const Services  = () => {
     return (
         <section className="p-4 relative z-0">
-            <div className="absolute -top-[200px] right-0 lg:flex hidden z-10">
+            <div className="absolute -top-[100px] right-[40px] lg:flex hidden z-10">
                 <Image src={img1} alt="img1" width={540} height={540} className="z-20"/>
             </div>
             <div className="absolute -bottom-[320px] -left-20 lg:flex hidden z-10">
