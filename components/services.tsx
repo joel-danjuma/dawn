@@ -102,9 +102,7 @@ const Services  = () => {
                 <CardBody className="gap-[16px]">
                 <h3 className="font-bold text-3xl">{service.title}</h3>
                 <p className="text-[17px]">{service.description}</p>
-                </CardBody>   
-                
-                    
+                </CardBody>     
                 </Card>
             ))}
             
