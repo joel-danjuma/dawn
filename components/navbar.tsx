@@ -11,7 +11,7 @@ import Image from "next/image";
 import logo from "../public/logo.svg";
 import Link from "next/link";
 import { MenuToggle } from "@/public/icons/menuToggle";
-
+import { siteConfig } from "@/config/site";
 
 const Nav = () => {
   return (
@@ -24,35 +24,31 @@ const Nav = () => {
           <Image src={logo} width={158} height={32} alt="logo"></Image>
         </NavbarContent>
 
-        <NavbarContent justify="end"  className="gap-4">
-        
-          <NavbarItem>
+        <NavbarContent justify="end" className="gap-4">
+          <NavbarItem className="lg:flex hidden">
             <Button className="bg-white text-black p-4">
-              <Link href="#cta">
-              Join Waitlist
-            </Link>
+              <Link href="#cta">Join Waitlist</Link>
             </Button>
           </NavbarItem>
-          <NavbarMenuToggle icon={<MenuToggle/>} />
-          
+          <NavbarMenuToggle icon={<MenuToggle />} />
         </NavbarContent>
-        <NavbarMenu  className="">
-            {/* {siteConfig.navItems.map((item, i) => (
-                    <NavbarMenuItem key={i}>
-                        <Link href={item.href}>
-                            {item.label}
-                        </Link>
-                    </NavbarMenuItem>
-                ))} */}
 
-                <NavbarMenuItem>
+        <NavbarMenu className="lg:px-[100px] px-4 py-12 space-y-4">
+          {siteConfig.navItems.map((item, i) => (
+            <NavbarMenuItem key={i}>
+              <Link href={item.href}>{item.label}</Link>
+            </NavbarMenuItem>
+          ))}
+          <NavbarItem className="lg:hidden flex">
+            <Button className="bg-white text-black p-4">
+              <Link href="#cta">Join Waitlist</Link>
+            </Button>
+          </NavbarItem>
+
+          {/* <NavbarMenuItem>
                   About Us
-                </NavbarMenuItem>
-
-                
-          </NavbarMenu>
-       
-        
+                </NavbarMenuItem> */}
+        </NavbarMenu>
       </Navbar>
     </header>
   );
