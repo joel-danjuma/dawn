@@ -25,12 +25,12 @@ const Nav = () => {
         </NavbarContent>
 
         <NavbarContent justify="end" className="gap-4">
+          <NavbarMenuToggle className="text-4xl" icon={<MenuToggle />} />
           <NavbarItem className="lg:flex hidden">
             <Button className="bg-white text-black p-4">
               <Link href="#cta">Join Waitlist</Link>
             </Button>
           </NavbarItem>
-          <NavbarMenuToggle icon={<MenuToggle />} />
         </NavbarContent>
 
         <NavbarMenu className="lg:px-[100px] px-4 py-12 space-y-4">
