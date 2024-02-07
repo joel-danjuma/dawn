@@ -1,5 +1,5 @@
 import bg from "@/public/about-bg.svg";
-import img from "@/public/aboutimg.svg";
+import img from "@/public/aboutImg.svg";
 import Image from "next/image";
 
 const AboutHero = () => {
