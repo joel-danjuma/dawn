@@ -39,7 +39,11 @@ const Hero = () => {
           })}
         </div>
         <div className="space-x-5 flex-row">
-          <Button className="bg-white p-2 text-black">Join Waitlist</Button>
+          <Button className="bg-white p-2 text-black">
+            <Link href={`${process.env.NEXT_PUBLIC_WAITLIST_LINK}`}>
+              Join Waitlist
+            </Link>
+          </Button>
           <Link href={"/about"}>Learn More</Link>
         </div>
       </div>

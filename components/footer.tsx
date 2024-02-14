@@ -23,11 +23,11 @@ const Footer = () => {
               <ul className="lg:flex lg:flex-row  grid grid-flow-row grid-cols-3 grid-rows-2 justify-between lg:gap-4 gap-2">
                 <li>
                   <a
-                    href="#"
+                    href={`${process.env.NEXT_PUBLIC_WHITEPAPER_LINK}`}
                     className="w-6 h-6 transition hover:text-blue-500"
                   >
                     <>
-                      <h3 className="text-white text-center">Community</h3>
+                      <h3 className="text-white text-center">White Paper</h3>
                     </>
                   </a>
                 </li>
@@ -88,36 +88,36 @@ const Footer = () => {
         <div className="px-4 py-2 mx-auto max-w-7xl sm:px-6 md:flex md:items-center md:justify-between lg:px-8">
           <div className="flex justify-center space-x-6 md:order-2">
             <span className="inline-flex justify-center w-full gap-3 lg:ml-auto md:justify-start md:w-auto">
-              <a
+              {/* <a
                 href="#"
                 className="w-6 h-6 transition fill-black hover:text-blue-500"
               >
                 <span className="sr-only">Discord</span>
                 <Discord />
-              </a>
+              </a> */}
               <a
-                href="#"
+                href={`${process.env.NEXT_PUBLIC_TWITTER_LINK}`}
                 className="w-6 h-6 transition fill-black hover:text-blue-500"
               >
                 <span className="sr-only">Twitter</span>
                 <Twitter />
               </a>
               <a
-                href="#"
+                href={`${process.env.NEXT_PUBLIC_INSTAGRAM_LINK}`}
                 className="w-6 h-6 transition fill-black hover:text-blue-500"
               >
                 <span className="sr-only">Instagram</span>
                 <Instagram />
               </a>
-              <a
-                href="#"
+              {/* <a
+                href={`${process.env.NEXT_PUBLIC_WAITLIST_LINK}`}
                 className="w-6 h-6 transition fill-black hover:text-blue-500"
               >
                 <span className="sr-only">Telegram</span>
                 <Telegram />
-              </a>
+              </a> */}
               <a
-                href="#"
+                href={`${process.env.NEXT_PUBLIC_FACEBOOK_LINK}`}
                 className="w-6 h-6 transition fill-black hover:text-blue-500"
               >
                 <span className="sr-only">Facebook</span>

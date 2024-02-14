@@ -40,14 +40,10 @@ const Nav = () => {
             </NavbarMenuItem>
           ))}
           <NavbarItem className="lg:hidden flex">
-            <Button className="bg-white text-black p-4">
+            <Button className="bg-white w-full text-black p-4">
               <Link href="#cta">Join Waitlist</Link>
             </Button>
           </NavbarItem>
-
-          {/* <NavbarMenuItem>
-                  About Us
-                </NavbarMenuItem> */}
         </NavbarMenu>
       </Navbar>
     </header>

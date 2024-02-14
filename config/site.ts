@@ -6,6 +6,10 @@ export const siteConfig = {
     "Experience a paradigm shift in education with DAWN, an innovative EDtech platform leveraging blockchain and AI. Unleash learning without boundaries, making education inclusive for all, irrespective of location, language, or abilities.",
   navItems: [
     {
+      label: "About",
+      href: "/about",
+    },
+    {
       label: "Benefits",
       href: "#benefits",
     },
@@ -28,6 +32,10 @@ export const siteConfig = {
   ],
   navMenuItems: [
     {
+      label: "About",
+      href: "/about",
+    },
+    {
       label: "Benefits",
       href: "#benefits",
     },
@@ -40,6 +48,7 @@ export const siteConfig = {
       label: "Pricing",
       href: "#pricing",
     },
+
     {
       label: "FAQs",
       href: "#faq",
