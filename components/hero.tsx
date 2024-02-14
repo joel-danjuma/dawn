@@ -1,9 +1,10 @@
 import { Button } from "@nextui-org/react";
 // import heroImg from "../public/hero.svg";
 import Image from "next/image";
-import img from "../public/hero-img.png"
+import img from "../public/hero-img.png";
+import Link from "next/link";
 
-const heroImg = process.env.HERO_IMG || img
+const heroImg = process.env.HERO_IMG || img;
 
 const features = [
   { headline: "10k", subtitle: "active students enrolled" },
@@ -39,17 +40,17 @@ const Hero = () => {
         </div>
         <div className="space-x-5 flex-row">
           <Button className="bg-white p-2 text-black">Join Waitlist</Button>
-          <span>
-            Learn More
-            
-          </span>
-      
+          <Link href={"/about"}>Learn More</Link>
         </div>
       </div>
       <div className="w-full flex justify-center items-center relative">
-
-        <Image src={heroImg} alt="img" height={974} width={894} className="z-10"/>
-     
+        <Image
+          src={heroImg}
+          alt="img"
+          height={974}
+          width={894}
+          className="z-10"
+        />
       </div>
     </section>
   );
