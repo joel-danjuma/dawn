@@ -26,7 +26,9 @@ const Nav = () => {
         className=" mx-auto container px-0 py-4 flex justify-between"
       >
         <NavbarContent justify="start">
-          <Image src={logo} width={158} height={32} alt="logo"></Image>
+          <Link href={"/"}>
+            <Image src={logo} width={158} height={32} alt="logo"></Image>
+          </Link>
         </NavbarContent>
 
         <NavbarContent justify="end" className="gap-4">
