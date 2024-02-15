@@ -1,3 +1,4 @@
+"use client";
 import {
   Navbar,
   NavbarContent,
@@ -10,13 +11,17 @@ import {
 import Image from "next/image";
 import logo from "../public/logo.svg";
 import Link from "next/link";
+import React from "react";
 import { MenuToggle } from "@/public/icons/menuToggle";
 import { siteConfig } from "@/config/site";
 
 const Nav = () => {
+  const [isMenuOpen, setIsMenuOpen] = React.useState(false);
   return (
     <header>
       <Navbar
+        isMenuOpen={isMenuOpen}
+        onMenuOpenChange={setIsMenuOpen}
         maxWidth="full"
         className=" mx-auto container px-0 py-4 flex justify-between"
       >
@@ -28,7 +33,14 @@ const Nav = () => {
           <NavbarMenuToggle className="text-4xl" icon={<MenuToggle />} />
           <NavbarItem className="lg:flex hidden">
             <Button className="bg-white text-black p-4">
-              <Link href="#cta">Join Waitlist</Link>
+              <Link
+                onClick={() => {
+                  setIsMenuOpen(!isMenuOpen);
+                }}
+                href="#cta"
+              >
+                Join Waitlist
+              </Link>
             </Button>
           </NavbarItem>
         </NavbarContent>
@@ -36,12 +48,26 @@ const Nav = () => {
         <NavbarMenu className="lg:px-[100px] px-4 py-12 space-y-4">
           {siteConfig.navItems.map((item, i) => (
             <NavbarMenuItem key={i}>
-              <Link href={item.href}>{item.label}</Link>
+              <Link
+                onClick={() => {
+                  setIsMenuOpen(!isMenuOpen);
+                }}
+                href={item.href}
+              >
+                {item.label}
+              </Link>
             </NavbarMenuItem>
           ))}
           <NavbarItem className="lg:hidden flex">
             <Button className="bg-white w-full text-black p-4">
-              <Link href="#cta">Join Waitlist</Link>
+              <Link
+                onClick={() => {
+                  setIsMenuOpen(!isMenuOpen);
+                }}
+                href="#cta"
+              >
+                Join Waitlist
+              </Link>
             </Button>
           </NavbarItem>
         </NavbarMenu>
