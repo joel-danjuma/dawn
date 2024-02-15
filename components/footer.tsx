@@ -24,6 +24,8 @@ const Footer = () => {
                 <li>
                   <a
                     href={`${process.env.NEXT_PUBLIC_WHITEPAPER_LINK}`}
+                    target="_blank"
+                    rel="noopener noreferrer"
                     className="w-6 h-6 transition hover:text-blue-500"
                   >
                     <>

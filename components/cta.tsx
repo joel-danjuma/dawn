@@ -29,7 +29,11 @@ const Cta = () => {
           available!
         </p>
         <Button className="bg-white text-black p-2">
-          <Link href={`${process.env.NEXT_PUBLIC_WAITLIST_LINK}`}>
+          <Link
+            href={`${process.env.NEXT_PUBLIC_WAITLIST_LINK}`}
+            target="_blank"
+            rel="noopener noreferrer"
+          >
             Join Waitlist
           </Link>
         </Button>
