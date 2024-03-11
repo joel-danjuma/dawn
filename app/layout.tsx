@@ -59,9 +59,7 @@ export default function RootLayout({
           <div className="main">
             <div className="gradient" />
           </div>
-          <Nav />
-          <main className="max-w-[1440px]">{children}</main>
-          <Footer />
+          <main className="max-w-[2560px]">{children}</main>
         </Providers>
       </body>
     </html>
