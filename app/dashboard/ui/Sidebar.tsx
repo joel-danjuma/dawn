@@ -18,7 +18,7 @@ type NavLink = {
 
 const navLinks: NavLink[] = [
   { title: "Home", icon: HomeIcon, href: "/dashboard" },
-  { title: "Explore", icon: CompassIcon, href: "" },
+  { title: "Explore", icon: CompassIcon, href: "/dashboard/explore" },
   { title: "Feedback", icon: FeedbackIcon, href: "" },
   { title: "Profile", icon: UserIcon, href: "" },
 ];
@@ -26,7 +26,7 @@ const navLinks: NavLink[] = [
 function SideNav() {
   const pathName = usePathname();
   return (
-    <nav className="border-1 border-white bg-white/[4%] h-full lg:flex flex-col items-start text-white py-4 rounded-[10px]">
+    <nav className="backdrop-blur-lg border-1 border-white bg-white/[10%] h-full lg:flex flex-col items-start text-white py-4 rounded-[10px]">
       <Image
         src={logo}
         width={158}
