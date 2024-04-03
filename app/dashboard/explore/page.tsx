@@ -11,11 +11,11 @@ function Page() {
       <div className="bg-[#9A4FFF]/[10%] rounded-[7px] mt-12 w-full">
         <p className="text-center text-[19px] p-4">
           Welcome to DAWN AI STUDY, your ultimate guide to personalized
-          learning! 🌟 I'm your friendly AI teacher, here to make your learning
-          journey smooth and exciting. Whether you're a student eager to explore
-          new subjects or a teacher looking for innovative teaching strategies,
-          I've got you covered! then it will also have the translation sign
-          behind that play button
+          learning! 🌟 I&apos;m your friendly AI teacher, here to make your
+          learning journey smooth and exciting. Whether you&apos;re a student
+          eager to explore new subjects or a teacher looking for innovative
+          teaching strategies, I&apos;ve got you covered! then it will also have
+          the translation sign behind that play button
         </p>
       </div>
 

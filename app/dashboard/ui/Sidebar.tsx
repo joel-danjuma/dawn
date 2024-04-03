@@ -36,8 +36,9 @@ function SideNav() {
       />
 
       <div className="flex flex-col gap-[18px] w-full">
-        {navLinks.map((navLink) => (
+        {navLinks.map((navLink, i) => (
           <Link
+            key={i}
             href={navLink.href}
             className={clsx(
               "ms-7 flex gap-3 items-center transition-colors py-[5px] px-[7px] rounded-s-[10px]",
