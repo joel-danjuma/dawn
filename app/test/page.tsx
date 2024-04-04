@@ -1,5 +1,6 @@
 "use client";
 import { useEffect, useState } from "react";
+import crypto from "crypto";
 
 interface Message {
   role: string;
@@ -10,6 +11,14 @@ const Page = () => {
   const [messages, setMessages] = useState<Message[]>([]);
   const [input, setInput] = useState("");
   const [eventSource, setEventSource] = useState<EventSource | null>(null);
+  const random = crypto.randomBytes(32).toString("hex"),
+    hash = crypto
+      .createHmac(
+        "sha256",
+        "6f6f9f2383820e432fdcb233083f38b0b4019478cb598c6df344225dcfa7224f"
+      )
+      .update(random)
+      .digest("hex");
 
   const startChat = () => {
     console.log("Starting chat..."); // Signal that the chat is starting
@@ -22,6 +31,10 @@ const Page = () => {
         method: "POST",
         headers: {
           "Content-Type": "application/json",
+          "x-api-version": "1",
+          "x-random": random,
+          "x-auth-id": "5ae65ce4-e04d-11ee-8617-7f4613917414",
+          "x-auth-key": hash,
         },
         body: JSON.stringify({
           method: "startChat",
@@ -56,6 +69,10 @@ const Page = () => {
           method: "POST",
           headers: {
             "Content-Type": "application/json",
+            "x-api-version": "1",
+            "x-random": random,
+            "x-auth-id": "5ae65ce4-e04d-11ee-8617-7f4613917414",
+            "x-auth-key": hash,
           },
           body: JSON.stringify({
             method: "postToChat",
@@ -92,7 +109,7 @@ const Page = () => {
 
   return (
     <div className="w-full min-h-screen flex flex-col items-center justify-center">
-      <div className="flex-col mb-4 min-h-[420px] max-w-[500px] min-w-[420px] border-2 rounded-lg ">
+      <div className="flex-col mb-4 min-h-[420px] max-w-[500px] min-w-[420px] border-2 rounded-lg p-2 ">
         {messages.map((message, index) => (
           <p
             key={index}
