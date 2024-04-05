@@ -1,126 +1,9 @@
-// "use client";
-// import { useEffect, useState } from "react";
-// import crypto from "crypto";
-// import { SSE } from "sse.js";
-
-// interface Message {
-//   role: string;
-//   message: any;
-// }
-
-// const Page = () => {
-//   const [messages, setMessages] = useState<Message[]>([]);
-//   const [input, setInput] = useState("");
-//   const [eventSource, setEventSource] = useState<EventSource | null>(null);
-//   const random = crypto.randomBytes(32).toString("hex"),
-//     hash = crypto
-//       .createHmac("sha256", process.env.LINGOLETTE_API_SECRET || "")
-//       .update(random)
-//       .digest("hex");
-
-//   const startChat = () => {
-//     console.log("Starting chat..."); // Signal that the chat is starting
-//     // No need to reassign EventSource here, just use it directly
-//     const es = new EventSource("https://localhost:3000/api/startChat");
-//     // setEventSource(es);
-
-//     es.onopen = () => {
-//       console.log("Chat started successfully."); // Signal that the chat has started successfully
-//       // You might want to send an initial message or perform other setup tasks here
-//     };
-
-//     es.onmessage = (event) => {
-//       const data = JSON.parse(event.data);
-//       setMessages((prevMessages) => [
-//         ...prevMessages,
-//         { role: "ai", message: data[0] },
-//       ]);
-//     };
-//     es.onerror = (error) => {
-//       console.error("EventSource error:", error);
-//     };
-//   };
-
-//   const handleSubmit = () => {
-//     const es = new EventSource("https://localhost:3000/api/startChat");
-//     // setEventSource(es);
-//     if (es) {
-//       es.onopen = (e) => {
-//         console.log("Chat started successfully."); // Signal that the chat has started successfully
-//       };
-//       setMessages((prevMessages) => [
-//         ...prevMessages,
-//         { role: "user", message: input },
-//       ]);
-//       setInput("");
-//       es.onmessage = (event) => {
-//         const data = JSON.parse(event.data);
-//         setMessages((prevMessages) => [
-//           ...prevMessages,
-//           { role: "ai", message: data[0] },
-//         ]);
-//       };
-//       es.onerror = (error) => {
-//         console.error("EventSource error:", error);
-//       };
-//     } else {
-//       console.error("EventSource is not initialized.");
-//     }
-//   };
-
-//   //   useEffect(() => {
-//   //     return () => {
-//   //       if (eventSource) {
-//   //         eventSource.close();
-//   //       }
-//   //     };
-//   //   }, [eventSource]);
-
-//   return (
-//     <div className="w-full min-h-screen flex flex-col items-center justify-center">
-//       <div className="flex-col mb-4 min-h-[420px] max-w-[500px] min-w-[420px] border-2 rounded-lg p-2 ">
-//         {messages.map((message, index) => (
-//           <p
-//             key={index}
-//             className={
-//               message.role === "user"
-//                 ? "text-blue-500 text-2xl"
-//                 : "text-green-500 text2-2xl"
-//             }
-//           >
-//             {message.message}
-//           </p>
-//         ))}
-//       </div>
-//       <div>
-//         <input
-//           type="text"
-//           value={input}
-//           onChange={(e) => setInput(e.target.value)}
-//           className="border-2 border-gray-300 p-2 rounded-md"
-//         />
-//         <button
-//           onClick={handleSubmit}
-//           className="bg-blue-500 text-white p-2 rounded-md ml-2"
-//         >
-//           Send
-//         </button>
-//         <button
-//           onClick={startChat}
-//           className="bg-green-500 text-white p-2 rounded-md ml-2"
-//         >
-//           Start Chat
-//         </button>
-//       </div>
-//     </div>
-//   );
-// };
-
-// export default Page;
-
 "use client";
-import { useEffect, useState } from "react";
+import { useState } from "react";
 import crypto from "crypto";
+import { getConfig } from "@/utils/getConfig";
+import { getSessionToken } from "@/utils/getSessionToken";
+import { StreamingTextResponse } from "ai";
 
 interface Message {
   role: string;
@@ -130,99 +13,138 @@ interface Message {
 const Page = () => {
   const [messages, setMessages] = useState<Message[]>([]);
   const [input, setInput] = useState("");
+  const [token, setToken] = useState("");
   const [eventSource, setEventSource] = useState<EventSource | null>(null);
   const random = crypto.randomBytes(32).toString("hex"),
     hash = crypto
-      .createHmac("sha256", process.env.LINGOLETTE_AUTH_SECRET || "")
+      .createHmac(
+        "sha256",
+        process.env.LINGOLETTE_AUTH_SECRET ||
+          "6f6f9f2383820e432fdcb233083f38b0b4019478cb598c6df344225dcfa7224f"
+      )
       .update(random)
       .digest("hex");
+  const userId = process.env.NEXT_PUBLIC_LINGOLETTE_AUTH_ID || "";
 
-  const startChat = () => {
-    console.log("Starting chat..."); // Signal that the chat is starting
-    const es = new EventSource("https://lingolette.com/api/binary");
-    setEventSource(es);
+  // (async () => {
+  //   const userId = ""; // Replace with the user ID you want to get a session token for
+  //   const sessionToken = await getSessionToken(userId);
+  //   console.log("Session token:", sessionToken);
+  // })();
+  // (async () => {
+  //   const userId = "";
+  //   const sessionToken = await getSessionToken(userId);
+  //   console.log("Session token:", sessionToken);
+  //   if (sessionToken !== null) {
+  //     setToken(sessionToken);
+  //   } else {
+  //     setToken("");
+  //   }
+  // })();
 
-    es.onopen = () => {
-      console.log("Chat started successfully."); // Signal that the chat has started successfully
-      fetch("https://lingolette.com/api/binary", {
-        method: "POST",
-        headers: {
-          "Content-Type": "application/json",
-          "x-api-version": "1",
-          "x-random": random,
-          "x-auth-id": process.env.LINGOLETTE_AUTH_ID || "",
-          "x-auth-key": hash,
-        },
-        body: JSON.stringify({
-          method: "startChat",
-          data: {
-            timeStamp: new Date(),
-            useVoiceOut: false,
-          },
-        }),
-      })
-        .then((response) => response.json())
-        .then((data) => console.log(data))
-        .catch((error) => console.error("Error:", error));
+  const [chatStarted, setChatStarted] = useState(false);
+
+  const chatAction = (input: string) => {
+    const muted = true; // Assuming voice output is not muted
+
+    // Use the getSessionToken function to get the session token
+    const token =
+      "eyJhbGciOiJIUzUxMiIsInR5cCI6IkpXVCJ9.eyJleHAiOjE3MTQ5MTE1MDgsImlkIjoiZGEwMTg3MjQtZjMzZi0xMWVlLWI4MWItZmI4ZmQ4NDg0NDdiIiwidHlwZSI6InVzZXIifQ.3rOuMxVz5nmKw0TXdMXgiA5qFDysgXtsNSs_2xrAtIhz728UPptqYQaHpcR5hi2CM644fXgsY105tYeD8GHDtg";
+
+    const firstCall = !chatStarted;
+
+    const eventUrlSuffix = firstCall
+      ? `method=startChat&timeStamp=${new Date().toISOString()}&useVoiceOut=${!muted}`
+      : `method=postToChat&input=${
+          input ? encodeURIComponent(input) : ""
+        }&useVoiceOut=${!muted}&useVoiceIn=${!input}`;
+
+    // const eventSource = new EventSource(
+    //   `${getConfig().apiUrl}/binary?token=${getSessionToken(
+    //     userId
+    //   )}&${eventUrlSuffix}`
+    // );
+    const eventSource = new EventSource(
+      `${getConfig().apiUrl}/binary?token=${token}&${eventUrlSuffix}`
+    );
+
+    eventSource.onopen = (e) => {
+      console.log("Chat Started...");
     };
 
-    es.onmessage = (event) => {
-      const data = JSON.parse(event.data);
-      setMessages((prevMessages) => [
-        ...prevMessages,
-        { role: "ai", message: data[0] },
-      ]);
+    eventSource.onmessage = (event) => {
+      // console.log("Message received:", event.data);
+      const stream = event.data;
+      return new StreamingTextResponse(stream);
     };
-    es.onerror = (error) => {
+
+    eventSource.onerror = (error) => {
       console.error("EventSource error:", error);
+      eventSource.close;
     };
+
+    if (firstCall) {
+      setChatStarted(true);
+    }
+
+    // const newEventSource = new EventSource(
+    //   `${getConfig().apiUrl}/binary?token=${token}&${eventUrlSuffix}`
+    // );
+
+    // // Add event listeners to handle messages, errors, etc.
+    // newEventSource.onmessage = (event) => {
+    //   console.log("New message received:", event.data);
+    // };
+
+    // newEventSource.onerror = (error) => {
+    //   console.error("New eventSource error:", error);
+    // };
   };
 
-  const handleSubmit = () => {
-    if (eventSource) {
-      eventSource.onopen = () => {
-        console.log("Chat started successfully."); // Signal that the chat has started successfully
-        fetch("https://lingolette.com/api/binary", {
-          method: "POST",
-          headers: {
-            "Content-Type": "application/json",
-            "x-api-version": "1",
-            "x-random": random,
-            "x-auth-id": process.env.LINGOLETTE_AUTH_ID || "",
-            "x-auth-key": hash,
-          },
-          body: JSON.stringify({
-            method: "postToChat",
-            data: {
-              input: input,
-              useVoiceOut: false,
-            },
-          }),
-        })
-          .then((response) => response.json())
-          .then((data) => console.log(data))
-          .catch((error) => console.error("Error:", error));
-      };
+  //  const postToChat = async (text: string) => {
+  //   const firstCall = false; // This is not the first call
+  //   const muted = false; // Assuming voice output is not muted
 
-      setMessages((prevMessages) => [
-        ...prevMessages,
-        { role: "user", message: input },
-      ]);
-      setInput("");
+  //   // Use the getSessionToken function to get the session token
+  //   const token = await getSessionToken(userId);
+
+  //   const eventUrlSuffix = firstCall ?
+  //      `method=startChat&timeStamp=${(new Date).toISOString()}&useVoiceOut=${!muted}` :
+  //      `method=postToChat&input=${text ? encodeURIComponent(text) : ''}&useVoiceOut=${!muted}&useVoiceIn=${!text}`;
+
+  //   const eventSource = new EventSource(`${getConfig().apiUrl}/binary?token=${token}&${eventUrlSuffix}`);
+
+  //   // Add event listeners to handle messages, errors, etc.
+  //   eventSource.onmessage = (event) => {
+  //      console.log("Message received:", event.data);
+  //   };
+
+  //   eventSource.onerror = (error) => {
+  //      console.error("EventSource error:", error);
+  //   };
+  //  };
+
+  const handleSubmit = async () => {
+    // Check if the input is not empty
+    if (input.trim() !== "") {
+      try {
+        await chatAction(input);
+
+        // Clear the input field after successful submission
+        setInput("");
+
+        // Optionally, you can add the message to the messages state here
+        setMessages([...messages, { role: "user", message: input }]);
+      } catch (error) {
+        console.error("Error posting to chat:", error);
+      }
     } else {
-      console.error(
-        "EventSource is not initialized. Please start the chat first."
-      );
+      console.log("Input is empty. Please enter a message.");
     }
   };
-
-  useEffect(() => {
-    return () => {
-      if (eventSource) {
-        eventSource.close();
-      }
-    };
-  }, [eventSource]);
+  const startChatWithInput = async (input: string) => {
+    await chatAction(input);
+  };
 
   return (
     <div className="w-full min-h-screen flex flex-col items-center justify-center">
@@ -232,8 +154,8 @@ const Page = () => {
             key={index}
             className={
               message.role === "user"
-                ? "text-blue-500 text-2xl"
-                : "text-green-500 text2-2xl"
+                ? "input-blue-500 input-2xl"
+                : "input-green-500 text2-2xl"
             }
           >
             {message.message}
@@ -242,20 +164,20 @@ const Page = () => {
       </div>
       <div>
         <input
-          type="text"
+          type="input"
           value={input}
           onChange={(e) => setInput(e.target.value)}
           className="border-2 border-gray-300 p-2 rounded-md"
         />
         <button
           onClick={handleSubmit}
-          className="bg-blue-500 text-white p-2 rounded-md ml-2"
+          className="bg-blue-500 input-white p-2 rounded-md ml-2"
         >
           Send
         </button>
         <button
-          onClick={startChat}
-          className="bg-green-500 text-white p-2 rounded-md ml-2"
+          onClick={() => startChatWithInput(input)}
+          className="bg-green-500 input-white p-2 rounded-md ml-2"
         >
           Start Chat
         </button>
