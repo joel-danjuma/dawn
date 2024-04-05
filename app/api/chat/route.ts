@@ -30,15 +30,15 @@ export async function GET(res: NextApiResponse) {
     }),
   });
 
-  // const stream = response.body;
+  const stream = response.body;
 
-  // if (!stream) {
-  //   // Handle the case where stream is null, e.g., by returning an error response
-  //   return new Response("Stream is null", {
-  //     status: response.status,
-  //   });
-  // }
-  // return new StreamingTextResponse(stream);
+  if (!stream) {
+    // Handle the case where stream is null, e.g., by returning an error response
+    return new Response("Stream is null", {
+      status: response.status,
+    });
+  }
+  return new StreamingTextResponse(stream);
 
   // if (!response.ok) {
   //   console.log("It failed boss");
