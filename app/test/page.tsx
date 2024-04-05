@@ -25,7 +25,7 @@ function parseChatText(text: string): string {
       const msgStart = t.indexOf('"');
       const msgEnd = t.lastIndexOf('"');
       const msgText = t.substring(msgStart + 1, msgEnd);
-      return msgText;
+      return msgText.replaceAll("\\", "");
     })
     .join("");
   return message;
