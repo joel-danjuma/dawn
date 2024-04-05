@@ -38,7 +38,9 @@ export async function POST(res: NextApiResponse) {
       status: response.status,
     });
   }
-  return new StreamingTextResponse(stream);
+  return new Response("Succesful", {
+    status: response.status,
+  });
 
   // if (!response.ok) {
   //   console.log("It failed boss");
