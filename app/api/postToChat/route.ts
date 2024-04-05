@@ -1,37 +1,22 @@
-import { NextApiRequest, NextApiResponse } from "next";
-import { OpenAIStream, StreamingTextResponse } from "ai";
-import crypto from "crypto";
+import { NextApiResponse } from "next";
+import { StreamingTextResponse } from "ai";
 
-export async function GET(req: NextApiRequest, res: NextApiResponse) {
-  const { input } = req.body;
+export async function POST(req: Request, res: NextApiResponse) {
+  const { input, token } = await req.json();
+  console.log(`Input: ${input} | Token: ${token}`);
 
-  const random = crypto.randomBytes(32).toString("hex"),
-    hash = crypto
-      .createHmac("sha256", process.env.LINGOLETTE_AUTH_SECRET || "")
-      .update(random)
-      .digest("hex");
-
-  const response = await fetch("https://lingolette.com/api/binary", {
-    method: "POST",
-    // cache: "no-cache",
-    // keepalive: true,
-    headers: {
-      "Content-Type": "application/json",
-      "x-api-version": "1",
-      "x-random": random,
-      "x-auth-id": process.env.LINGOLETTE_AUTH_ID || "",
-      "x-auth-key": hash,
-    },
-    body: JSON.stringify({
-      method: "postToChat",
-      data: {
-        input: input,
-        useVoiceOut: false,
-      },
-    }),
-  });
+  const response = await fetch(
+    `https://lingolette.com/api/binary?token=${token}&input=${input}`,
+    {
+      method: "POST",
+      body: JSON.stringify({
+        method: "postToChat",
+      }),
+    }
+  );
 
   if (!response.ok) {
+    response.text().then((t) => console.error(t));
     // res.status(response.status).json({ error: "Failed to fetch data" });
     return new Response("Failed to fetch data", {
       status: response.status,
