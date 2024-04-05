@@ -2,7 +2,7 @@ import { NextApiRequest, NextApiResponse } from "next";
 import { OpenAIStream, StreamingTextResponse } from "ai";
 import crypto from "crypto";
 
-export async function GET(req: NextApiRequest, res: NextApiResponse) {
+export async function POST(req: NextApiRequest, res: NextApiResponse) {
   const { input } = req.body;
 
   const random = crypto.randomBytes(32).toString("hex"),
