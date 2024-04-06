@@ -33,7 +33,7 @@ function parseChatText(text: string): string {
 }
 
 const token =
-  "eyJhbGciOiJIUzUxMiIsInR5cCI6IkpXVCJ9.eyJleHAiOjE3MTQ5MTE1MDgsImlkIjoiZGEwMTg3MjQtZjMzZi0xMWVlLWI4MWItZmI4ZmQ4NDg0NDdiIiwidHlwZSI6InVzZXIifQ.3rOuMxVz5nmKw0TXdMXgiA5qFDysgXtsNSs_2xrAtIhz728UPptqYQaHpcR5hi2CM644fXgsY105tYeD8GHDtg";
+  "eyJhbGciOiJIUzUxMiIsInR5cCI6IkpXVCJ9.eyJleHAiOjE3MTUwMjI3OTUsImlkIjoiNzAwMmQwYjYtZjQ0OS0xMWVlLTkxODQtNTMyNGIwZWZiYWY4IiwidHlwZSI6InVzZXIifQ.5yPpGj_MjD_Q1afua8gw_ia5zOPp1kIFLLqT7MoVj7cdcAyumc8mt23qmW5EKc6f09bzG5SfqwPj65mlnZfhVQ";
 
 function Page() {
   const [chatStart, setChatStart] = useState(false);
