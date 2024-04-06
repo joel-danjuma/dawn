@@ -3,11 +3,7 @@ import { OpenAIStream, StreamingTextResponse } from "ai";
 import crypto from "crypto";
 import { NextResponse } from "next/server";
 
-<<<<<<< HEAD:app/api/startChat/route.ts
-export async function POST(res: NextApiResponse) {
-=======
 export async function POST(req: NextApiRequest, res: NextApiResponse) {
->>>>>>> 554e0a522159c217f4712a219e553fa60f3527ee:app/api/chat/route.ts
   const random = crypto.randomBytes(32).toString("hex"),
     hash = crypto
       .createHmac("sha256", process.env.LINGOLETTE_AUTH_SECRET || "")
