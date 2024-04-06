@@ -1,9 +1,8 @@
-import { NextApiRequest, NextApiResponse } from "next";
+import { NextRequest, NextResponse } from "next/server";
 import { OpenAIStream, StreamingTextResponse } from "ai";
 import crypto from "crypto";
-import { NextResponse } from "next/server";
 
-export async function POST(req: NextApiRequest, res: NextApiResponse) {
+export async function POST(req: NextRequest, res: NextResponse) {
   const random = crypto.randomBytes(32).toString("hex"),
     hash = crypto
       .createHmac("sha256", process.env.LINGOLETTE_AUTH_SECRET || "")
