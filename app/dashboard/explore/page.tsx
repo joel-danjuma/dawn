@@ -3,9 +3,10 @@
 import { AttachmentIcon } from "@/public/icons/Attachment";
 import { MicIcon } from "@/public/icons/Mic";
 import { SendIcon } from "@/public/icons/Send";
-import { Button, Input, Skeleton } from "@nextui-org/react";
+import { Input, Skeleton } from "@nextui-org/react";
 import clsx from "clsx";
-import { useState } from "react";
+import { useContext, useState } from "react";
+import { DashboardAuthCtx } from "../context/DashboardAuthContext";
 
 interface Message {
   role: string;
@@ -32,14 +33,12 @@ function parseChatText(text: string): string {
   return message;
 }
 
-const token =
-  "eyJhbGciOiJIUzUxMiIsInR5cCI6IkpXVCJ9.eyJleHAiOjE3MTUwMjI3OTUsImlkIjoiNzAwMmQwYjYtZjQ0OS0xMWVlLTkxODQtNTMyNGIwZWZiYWY4IiwidHlwZSI6InVzZXIifQ.5yPpGj_MjD_Q1afua8gw_ia5zOPp1kIFLLqT7MoVj7cdcAyumc8mt23qmW5EKc6f09bzG5SfqwPj65mlnZfhVQ";
-
 function Page() {
   const [chatStart, setChatStart] = useState(false);
   const [messages, setMessages] = useState<Message[]>([]);
   const [input, setInput] = useState("");
   const [disableInputs, setDisableInputs] = useState(false);
+  const {user, token} = useContext(DashboardAuthCtx);
 
   function handleSendChat() {
     !chatStart && setChatStart(true);
