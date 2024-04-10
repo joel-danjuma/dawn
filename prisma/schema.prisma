@@ -1,0 +1,30 @@
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider = "postgresql"
+  url      = env("DATABASE_URL")
+}
+
+model UserProfile {
+  course               String
+  client_description   String
+  id                   String                @id @db.Uuid
+  LingoletteCredential LingoletteCredential?
+
+  @@map("user_profiles")
+}
+
+model LingoletteCredential {
+  targetLng     String
+  nativeLng     String
+  id            String      @db.Uuid
+  languageLevel Int
+  userProfile   UserProfile @relation(fields: [userid], references: [id])
+  userid        String      @db.Uuid
+
+  @@id([id, userid])
+  @@unique([userid])
+  @@map("lingolette_credentials")
+}

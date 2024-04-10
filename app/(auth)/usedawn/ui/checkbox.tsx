@@ -38,8 +38,7 @@ const items = [
   },
 ];
 
-export const CustomCheckbox = () => {
-  const [selected, setSelected] = React.useState("");
+export const CustomCheckbox = ({selected, setSelected}: {setSelected: (selected: string) => void, selected: string}) => {
 
   const handleCheckboxChange = (itemTitle: string) => {
     // If the item is already selected, clear the selection
