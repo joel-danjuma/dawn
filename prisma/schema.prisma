@@ -21,7 +21,7 @@ model LingoletteCredential {
   nativeLng     String
   id            String      @db.Uuid
   languageLevel Int
-  userProfile   UserProfile @relation(fields: [userid], references: [id])
+  userProfile   UserProfile @relation(fields: [userid], references: [id], onDelete: Cascade, onUpdate: Cascade)
   userid        String      @db.Uuid
 
   @@id([id, userid])

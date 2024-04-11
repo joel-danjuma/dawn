@@ -25,12 +25,12 @@ import { LoadingIcon } from "@/public/icons/loading";
 import { signup } from "@/app/actions/auth/action";
 
 // eslint-disable-next-line @next/next/no-async-client-component
-function SignUpCard(){
+function SignUpCard() {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const [course, setCourse] = useState("");
   const [clientDesc, setClientDesc] = useState("");
-  const {isOpen, onOpen} = useDisclosure();
+  const { isOpen, onOpen } = useDisclosure();
   const [_, startTransition] = useTransition();
 
   const [currentPage, setCurrentPage] = React.useState(1);
@@ -46,13 +46,21 @@ function SignUpCard(){
       case 1:
         return (
           <div className="flex-col space-y-1 justify-start items-center">
-            <h2 className="text-[18px] text-white font-bold">
-              Identification
-            </h2>
-            <Input value={email} label="Email" type="email" onValueChange={setEmail} />
-            <Input value={password} label="Email" type="password" onValueChange={setPassword} />
+            <h2 className="text-[18px] text-white font-bold">Identification</h2>
+            <Input
+              value={email}
+              label="Email"
+              type="email"
+              onValueChange={setEmail}
+            />
+            <Input
+              value={password}
+              label="Email"
+              type="password"
+              onValueChange={setPassword}
+            />
           </div>
-        )
+        );
       case 2:
         return (
           <div className="flex-col space-y-1 justify-start items-center">
@@ -62,7 +70,12 @@ function SignUpCard(){
             <h3 className="lg:text-[50px] text-[32px] text-white">
               What would you like to learn?
             </h3>
-            <Select className="py-4" label="Select Course" value={course} onChange={(e) => setCourse(e.target.value)}>
+            <Select
+              className="py-4"
+              label="Select Course"
+              value={course}
+              onChange={(e) => setCourse(e.target.value)}
+            >
               {courses.map((course, i) => (
                 <SelectItem key={i}>{course}</SelectItem>
               ))}
@@ -138,8 +151,9 @@ function SignUpCard(){
           <div className="">{renderPage()}</div>
 
           <div
-            className={`w-full py-2 flex items-center  gap-8 ${currentPage === 1 ? "justify-center" : "justify-between"
-              } `}
+            className={`w-full py-2 flex items-center  gap-8 ${
+              currentPage === 1 ? "justify-center" : "justify-between"
+            } `}
           >
             {currentPage > 1 && (
               <Button
@@ -155,7 +169,7 @@ function SignUpCard(){
               onPress={function () {
                 if (currentPage < 3) {
                   setCurrentPage(currentPage + 1);
-                }else if (currentPage >= 3) {
+                } else if (currentPage >= 3) {
                   authenticate();
                 }
               }}
@@ -166,19 +180,28 @@ function SignUpCard(){
           </div>
         </div>
         <div className="w-full h-full">{renderCardBody()}</div>
-        <Modal isOpen={isOpen} placement="center" className="bg-white" isDismissable={false} isKeyboardDismissDisabled={false} hideCloseButton={true}>
+        <Modal
+          isOpen={isOpen}
+          placement="center"
+          className="bg-white"
+          isDismissable={false}
+          isKeyboardDismissDisabled={false}
+          hideCloseButton={true}
+        >
           <ModalContent>
             <ModalBody className="bg-white flex flex-col items-center">
               <div className="animate-spin">
-                <LoadingIcon height={70} width={70}/>
+                <LoadingIcon height={70} width={70} />
               </div>
-              <p className="text-black">Please wait while we get you started....</p>
+              <p className="text-black">
+                Please wait while we get you started....
+              </p>
             </ModalBody>
           </ModalContent>
         </Modal>
       </div>
     </>
   );
-};
+}
 
 export default SignUpCard;
