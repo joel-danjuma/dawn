@@ -1,9 +1,5 @@
 "use client";
 import {
-  Card,
-  CardHeader,
-  CardBody,
-  CardFooter,
   Input,
   Button,
   Pagination,
@@ -27,8 +23,6 @@ import Card1 from "./card1";
 import { CustomCheckbox } from "./checkbox";
 import { LoadingIcon } from "@/public/icons/loading";
 import { signup } from "@/app/actions/auth/action";
-import { createClient } from "@/utils/supabase/client";
-import { redirect } from "next/navigation";
 
 // eslint-disable-next-line @next/next/no-async-client-component
 function SignUpCard(){

@@ -16,7 +16,7 @@ async function DashboardLayout({ children }: { children: React.ReactNode }) {
   } = await authClient.auth.getUser();
 
   if (!user) {
-    redirect("/usedawn");
+    redirect("/login");
   }
 
   const lingoletteCredentials = await db.lingoletteCredential.findUnique({

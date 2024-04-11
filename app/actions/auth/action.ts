@@ -11,8 +11,7 @@ export async function login(formData: FormData) {
   const supabase = createClient()
 
 
-  // type-casting here for convenience
-  // in practice, you should validate your inputs
+  // validation needed
   const data = {
     email: formData.get('email') as string,
     password: formData.get('password') as string,
@@ -25,14 +24,13 @@ export async function login(formData: FormData) {
   }
 
   revalidatePath('/', 'layout')
-  redirect('/')
+  redirect('/dashboard')
 }
 
 export async function signup(formData: FormData) {
   const supabase = createClient()
 
-  // type-casting here for convenience
-  // in practice, you should validate your inputs
+  // validation needed
   const fdata = {
     email: formData.get('email') as string,
     password: formData.get('password') as string,
@@ -62,7 +60,7 @@ export async function signup(formData: FormData) {
     redirect(`/error?error=${err}`)
   }
 
-  const profile = await db.userProfile.create({data: {
+  await db.userProfile.create({data: {
     client_description: formData.get("client_description")?.toString() ?? "",
     id: user.id,
     course: formData.get("course")?.toString() ?? "",
@@ -74,18 +72,9 @@ export async function signup(formData: FormData) {
     }},
   }})
 
-//   await db.lingoletteCredentials.create({
-//     data: {
-//         targetLng: lingolettePayload.targetLng,
-//         nativeLng: lingolettePayload.nativeLng,
-//         languageLevel: lingolettePayload.languageLevel,
-//         id: lingolettePayload.id,
-//         userId: profile.id
-//     }
-//   })
 
   await supabase.auth.signInWithPassword(fdata)
 
   revalidatePath('/', 'layout')
-  redirect('/dashboard')
+  redirect('/loading')
 }
