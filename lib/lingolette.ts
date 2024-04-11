@@ -62,6 +62,8 @@ class Lingolette {
   }
 }
 
-
-const  LingoletteClient = new Lingolette(process.env.LINGOLETTE_AUTH_ID ?? "", process.env.LINGOLETTE_AUTH_SECRET ?? "");
+const LingoletteClient = new Lingolette(
+  process.env.LINGOLETTE_AUTH_ID ?? "",
+  process.env.LINGOLETTE_AUTH_SECRET ?? ""
+);
 export { LingoletteClient, Lingolette };

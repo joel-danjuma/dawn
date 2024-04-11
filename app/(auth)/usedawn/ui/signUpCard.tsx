@@ -55,7 +55,7 @@ function SignUpCard() {
             />
             <Input
               value={password}
-              label="Email"
+              label="Password"
               type="password"
               onValueChange={setPassword}
             />
