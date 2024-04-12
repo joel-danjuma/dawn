@@ -1,6 +1,6 @@
 function Intro() {
     return (
-        <div>
+        <>
           <h3 className="text-[33px] font-[600]">Hello Fancy</h3>
 
           <div className="bg-[#9A4FFF]/[10%] rounded-[7px] mt-12 w-full">
@@ -28,7 +28,7 @@ function Intro() {
               <p>Discuss best practices in teaching</p>
             </div>
           </div>
-        </div>
+        </>
     )
 }
 

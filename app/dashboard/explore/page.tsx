@@ -1,6 +1,5 @@
 "use client";
 
-
 import { useContext, useState } from "react";
 import { DashboardAuthCtx } from "../context/DashboardAuthContext";
 import { Intro } from "./components/ExploreIntro";
@@ -69,14 +68,21 @@ function Page() {
   }
 
   return (
-    <div className="md:w-[770px] h-[90vh] overflow-hidden relative">
-      {!chatStart && <Intro />}
+    <div className="md:w-[770px] h-full overflow-hidden flex flex-col">
+      <div className="h-[80%] overflow-auto">
+        {!chatStart && <Intro />}
 
-      {chatStart && (
-        <ChatSection messages={messages} isGettingAIResponse={disableInputs} />
-      )}
+        {chatStart && (
+          <div className="overflow-auto p-2 rounded-lg">
+            <ChatSection
+              messages={messages}
+              isGettingAIResponse={disableInputs}
+            />
+          </div>
+        )}
+      </div>
 
-      <div className="absolute bottom-0 w-full">
+      <div className="w-full">
         <ChatInput
           setInput={setInput}
           disableInputs={disableInputs}

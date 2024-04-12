@@ -1,32 +1,35 @@
-import { Skeleton } from "@nextui-org/react";
+import { Avatar, Skeleton } from "@nextui-org/react";
 import { Message } from "../page";
 import clsx from "clsx";
 
-function ChatSection({messages, isGettingAIResponse}: {messages: Message[], isGettingAIResponse: boolean}) {
-    return (
-        <div className="overflow-auto h-[80%] relative p-2 rounded-lg">
-          {messages.map((msg, idx) => (
-            <p
-              key={idx}
-              className={clsx(
-                "bg-blue-700 max-w-[50%] min-w-[30%] w-max my-7 rounded-md p-1",
-                {
-                  "bg-purple-700 ms-auto": msg.role === "user",
-                }
-              )}
-            >
-              {msg.message}
-            </p>
-          ))}
-          {isGettingAIResponse && (
-            <div className="flex flex-col gap-1">
-              <Skeleton className="h-[10px] max-w-[40%] rounded-lg" />
-              <Skeleton className="h-[10px] max-w-[30%] rounded-lg" />
-              <Skeleton className="h-[10px] max-w-[20%] rounded-lg" />
-            </div>
-          )}
+function ChatSection({
+  messages,
+  isGettingAIResponse,
+}: {
+  messages: Message[];
+  isGettingAIResponse: boolean;
+}) {
+  return (
+    <>
+      {messages.map((msg, idx) => (
+        <div key={idx} className="grid grid-cols-[auto_1fr] gap-2 my-3">
+          {msg.role === "user" ? <Avatar /> : <Avatar name="DwnAI" />}
+          <p
+            className="rounded-md h-max py-1 px-3"
+          >
+            {msg.message}
+          </p>
         </div>
-    )
+      ))}
+      {isGettingAIResponse && (
+        <div className="flex flex-col gap-1">
+          <Skeleton className="h-[10px] max-w-[40%] rounded-lg" />
+          <Skeleton className="h-[10px] max-w-[30%] rounded-lg" />
+          <Skeleton className="h-[10px] max-w-[20%] rounded-lg" />
+        </div>
+      )}
+    </>
+  );
 }
 
-export {ChatSection};
+export { ChatSection };
