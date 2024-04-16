@@ -8,7 +8,10 @@ import { UserIcon } from "@/public/icons/user";
 import { CompassIcon } from "@/public/icons/compass";
 import Link from "next/link";
 import clsx from "clsx";
-import { usePathname } from "next/navigation";
+import { usePathname, useRouter } from "next/navigation";
+import { Button } from "@nextui-org/react";
+import { createClient } from "@/utils/supabase/client";
+import { LogoutIcon } from "@/public/icons/Logoout";
 
 type NavLink = {
   title: string;
@@ -25,8 +28,16 @@ const navLinks: NavLink[] = [
 
 function SideNav() {
   const pathName = usePathname();
+  const router = useRouter();
+
+  function signOut() {
+    createClient()
+      .auth.signOut()
+      .then(() => router.push("/"));
+  }
+
   return (
-    <nav className="backdrop-blur-lg border-1 border-white bg-white/[10%] h-full lg:flex flex-col items-start text-white py-4 rounded-[10px]">
+    <nav className="backdrop-blur-lg border-1 border-white bg-white/[10%] h-full flex flex-col items-start text-white py-4 rounded-[10px]">
       <Image
         src={logo}
         width={158}
@@ -52,6 +63,10 @@ function SideNav() {
             {navLink.title}
           </Link>
         ))}
+      </div>
+
+      <div className="mt-auto ms-7">
+        <Button className="px-7" onClick={signOut}><LogoutIcon />Log out</Button>
       </div>
     </nav>
   );
