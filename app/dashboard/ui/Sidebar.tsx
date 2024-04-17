@@ -23,7 +23,7 @@ const navLinks: NavLink[] = [
   { title: "Home", icon: HomeIcon, href: "/dashboard" },
   { title: "Explore", icon: CompassIcon, href: "/dashboard/explore" },
   { title: "Feedback", icon: FeedbackIcon, href: "" },
-  { title: "Profile", icon: UserIcon, href: "" },
+  { title: "Profile", icon: UserIcon, href: "/dashboard/profile" },
 ];
 
 function SideNav() {
