@@ -12,7 +12,7 @@ const AuthLayout = async ({
   const {error, data: {user}} = await authClient.auth.getUser();
 
   if (user !== null) {
-    redirect("/dashboard")
+    redirect("/dashboard/explore")
   }
 
   return (

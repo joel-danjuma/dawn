@@ -8,7 +8,7 @@ import { useEffect } from "react";
 function LoadingImage() {
   const router = useRouter();
   useEffect(() => {
-    const timeout = setTimeout(() => router.replace("/dashboard"), 1000);
+    const timeout = setTimeout(() => router.replace("/dashboard/explore"), 1000);
 
     return () => {
       clearTimeout(timeout);

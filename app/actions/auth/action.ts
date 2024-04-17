@@ -7,6 +7,8 @@ import { createClient } from "@/utils/supabase/server";
 import { db } from "@/lib/db";
 import { LingoletteClient } from "@/lib/lingolette";
 
+const AUTH_SUCCESS_REDIRECT_URL = "/dashboard/explore";
+
 export async function login(formData: FormData) {
   const supabase = createClient();
 
@@ -23,7 +25,7 @@ export async function login(formData: FormData) {
   }
 
   revalidatePath("/", "layout");
-  redirect("/dashboard");
+  redirect(AUTH_SUCCESS_REDIRECT_URL);
 }
 
 export async function signup(formData: FormData) {
