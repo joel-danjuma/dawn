@@ -38,13 +38,20 @@ function Page() {
   const [disableInputs, setDisableInputs] = useState(false);
   const { user, token } = useContext(DashboardAuthCtx);
 
-  function handleSendChat() {
+  function onPromptClicked(prompt: string) {
+    setInput(prompt);
+    handleSendChat(prompt);
+  }
+
+  function handleSendChat(prompt?: string) {
     !chatStart && setChatStart(true);
-    setMessages([...messages, { role: "user", message: input }]);
+    setMessages([...messages, { role: "user", message: prompt ? prompt : input }]);
+
     setDisableInputs(true);
+
     fetch("/api/postToChat", {
       method: "POST",
-      body: JSON.stringify({ input, token }),
+      body: JSON.stringify({ prompt: prompt ? prompt : input, token }),
       headers: { "Content-Type": "application/json" },
     })
       .catch(function (e) {
@@ -56,7 +63,7 @@ function Page() {
           const message = parseChatText(text);
           setMessages([
             ...messages,
-            { role: "user", message: input },
+            { role: "user", message: prompt ? prompt : input },
             { role: "ai", message },
           ]);
         });
@@ -70,7 +77,7 @@ function Page() {
   return (
     <div className="md:w-[770px] h-full overflow-hidden flex flex-col">
       <div className="h-[80%] overflow-auto">
-        {!chatStart && <Intro />}
+        {!chatStart && <Intro onPromptClicked={onPromptClicked}/>}
 
         {chatStart && (
           <div className="overflow-auto p-2 rounded-lg">

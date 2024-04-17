@@ -3,7 +3,7 @@
 import { createClient } from "@/utils/supabase/server";
 import { SideNav } from "./ui/Sidebar";
 import { redirect } from "next/navigation";
-import { DashboardContextCreator } from "./components/DashboardContextCreator";
+import { DashboardContextCreator } from "./ui/DashboardContextCreator";
 import { db } from "@/lib/db";
 import { LingoletteClient } from "@/lib/lingolette";
 

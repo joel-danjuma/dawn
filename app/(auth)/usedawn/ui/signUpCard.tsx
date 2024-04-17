@@ -35,7 +35,13 @@ function SignUpCard() {
 
   const [currentPage, setCurrentPage] = React.useState(1);
 
-  const courses = ["course 1", "course 2", "course 3", "course 4", "course 5"];
+  const courses = [
+    "Primary / middle school",
+    "Higher education",
+    "Post graduate",
+    "Professional",
+    "Web-3",
+  ];
 
   const handlePaginationChange = (newPage: number) => {
     setCurrentPage(newPage);
