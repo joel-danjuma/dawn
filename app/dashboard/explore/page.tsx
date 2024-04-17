@@ -40,12 +40,17 @@ function Page() {
 
   function onPromptClicked(prompt: string) {
     setInput(prompt);
+    console.log(input);
     handleSendChat(prompt);
   }
 
   function handleSendChat(prompt?: string) {
     !chatStart && setChatStart(true);
-    setMessages([...messages, { role: "user", message: prompt ? prompt : input }]);
+    console.log("Before fetch, input:", input);
+    setMessages([
+      ...messages,
+      { role: "user", message: prompt ? prompt : input },
+    ]);
 
     setDisableInputs(true);
 
@@ -77,7 +82,7 @@ function Page() {
   return (
     <div className="md:w-[770px] h-full overflow-hidden flex flex-col">
       <div className="h-[80%] overflow-auto">
-        {!chatStart && <Intro onPromptClicked={onPromptClicked}/>}
+        {!chatStart && <Intro onPromptClicked={onPromptClicked} />}
 
         {chatStart && (
           <div className="overflow-auto p-2 rounded-lg">
