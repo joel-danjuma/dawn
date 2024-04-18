@@ -1,9 +1,9 @@
 import { createClient } from "@/utils/supabase/server";
 import { Header } from "./ui/Header";
-import { Input, Select } from "./ui/Input";
+import { Input, Select } from "./ui/FormFields";
 import { redirect } from "next/navigation";
 import { db } from "@/lib/db";
-import { select } from "@nextui-org/react";
+import { SubmitButton } from "./ui/SubmitButton";
 
 async function Page() {
   const supabase = createClient();
@@ -16,7 +16,10 @@ async function Page() {
     redirect("/login");
   }
 
-  const userProfile = await db.userProfile.findUnique({ where: { id: user.id }, include: {LingoletteCredential: true} });
+  const userProfile = await db.userProfile.findUnique({
+    where: { id: user.id },
+    include: { LingoletteCredential: true },
+  });
 
   if (!userProfile) {
     // implement proper logging
@@ -31,7 +34,7 @@ async function Page() {
     // implement proper loggin
     console.error(`LingoletteCredentials not found for user id = ${user.id}`);
     console.error("That shouldn't be happening...redirecting");
-    redirect("/")
+    redirect("/");
   }
 
   return (
@@ -89,7 +92,9 @@ async function Page() {
             <Select
               name="grammatical-gender"
               id="grammatical-gender"
-              defaultSelected={userProfile.grammatical_gender ?? "prefer-not-to-say"}
+              defaultSelected={
+                userProfile.grammatical_gender ?? "prefer-not-to-say"
+              }
               options={[
                 { label: "Male", value: "male" },
                 { label: "Female", value: "female" },
@@ -129,6 +134,10 @@ async function Page() {
               />
             </div>
           </div>
+        </div>
+
+        <div className="mt-4">
+          <SubmitButton label="Update" />
         </div>
       </form>
     </>
