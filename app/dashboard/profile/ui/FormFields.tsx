@@ -19,7 +19,7 @@ function Input({
       name={name}
       required
       className={COMMON_CLASS_NAMES}
-      value={value}
+      defaultValue={value}
     />
   );
 }

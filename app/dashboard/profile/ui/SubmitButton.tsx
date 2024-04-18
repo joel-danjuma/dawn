@@ -10,7 +10,7 @@ function SubmitButton({ label = "Update" }: { label?: string }) {
   const { pending } = useFormStatus();
 
   return (
-    <Button disabled={pending}>{pending ? "Please wait..." : label}</Button>
+    <Button disabled={pending} type="submit">{pending ? "Please wait..." : label}</Button>
   );
 }
 

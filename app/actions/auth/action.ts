@@ -9,6 +9,15 @@ import { LingoletteClient } from "@/lib/lingolette";
 
 const AUTH_SUCCESS_REDIRECT_URL = "/dashboard/explore";
 
+export type LingoletteCreateUserType = {
+  name: string; // — user displayed name,
+  targetLng: string; // — target language code,
+  nativeLng: string; // — native language code,
+  languageLevel: number; // — level user is at,
+  id: string; // — user id used to access this user,
+  createdAt: Date; // — date of user creation,
+};
+
 export async function login(formData: FormData) {
   const supabase = createClient();
 
@@ -49,14 +58,7 @@ export async function signup(formData: FormData) {
     redirect("/error?error=Error creating account");
   }
 
-  const lingolettePayload = result.data as {
-    name: string; // — user displayed name,
-    targetLng: string; // — target language code,
-    nativeLng: string; // — native language code,
-    languageLevel: number; // — level user is at,
-    id: string; // — user id used to access this user,
-    createdAt: Date; // — date of user creation,
-  };
+  const lingolettePayload = result.data as LingoletteCreateUserType;
 
   const {
     error,

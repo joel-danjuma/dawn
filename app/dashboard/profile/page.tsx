@@ -4,6 +4,7 @@ import { Input, Select } from "./ui/FormFields";
 import { redirect } from "next/navigation";
 import { db } from "@/lib/db";
 import { SubmitButton } from "./ui/SubmitButton";
+import { updateProfile } from "@/app/actions/auth/profile";
 
 async function Page() {
   const supabase = createClient();
@@ -40,7 +41,7 @@ async function Page() {
   return (
     <>
       <Header />
-      <form className="" action="">
+      <form action={updateProfile}>
         <div className="grid grid-cols-[auto_1fr] gap-5 border-1 border-white/20 rounded-md p-10 md:w-[601px] my-7">
           <div className="flex flex-col gap-7">
             <label htmlFor="name">Name</label>
