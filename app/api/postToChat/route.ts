@@ -3,7 +3,6 @@ import { StreamingTextResponse } from "ai";
 
 export async function POST(req: Request, res: NextApiResponse) {
   const { input, token } = await req.json();
-  console.log(input);
 
   const response = await fetch(
     `https://lingolette.com/api/binary?token=${token}&input=${input}`,
