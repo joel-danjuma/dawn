@@ -1,16 +1,19 @@
-import { NextApiResponse } from "next";
 import { StreamingTextResponse } from "ai";
+import { NextResponse } from "next/server";
 
-export async function POST(req: Request, res: NextApiResponse) {
-  const { input, token } = await req.json();
+export async function POST(request: Request, res: NextResponse) {
+  const { token } = await request.json();
 
   const response = await fetch(
-    `https://lingolette.com/api/binary?token=${token}&input=${input}`,
+    `https://lingolette.com/api/binary?token=${token}&timeStamp=${JSON.stringify(Date())}`,
     {
       method: "POST",
+      headers: {
+        "Content-Type": "application/json"
+      },
       body: JSON.stringify({
-        method: "postToChat",
-        data: {input}
+        method: "startChat",
+        data: {timeStamp: Date()},
       }),
     }
   );
@@ -18,7 +21,7 @@ export async function POST(req: Request, res: NextApiResponse) {
   if (!response.ok) {
     response.text().then((t) => console.error(t));
     // res.status(response.status).json({ error: "Failed to fetch data" });
-    return new Response("Failed to fetch data", {
+    return new Response("Failed to initialise chat", {
       status: response.status,
     });
   }
