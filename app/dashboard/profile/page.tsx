@@ -1,5 +1,5 @@
 import { Header } from "./ui/Header";
-import { Input } from "./ui/Input";
+import { Input, Select } from "./ui/Input";
 
 function Page() {
   return (
@@ -17,17 +17,48 @@ function Page() {
 
           <div className="flex flex-col gap-7">
             <Input type="text" id="name" name="name" />
-            <Input type="text" id="naitve-language" name="naitve-language" />
-            <Input
-              type="text"
-              id="language-studying"
-              name="language-studying"
+            <Select
+              name="naitve-language"
+              id="naitve-language"
+              options={[
+                { label: "Igbo", value: "ig" },
+                { label: "Yoruba", value: "yo" },
+                { label: "English", value: "en" },
+              ]}
             />
-            <Input type="text" id="level" name="level" />
-            <Input
-              type="text"
-              id="grammatical-gender"
+            <Select
+              name="language-studying"
+              id="language-studying"
+              options={[
+                { label: "English", value: "en" },
+                { label: "Catalan", value: "ca" },
+                { label: "German", value: "de" },
+                { label: "Spanish", value: "es" },
+                { label: "French", value: "fr" },
+              ]}
+            />
+            <Select
+              name="level"
+              id="level"
+              options={[
+                { label: "Unknown", value: "0" },
+                { label: "A1", value: "1" },
+                { label: "A2", value: "2" },
+                { label: "B1", value: "3" },
+                { label: "B2", value: "4" },
+                { label: "C1", value: "5" },
+                { label: "C2", value: "6" },
+                { label: "No knowledge", value: "7" },
+              ]}
+            />
+            <Select
               name="grammatical-gender"
+              id="grammatical-gender"
+              options={[
+                { label: "Male", value: "male" },
+                { label: "Female", value: "female" },
+                { label: "Prefer not to say", value: "prefer-not-to-say" },
+              ]}
             />
           </div>
         </div>
@@ -37,13 +68,29 @@ function Page() {
 
           <div className="grid grid-cols-[auto_1fr] gap-5 border-1 border-white/20 rounded-md p-10 md:w-[601px]">
             <div className="flex flex-col gap-7">
-                <label htmlFor="t-grammatical-gender">Grammatical gender</label>
-                <label htmlFor="t-speed">Speed</label>
+              <label htmlFor="t-grammatical-gender">Grammatical gender</label>
+              <label htmlFor="t-speed">Speed</label>
             </div>
 
             <div className="flex flex-col gap-7">
-                <Input name="t-grammatical-gender" id="t-grammatical-gender" type="text"/>
-                <Input name="speed" id="speed" type="text"/>
+              <Select
+                name="t-grammatical-gender"
+                id="t-grammatical-gender"
+                options={[
+                  { label: "Male", value: "male" },
+                  { label: "Female", value: "female" },
+                  { label: "Prefer not to say", value: "prefer-not-to-say" },
+                ]}
+              />
+              <Select
+                name="t-speed"
+                id="t-speed"
+                options={[
+                  { label: "Very slow", value: "very-slow" },
+                  { label: "Slow", value: "slow" },
+                  { label: "Fast", value: "fast" },
+                ]}
+              />
             </div>
           </div>
         </div>
