@@ -13,6 +13,8 @@ model UserProfile {
   client_description   String
   id                   String                @id @db.Uuid
   LingoletteCredential LingoletteCredential?
+  name String @default("")
+  grammatical_gender String @default("prefer-not-to-say")
 
   @@map("user_profiles")
 }
