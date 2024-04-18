@@ -1,10 +1,11 @@
 "use client";
 
-import { useContext, useState } from "react";
+import { useContext, useEffect, useState } from "react";
 import { DashboardAuthCtx } from "../context/DashboardAuthContext";
 import { Intro } from "./components/ExploreIntro";
 import { ChatSection } from "./components/ChatSection";
 import { ChatInput } from "./components/ChatInput";
+import { Skeleton } from "@nextui-org/react";
 
 export interface Message {
   role: string;
@@ -37,21 +38,46 @@ function Page() {
   const [input, setInput] = useState("");
   const [disableInputs, setDisableInputs] = useState(false);
   const { user, token } = useContext(DashboardAuthCtx);
+  const [chatInitialised, setChatInitialised] = useState(false);
+  const [chatInitError, setChatInitError] = useState(false);
+
+  useEffect(() => {
+    fetch("/api/initChat", {
+      method: "POST",
+      body: JSON.stringify({ token }),
+    })
+      .catch(function (e) {
+        setChatInitError(true);
+        console.error("Failed to initialise chat", e);
+      })
+      .then((response) => {
+        if (response!!.ok) {
+          setChatInitialised(true);
+        } else {
+          setChatInitError(true);
+        }
+      });
+  }, [token]);
 
   function onPromptClicked(prompt: string) {
     setInput(prompt);
+    console.log(input);
     handleSendChat(prompt);
   }
 
   function handleSendChat(prompt?: string) {
     !chatStart && setChatStart(true);
-    setMessages([...messages, { role: "user", message: prompt ? prompt : input }]);
+    console.log("Before fetch, input:", input);
+    setMessages([
+      ...messages,
+      { role: "user", message: prompt ? prompt : input },
+    ]);
 
     setDisableInputs(true);
 
     fetch("/api/postToChat", {
       method: "POST",
-      body: JSON.stringify({ prompt: prompt ? prompt : input, token }),
+      body: JSON.stringify({ input: prompt ? prompt : input, token }),
       headers: { "Content-Type": "application/json" },
     })
       .catch(function (e) {
@@ -77,7 +103,7 @@ function Page() {
   return (
     <div className="md:w-[770px] h-full overflow-hidden flex flex-col">
       <div className="h-[80%] overflow-auto">
-        {!chatStart && <Intro onPromptClicked={onPromptClicked}/>}
+        {!chatStart && <Intro onPromptClicked={onPromptClicked} />}
 
         {chatStart && (
           <div className="overflow-auto p-2 rounded-lg">
@@ -90,12 +116,29 @@ function Page() {
       </div>
 
       <div className="w-full">
-        <ChatInput
-          setInput={setInput}
-          disableInputs={disableInputs}
-          input={input}
-          handleSendChat={handleSendChat}
-        />
+        {!chatInitialised && !chatInitError && (
+          <>
+            <div className="w-full h-[50px] py-1 px-6 flex gap-3">
+              <Skeleton className="rounded-lg h-full w-[4%]" />
+              <Skeleton className="rounded-md h-full w-[70%]" />
+              <Skeleton className="rounded-lg h-full w-[4%]" />
+              <Skeleton className="rounded-lg h-full w-[4%]" />
+            </div>
+          </>
+        )}
+        {chatInitialised && !chatInitError &&
+          <ChatInput
+            setInput={setInput}
+            disableInputs={disableInputs}
+            input={input}
+            handleSendChat={handleSendChat}
+          />
+        }
+        {chatInitError && (
+          <p className="text-red-700 font-semibold">
+            Error initialising chat session
+          </p>
+        )}
 
         <p className="mt-7">
           Chat may produce inaccurate information. Verify important data and
