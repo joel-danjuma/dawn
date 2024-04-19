@@ -40,12 +40,12 @@ async function DashboardLayout({ children }: { children: React.ReactNode }) {
   const token = tokenResult.data as { token: string };
 
   return (
-    <div className="md:flex md:flex-row w-full h-screen relative p-3 md:p-4 gap-12">
+    <div className="md:flex md:flex-row w-full h-screen relative p-3 md:p-4 gap-12 overflow-hidden">
       <div className="lg:block md:w-[270px]">
         <SideNav />
       </div>
 
-      <div>
+      <div className="overflow-auto h-[92%] md:h-full bg-transparent">
         <DashboardContextCreator user={user} token={token.token}>
           {children}
         </DashboardContextCreator>
