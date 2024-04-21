@@ -1,58 +1,70 @@
 import SectionTitle from "@/components/sectionTitle";
 import { Card, CardFooter, CardBody } from "@nextui-org/react";
 import Image from "next/image";
-import img from "@/public/team-img.svg";
+// import img from "./images/victor.JPG";
+import Link from "next/link";
+import { redirect } from "next/dist/server/api-utils";
 
 const team = [
   {
     name: "Victor Ogunbiyi",
     role: "Founder & CEO",
-    img: "",
+    linkedIn: "https://www.linkedin.com/in/victor-ogunbiyi-7b945b289/",
+    img: "https://utfs.io/f/b804492c-d74c-45e2-89f7-4162a344c590-1xcj24.JPG",
   },
   {
     name: "Adekunle Adeyemi",
-    role: "Co-Founder & Head of Community",
-    img: "",
+    role: "Co-Founder & Head of Educational Development",
+    linkedIn: "https://www.linkedin.com/in/oluwabukola-dada-134424260/",
+    img: "https://utfs.io/f/e1d3ad2c-879b-4c37-a9aa-64a1a2dd7cb6-bqhoyo.jpg",
   },
   {
     name: "Arome Ibrahim",
-    role: "Advisor",
-    img: "",
+    role: "Metaverse Advisor",
+    linkedIn: "https://www.linkedin.com/in/aromeibrahim/",
+    img: "https://utfs.io/f/94f063f6-0cc0-404e-bea1-f1b51cc5cba9-drlaz7.JPG",
   },
   {
-    name: "Enemor Gabriel",
-    role: "CPO",
-    img: "",
-  },
-  {
-    name: "Abimbola Abe",
-    role: "Story Teller & Digital Marketer",
-    img: "",
-  },
-  {
-    name: "Abi Joseph",
-    role: "Brand Designer",
-    img: "",
-  },
-  {
-    name: "Sekinah Ibrahim",
-    role: "Data Analyst",
-    img: "",
-  },
-  {
-    name: "Michael Jimoh",
+    name: "Adekemi Fasobu",
     role: "Project Manager",
-    img: "",
+    linkedIn: "https://www.linkedin.com/in/fasobu-adekemi/",
+    img: "https://utfs.io/f/b4e50210-3c49-4875-a514-7df2fcf08159-vuz077.JPG",
   },
   {
-    name: "Ayobamidele O.",
-    role: "Student Influencer",
-    img: "",
+    name: "Kelvin Clark",
+    role: "Full Stack & AI Developer",
+    linkedIn: "https://www.linkedin.com/in/kelvin-clark-owusu-3b6778194/",
+    img: "https://utfs.io/f/c2cd9015-e3c3-4027-9289-3bb6edfc7679-dgtgc1.JPG",
   },
+  // {
+  //   name: "Abi Joseph",
+  //   role: "Brand Designer",
+  //   linkedIn :"",
+  //   img: "",
+  // },
+  // {
+  //   name: "Sekinah Ibrahim",
+  //   role: "Data Analyst",
+  //   linkedIn :"",
+  //   img: "",
+  // },
+  // {
+  //   name: "Michael Jimoh",
+  //   role: "Project Manager",
+  //   linkedIn :"",
+  //   img: "",
+  // },
+  // {
+  //   name: "Ayobamidele O.",
+  //   role: "Student Influencer",
+  //   linkedIn :"",
+  //   img: "",
+  // },
   {
     name: "Danjuma Joel",
-    role: "Full Stack Developer",
-    img: "",
+    role: "CTO / Full Stack Developer",
+    linkedIn: "https://www.linkedin.com/in/joel-danjuma/",
+    img: "https://utfs.io/f/4fa85cd3-1f55-4bad-89a0-8b83411e2d16-1x9b9g.jpg",
   },
 ];
 
@@ -64,11 +76,13 @@ const Team = () => {
       </SectionTitle>
       <div className="grid lg:grid-cols-3 grid-cols-1 grid-flow-row place-items-center gap-4 lg:p-0 px-4">
         {team.map((member, i) => (
-          <Card key={i} className="px-4 space-y-4 col-span-1 row-span-1">
-            <CardBody className="relative w-[340px] h-[340px] lg:w-[380px] lg:h-[380px]">
-              <Image src={img} alt="img" fill />
+          <Card key={i} className=" space-y-4 col-span-1 row-span-1">
+            <CardBody className="relative w-[340px] h-[340px] lg:w-[400px] lg:h-[400px]">
+              <Link className="px-0" href={member.linkedIn}>
+                <Image src={member.img} alt="img" fill className="px-0" />
+              </Link>
             </CardBody>
-            <CardFooter className="flex-col space-y-2">
+            <CardFooter className=" px-4 flex-col space-y-2">
               <p>{member.name}</p>
               <p>{member.role}</p>
             </CardFooter>
