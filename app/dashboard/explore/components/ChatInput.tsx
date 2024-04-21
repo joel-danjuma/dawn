@@ -20,7 +20,7 @@ function ChatInput({
         e.preventDefault();
         handleSendChat();
       }}
-      className="flex items-center gap-7 bg-[#0F0F0F] border-1 border-[#0F0F0F]/[10%] rounded-[13px] py-2 ps-12 pe-7 mt-20"
+      className="flex items-center gap-2 md:gap-7 bg-[#0F0F0F] border-1 border-[#0F0F0F]/[10%] rounded-[13px] py-2 md:ps-12 md:pe-7 mt-7"
     >
       <AttachmentIcon />
       <Input

@@ -102,7 +102,7 @@ function Page() {
 
   return (
     <div className="md:w-[770px] h-full overflow-hidden flex flex-col">
-      <div className="h-[80%] overflow-auto">
+      <div className="h-full md:h-[80%] overflow-auto">
         {!chatStart && <Intro onPromptClicked={onPromptClicked} />}
 
         {chatStart && (
@@ -140,7 +140,7 @@ function Page() {
           </p>
         )}
 
-        <p className="mt-7">
+        <p className="text-sm mt-2 md:mt-7">
           Chat may produce inaccurate information. Verify important data and
           Always review content for accuracy and bias; use professional judgment
           and comply with school policies.
