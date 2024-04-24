@@ -14,11 +14,7 @@ function ChatSection({
       {messages.map((msg, idx) => (
         <div key={idx} className="grid grid-cols-[auto_1fr] gap-2 my-3">
           {msg.role === "user" ? <Avatar /> : <Avatar name="DwnAI" />}
-          <p
-            className="rounded-md h-max py-1 px-3"
-          >
-            {msg.message}
-          </p>
+          <p className="rounded-md h-max py-1 px-3">{msg.message}</p>
         </div>
       ))}
       {isGettingAIResponse && (

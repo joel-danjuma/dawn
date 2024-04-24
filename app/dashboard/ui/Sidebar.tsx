@@ -11,7 +11,8 @@ import clsx from "clsx";
 import { usePathname, useRouter } from "next/navigation";
 import { Button } from "@nextui-org/react";
 import { createClient } from "@/utils/supabase/client";
-import { LogoutIcon } from "@/public/icons/Logoout";
+import { SignOutButton } from "@/components/signout-button";
+// import { LogoutIcon } from "@/public/icons/Logoout";
 
 type NavLink = {
   title: string;
@@ -28,13 +29,13 @@ const navLinks: NavLink[] = [
 
 function SideNav() {
   const pathName = usePathname();
-  const router = useRouter();
+  // const router = useRouter();
 
-  function signOut() {
-    createClient()
-      .auth.signOut()
-      .then(() => router.push("/"));
-  }
+  // function signOut() {
+  //   createClient()
+  //     .auth.signOut()
+  //     .then(() => router.push("/"));
+  // }
 
   return (
     <nav className="backdrop-blur-lg border-1 border-white bg-white/[10%] h-full flex flex-col items-start text-white py-4 rounded-[10px]">
@@ -66,7 +67,8 @@ function SideNav() {
       </div>
 
       <div className="mt-auto ms-7">
-        <Button className="px-7" onClick={signOut}><LogoutIcon />Log out</Button>
+        <SignOutButton />
+        {/* <Button className="px-7" onClick={signOut}><LogoutIcon />Log out</Button> */}
       </div>
     </nav>
   );

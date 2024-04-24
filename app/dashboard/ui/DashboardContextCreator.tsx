@@ -2,10 +2,21 @@
 
 import React from "react";
 import { DashboardAuthCtx } from "../context/DashboardAuthContext";
-import { User } from "@supabase/supabase-js";
+import { User } from "next-auth";
+import { JWT } from "@auth/core/jwt";
 
-export function DashboardContextCreator({children, user, token}: {children: React.ReactNode, user: User, token: string}) {
-    return <DashboardAuthCtx.Provider value={{user, token}}>
-        {children}
+export function DashboardContextCreator({
+  children,
+  user,
+  token,
+}: {
+  children: React.ReactNode;
+  user: User;
+  token: JWT;
+}) {
+  return (
+    <DashboardAuthCtx.Provider value={{ user, token }}>
+      {children}
     </DashboardAuthCtx.Provider>
+  );
 }

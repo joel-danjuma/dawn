@@ -17,7 +17,7 @@ async function Page() {
     redirect("/login");
   }
 
-  const userProfile = await db.userProfile.findUnique({
+  const userProfile = await db.user.findUnique({
     where: { id: user.id },
     include: { LingoletteCredential: true },
   });
@@ -52,7 +52,12 @@ async function Page() {
           </div>
 
           <div className="flex flex-col gap-7">
-            <Input type="text" id="name" name="name" value={userProfile.name} />
+            <Input
+              type="text"
+              id="name"
+              name="name"
+              value={userProfile.name || ""}
+            />
             <Select
               name="naitve-language"
               id="naitve-language"

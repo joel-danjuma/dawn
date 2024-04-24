@@ -1,3 +1,6 @@
+import Link from "next/link";
+import SignUpForm from "./ui/signUpForm";
+import GoogleLogin from "../ui/social";
 import {
   Card,
   CardContent,
@@ -5,27 +8,24 @@ import {
   CardHeader,
   CardTitle,
 } from "@/components/ui/card";
-import Link from "next/link";
-import GoogleLogin from "../ui/social";
-import LoginForm from "./ui/loginForm";
 
-export default function Login() {
+export default function SignUp() {
   return (
     <section className="grid place-items-center h-screen">
       <Card className="mx-auto max-w-sm">
         <CardHeader>
-          <CardTitle className="text-2xl">Login</CardTitle>
+          <CardTitle className="text-xl">Sign Up</CardTitle>
           <CardDescription>
-            Enter your email below to login to your account
+            Enter your information to create an account
           </CardDescription>
         </CardHeader>
         <CardContent>
-          <LoginForm />
+          <SignUpForm />
           <GoogleLogin />
           <div className="mt-4 text-center text-sm">
-            Don&apos;t have an account?{" "}
-            <Link href="/signup" className="underline">
-              Sign up
+            Already have an account?{" "}
+            <Link href="/login" className="underline">
+              Log in
             </Link>
           </div>
         </CardContent>

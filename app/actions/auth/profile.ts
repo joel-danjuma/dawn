@@ -5,61 +5,45 @@ import { redirect } from "next/navigation";
 import { revalidatePath } from "next/cache";
 import { LingoletteClient } from "@/lib/lingolette";
 import { LingoletteCreateUserType } from "./action";
+import { auth } from "@/auth";
 
 export { updateProfile };
 
 async function updateProfile(formdata: FormData) {
-  const supabase = createClient();
-  const {
-    error,
-    data: { user },
-  } = await supabase.auth.getUser();
-
-  if (error || user === null) {
-    redirect("/login");
-  }
-
-  const userProfile = await db.userProfile.findUnique({
-    where: { id: user.id },
+  const session = await auth();
+  const user = await db.user.findUnique({
+    where: {
+      id: session?.user.id,
+    },
     include: { LingoletteCredential: true },
   });
 
-  if (userProfile === null) {
+  if (user === null) {
     redirect("/login");
   }
-
   // perform proper sanitization
   const data = {
-    name: formdata.get("name") ?? userProfile.name,
-    nativeLng:
-      formdata.get("native-language") ??
-      userProfile.LingoletteCredential?.nativeLng ??
-      "en",
-    targetLng:
-      formdata.get("language-studying") ??
-      userProfile.LingoletteCredential?.targetLng ??
-      "fr",
-    langLevel:
-      parseInt(formdata.get("level")?.toString() ?? "") ??
-      userProfile.LingoletteCredential?.languageLevel ??
-      7,
+    name: formdata.get("name") ?? user.name,
+    nativeLng: formdata.get("native-language") ?? "en",
+    targetLng: formdata.get("language-studying") ?? "fr",
+    langLevel: parseInt(formdata.get("level")?.toString() ?? "") ?? 7,
     grammaticalGender:
       formdata.get("grammatical-gender") ??
-      userProfile.grammatical_gender ??
+      user.grammatical_gender ??
       "prefer-not-to-say",
   };
 
   // check if lingolette table properties are changed
   try {
     if (
-      data.nativeLng !== userProfile.LingoletteCredential?.nativeLng ||
-      data.targetLng !== userProfile.LingoletteCredential?.targetLng ||
-      data.langLevel !== userProfile.LingoletteCredential?.languageLevel
+      data.nativeLng !== user.LingoletteCredential?.nativeLng ||
+      data.targetLng !== user.LingoletteCredential?.targetLng ||
+      data.langLevel !== user.LingoletteCredential?.languageLevel
     ) {
       // delete user
       // The user id passed to the lingolette api is not the same as the user id from the users table
       const deleteResponse = await LingoletteClient.call("org", "removeUser", {
-        userId: userProfile.LingoletteCredential?.id,
+        userId: user.LingoletteCredential?.id,
       });
 
       // create new user
@@ -80,11 +64,11 @@ async function updateProfile(formdata: FormData) {
 
       const userPayload = result.data as LingoletteCreateUserType;
 
-      await db.userProfile.update({
+      await db.user.update({
         include: { LingoletteCredential: true },
         where: { id: user.id },
         data: {
-          name: data.name.toString(),
+          name: data.name?.toString(),
           grammatical_gender: data.grammaticalGender.toString(),
           LingoletteCredential: {
             connect: {
@@ -100,10 +84,10 @@ async function updateProfile(formdata: FormData) {
         },
       });
     } else {
-      await db.userProfile.update({
+      await db.user.update({
         where: { id: user.id },
         data: {
-          name: data.name.toString(),
+          name: data.name?.toString(),
           grammatical_gender: data.grammaticalGender.toString(),
         },
       });

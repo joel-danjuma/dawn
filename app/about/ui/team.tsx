@@ -10,7 +10,7 @@ const team = [
     img: "",
   },
   {
-    name: "Adekunle Adeyemi",
+    name: "Oluwabukola Dada",
     role: "Co-Founder & Head of Community",
     img: "",
   },

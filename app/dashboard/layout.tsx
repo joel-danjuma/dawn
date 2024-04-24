@@ -1,43 +1,48 @@
-"use server"
+"use server";
 
-import { createClient } from "@/utils/supabase/server";
+// import { createClient } from "@/utils/supabase/server";
 import { SideNav } from "./ui/Sidebar";
 import { redirect } from "next/navigation";
 import { DashboardContextCreator } from "./ui/DashboardContextCreator";
 import { db } from "@/lib/db";
-import { LingoletteClient } from "@/lib/lingolette";
+// import { LingoletteClient } from "@/lib/lingolette";
+import { auth } from "@/auth";
 
 async function DashboardLayout({ children }: { children: React.ReactNode }) {
-  const authClient = createClient();
+  const session = await auth();
 
-  const {
-    error,
-    data: { user },
-  } = await authClient.auth.getUser();
+  const user = await db.user.findUnique({
+    where: {
+      id: session?.user.id,
+    },
+  });
 
   if (!user) {
     redirect("/login");
   }
 
-  const lingoletteCredentials = await db.lingoletteCredential.findUnique({
-    where: { userid: user!!.id },
-  });
+  // const lingoletteCredentials = await db.lingoletteCredential.findUnique({
+  //   where: { userid: user!!.id },
+  // });
 
-  if (!lingoletteCredentials) {
-    console.error("Failed to fetch lingolette credentials");
-    return redirect("/error?error=Error fetching user credentials")
-  }
+  // if (!lingoletteCredentials) {
+  //   console.error("Failed to fetch lingolette credentials");
+  //   return redirect("/error?error=Error fetching user credentials");
+  // }
 
-  const tokenResult = await LingoletteClient.call("org", "createUserSession", {
-    userId: lingoletteCredentials?.id,
-  });
+  // const tokenResult = await LingoletteClient.call("org", "createUserSession", {
+  //   userId: lingoletteCredentials?.id,
+  // });
 
-  if (!tokenResult.data) {
-    console.error("Lingolette error", tokenResult);
-    return redirect("/error?error=Failed to create user and ai session. Try again later");
-  }
+  // if (!tokenResult.data) {
+  //   console.error("Lingolette error", tokenResult);
+  //   return redirect(
+  //     "/error?error=Failed to create user and ai session. Try again later"
+  //   );
+  // }
 
-  const token = tokenResult.data as { token: string };
+  // const token = tokenResult.data as { token: string };
+  const token = session?.user.token;
 
   return (
     <div className="md:flex md:flex-row w-full h-screen relative p-4 gap-12">
@@ -46,9 +51,11 @@ async function DashboardLayout({ children }: { children: React.ReactNode }) {
       </div>
 
       <div>
-        <DashboardContextCreator user={user} token={token.token}>
-          {children}
-        </DashboardContextCreator>
+        {token && (
+          <DashboardContextCreator user={user} token={token}>
+            {children}
+          </DashboardContextCreator>
+        )}
       </div>
     </div>
   );

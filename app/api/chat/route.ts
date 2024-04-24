@@ -1,60 +1,54 @@
-import { NextRequest, NextResponse } from "next/server";
+import { input } from "@nextui-org/react";
+import { NextApiResponse } from "next";
 import { OpenAIStream, StreamingTextResponse } from "ai";
-import crypto from "crypto";
+import { ChatGroq } from "@langchain/groq";
+import { ChatPromptTemplate } from "@langchain/core/prompts";
+import { StringOutputParser } from "@langchain/core/output_parsers";
+import { NextResponse } from "next/server";
 
-export async function POST(req: NextRequest, res: NextResponse) {
-  const random = crypto.randomBytes(32).toString("hex"),
-    hash = crypto
-      .createHmac("sha256", process.env.LINGOLETTE_AUTH_SECRET || "")
-      .update(random)
-      .digest("hex");
+const model = new ChatGroq({
+  apiKey: process.env.GROQ_API_KEY,
+  model: "llama3-8b-8192",
+});
 
-  const response = await fetch("https://lingolette.com/api/binary", {
-    method: "POST",
-    cache: "no-cache",
-    keepalive: true,
-    headers: {
-      "Content-Type": "application/json",
-      "x-api-version": "1",
-      "x-random": random,
-      "x-auth-id": process.env.LINGOLETTE_AUTH_ID || "",
-      "x-auth-key": hash,
-    },
-    body: JSON.stringify({
-      method: "startChat",
-      data: {
-        timeStamp: new Date(),
-        useVoiceOut: false,
-      },
-    }),
-  });
+export async function POST(req: Request) {
+  const { messages }: { messages: Array<{ role: string; content: string }> } =
+    await req.json();
+  // console.log(messages);
+  try {
+    // Find the most recent user message
+    const mostRecentUserMessage = messages
+      .slice()
+      .reverse()
+      .find((message) => message.role === "user");
 
-  // const stream = response.body;
+    // Check if a user message was found
+    if (!mostRecentUserMessage) {
+      throw new Error("No user message found in the provided messages.");
+    }
 
-  // if (!stream) {
-  //   // Handle the case where stream is null, e.g., by returning an error response
-  //   return new Response("Stream is null", {
-  //     status: response.status,
-  //   });
-  // }
-  // return new Response("Succesful", {
-  //   status: response.status,
-  // });
-
-  if (!response.ok) {
-    console.log("It failed boss");
-    // res.status(response.status).json({ error: "Failed to fetch data" });
-    return new Response("Failed to fetch data", {
-      status: response.status,
+    // Use the content of the most recent user message as the input
+    const input = mostRecentUserMessage.content;
+    const prompt = ChatPromptTemplate.fromMessages([
+      [
+        "system",
+        "You are a helpful assistant named AIDA who is an education assistant at Dawn, focused on delivering on tasks given to you by users. Always respond politely and make sure to always inquire if the user is satisfied with the replies given.",
+      ],
+      ["human", "{input}"],
+    ]);
+    const outputParser = new StringOutputParser();
+    const chain = prompt.pipe(model).pipe(outputParser);
+    // const chain = prompt.pipe(model);
+    const response = await chain.stream({
+      input,
     });
-  }
-  const stream = response.body;
+    // const stream = OpenAIStream(response);
 
-  if (!stream) {
-    // Handle the case where stream is null, e.g., by returning an error response
-    return new Response("Stream is null", {
-      status: response.status,
-    });
+    return new StreamingTextResponse(response);
+  } catch (error) {
+    console.log({ Error: error });
+    return {
+      error: error,
+    };
   }
-  return new StreamingTextResponse(stream);
 }
