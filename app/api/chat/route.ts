@@ -42,13 +42,27 @@ export async function POST(req: Request) {
     const response = await chain.stream({
       input,
     });
+
     // const stream = OpenAIStream(response);
 
-    return new StreamingTextResponse(response);
+    let stream = new StreamingTextResponse(response);
+    return stream;
+    // const res = new Response(stream, {
+    //   status: 200, // Set the appropriate status code
+    //   headers: {
+    //     "Content-Type": "text/plain", // Set the appropriate content type
+    //   },
+    // });
+    // return res;
   } catch (error) {
-    console.log({ Error: error });
-    return {
-      error: error,
-    };
+    console.error(error);
+
+    // Return an error response
+    return new Response(JSON.stringify({ error: error }), {
+      status: 500,
+      headers: {
+        "Content-Type": "application/json",
+      },
+    });
   }
 }
