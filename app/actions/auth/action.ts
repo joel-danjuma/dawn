@@ -63,7 +63,7 @@ export async function login(values: z.infer<typeof LoginSchema>) {
         email,
         password,
         redirect: true,
-        redirectTo: DEFAULT_LOGIN_REDIRECT,
+        // redirectTo: DEFAULT_LOGIN_REDIRECT,
       });
 
       return {
@@ -111,7 +111,7 @@ export const signup = async (values: z.infer<typeof RegisterSchema>) => {
         name: name,
         email: email,
         password: hashedPassword,
-        redirectTo: DEFAULT_LOGIN_REDIRECT,
+        // redirectTo: DEFAULT_LOGIN_REDIRECT,
       });
       return {
         success: "User Created",

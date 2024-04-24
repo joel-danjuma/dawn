@@ -67,14 +67,6 @@ const config = {
       if (account?.provider !== "credentials") {
         return true;
       }
-      // const existingUser = await db.user.findUnique({
-      //   where: {
-      //     id: user.id,
-      //   },
-      // });
-      // if (!existingUser || !existingUser?.emailVerified) {
-      //   return false;
-      // }
       return true;
     },
 
