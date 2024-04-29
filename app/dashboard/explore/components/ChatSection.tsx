@@ -1,4 +1,6 @@
+"use client";
 import { Avatar, Skeleton } from "@nextui-org/react";
+import React, { useEffect, useRef } from "react";
 import { Message } from "ai";
 
 function ChatSection({
@@ -8,6 +10,16 @@ function ChatSection({
   messages: Message[];
   isLoading: boolean;
 }) {
+  const messagesEndRef = useRef<HTMLDivElement>(null);
+
+  const scrollToBottom = () => {
+    messagesEndRef.current?.scrollIntoView({ behavior: "smooth" });
+  };
+
+  useEffect(() => {
+    scrollToBottom();
+  }, [messages]);
+
   return (
     <>
       {messages.map((msg) => (
@@ -16,6 +28,7 @@ function ChatSection({
           <p className="rounded-md h-max py-1 px-3">{msg.content}</p>
         </div>
       ))}
+      <div ref={messagesEndRef} />
       {/* {isLoading && (
         <div className="flex flex-col gap-1 py-2 pl-2">
           <Skeleton className="h-[10px] max-w-[40%] rounded-lg" />

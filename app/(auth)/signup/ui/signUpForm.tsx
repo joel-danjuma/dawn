@@ -4,7 +4,8 @@ import { useForm } from "react-hook-form";
 import { RegisterSchema } from "@/schemas";
 import FormError from "../../ui/form-error";
 import { signup } from "../../../actions/auth/action";
-import { Input } from "@/components/ui/input";
+// import { Input } from "@/components/ui/input";
+import { Input } from "@/components/ui/gradientInput";
 import FormSuccess from "../../ui/form-success";
 import { Button } from "@/components/ui/button";
 import { startTransition, useState } from "react";
@@ -92,22 +93,23 @@ const SignUpForm = () => {
             render={({ field }) => (
               <FormItem className="w-full ">
                 <FormControl className="w-full">
-                  <div className="w-full flex items-end">
-                    <Input
-                      {...field}
-                      name="password"
-                      type={"password"}
-                      placeholder={"8+ Characters"}
-                    />
-                    {/* <Button
+                  <Input
+                    {...field}
+                    name="password"
+                    type={"password"}
+                    placeholder={"8+ Characters"}
+                  />
+                  {/* <div className="w-full flex items-end">
+                   
+                    <Button
                       className="rounded-none border-l-0 border-r-0 border-t-0 border-b-2 "
                       variant="outline"
                       type="button"
                       onClick={toggleVisibility}
                     >
                       {isVisible ? <EyeSlashFilledIcon /> : <EyeFilledIcon />}
-                    </Button> */}
-                  </div>
+                    </Button>
+                  </div> */}
                 </FormControl>
                 <FormMessage />
               </FormItem>

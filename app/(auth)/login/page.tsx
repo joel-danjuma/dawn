@@ -21,6 +21,7 @@ export default function Login() {
         </CardHeader>
         <CardContent>
           <LoginForm />
+          <div className="bg-gradient-to-r from-transparent via-neutral-300 dark:via-neutral-700 to-transparent my-8 h-[1px] w-full" />
           <GoogleLogin />
           <div className="mt-4 text-center text-sm">
             Don&apos;t have an account?{" "}

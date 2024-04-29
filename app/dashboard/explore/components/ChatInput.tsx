@@ -4,6 +4,7 @@ import {
   TooltipTrigger,
   TooltipProvider,
 } from "@/components/ui/tooltip";
+import React, { useRef } from "react";
 import { Label } from "@/components/ui/label";
 import { Button } from "@/components/ui/button";
 import { Textarea } from "@/components/ui/textarea";
@@ -25,6 +26,15 @@ function ChatInput({
   // disableInputs,
   input,
 }: ChatInputProps) {
+  const textareaRef = useRef<HTMLTextAreaElement>(null);
+
+  const handleKeyDown = (event: React.KeyboardEvent<HTMLTextAreaElement>) => {
+    if (event.key === " " && event.ctrlKey) {
+      event.preventDefault(); // Prevent the spacebar from adding a space in the textarea
+      handleSubmit(event as any); // Trigger the form submission
+    }
+  };
+
   return (
     <form
       onSubmit={handleSubmit}
@@ -38,8 +48,10 @@ function ChatInput({
         id="message"
         value={input}
         onChange={handleInputChange}
+        onKeyDown={handleKeyDown} // Add the onKeyDown event listener here
         placeholder="Type your message here..."
         className="min-h-12 resize-none border-0 p-3 shadow-none focus-visible:ring-0"
+        ref={textareaRef} // Optional: If you need to access the textarea element directly
       />
       <div className="flex items-center p-3 pt-0">
         <TooltipProvider>
