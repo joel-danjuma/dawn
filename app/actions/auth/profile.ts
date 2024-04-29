@@ -1,5 +1,4 @@
 "use server";
-import { createClient } from "@/utils/supabase/server";
 import { db } from "@/lib/db";
 import { redirect } from "next/navigation";
 import { revalidatePath } from "next/cache";
@@ -25,8 +24,8 @@ async function updateProfile(formdata: FormData) {
   const data = {
     name: formdata.get("name") ?? user.name,
     nativeLng: formdata.get("native-language") ?? "en",
-    targetLng: formdata.get("language-studying") ?? "fr",
-    langLevel: parseInt(formdata.get("level")?.toString() ?? "") ?? 7,
+    targetLng: formdata.get("language-studying") ?? "en",
+    langLevel: parseInt(formdata.get("level")?.toString() ?? "") ?? 2,
     grammaticalGender:
       formdata.get("grammatical-gender") ??
       user.grammatical_gender ??
@@ -42,13 +41,18 @@ async function updateProfile(formdata: FormData) {
     ) {
       // delete user
       // The user id passed to the lingolette api is not the same as the user id from the users table
-      const deleteResponse = await LingoletteClient.call("org", "removeUser", {
-        userId: user.LingoletteCredential?.id,
-      });
+      if (user.LingoletteCredential) {
+        const deleteResponse = await LingoletteClient.call("org", "removeUser", {
+          userId: user.LingoletteCredential.id,
+        });
+        console.info("Lingolette User delete operation: ", deleteResponse);
+      }
+
+      console.info("Creating new user profile on Lingolette...")
 
       // create new user
       const result = await LingoletteClient.call("org", "addUser", {
-        name: user.email,
+        name: user.name,
         targetLng: data.targetLng,
         nativeLng: data.nativeLng,
         languageLevel: data.langLevel,

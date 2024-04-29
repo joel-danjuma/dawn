@@ -70,7 +70,7 @@ class Lingolette {
           res.on("data", (chunk) => (data += chunk));
           res.on("error", (e) => reject(e)); // Use reject instead of resolve for errors
           res.on("end", () => {
-            console.log("Raw response data:", data); // Log the raw response data
+            console.log("Raw response data: ", data); // Log the raw response data
             try {
               resolve(JSON.parse(data)); // Attempt to parse the data
             } catch (error) {

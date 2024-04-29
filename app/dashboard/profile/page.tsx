@@ -1,42 +1,42 @@
-import { createClient } from "@/utils/supabase/server";
+"use server";
+
 import { Header } from "./ui/Header";
 import { Input, Select } from "./ui/FormFields";
 import { redirect } from "next/navigation";
 import { db } from "@/lib/db";
 import { SubmitButton } from "./ui/SubmitButton";
 import { updateProfile } from "@/app/actions/auth/profile";
+import { auth } from "@/auth";
+
+const DEFAULT_LINGOLETTE_CREDENTIALS = {
+  targetLng: "en",
+  nativeLng: "en",
+  id: null,
+  languageLevel: 2,
+  userid: null,
+};
 
 async function Page() {
-  const supabase = createClient();
-  const {
-    error,
-    data: { user },
-  } = await supabase.auth.getUser();
+  const session = await auth();
 
-  if (error || user === null) {
+  const user = await db.user.findUnique({
+    where: {
+      id: session?.user.id,
+    },
+    include: {
+      LingoletteCredential: true,
+    },
+  });
+
+  if (!user) {
     redirect("/login");
   }
 
-  const userProfile = await db.user.findUnique({
-    where: { id: user.id },
-    include: { LingoletteCredential: true },
-  });
-
-  if (!userProfile) {
-    // implement proper logging
-    console.error(`User profile null for user id = ${user.id}`);
-    console.error(`That shouldn't be happening...redirecting`);
-    redirect("/");
-  }
-
-  const lingoletteCredentials = userProfile.LingoletteCredential;
-
-  if (!lingoletteCredentials) {
-    // implement proper loggin
-    console.error(`LingoletteCredentials not found for user id = ${user.id}`);
-    console.error("That shouldn't be happening...redirecting");
-    redirect("/");
-  }
+  const lingoletteCredential = user.LingoletteCredential ?? {
+    ...DEFAULT_LINGOLETTE_CREDENTIALS,
+    userid: user.id,
+    userProfile: user,
+  };
 
   return (
     <>
@@ -56,12 +56,12 @@ async function Page() {
               type="text"
               id="name"
               name="name"
-              value={userProfile.name || ""}
+              value={user.name || ""}
             />
             <Select
               name="naitve-language"
               id="naitve-language"
-              defaultSelected={lingoletteCredentials.nativeLng}
+              defaultSelected={lingoletteCredential.nativeLng}
               options={[
                 { label: "Igbo", value: "ig" },
                 { label: "Yoruba", value: "yo" },
@@ -71,7 +71,7 @@ async function Page() {
             <Select
               name="language-studying"
               id="language-studying"
-              defaultSelected={lingoletteCredentials.targetLng}
+              defaultSelected={lingoletteCredential.targetLng}
               options={[
                 { label: "English", value: "en" },
                 { label: "Catalan", value: "ca" },
@@ -83,7 +83,7 @@ async function Page() {
             <Select
               name="level"
               id="level"
-              defaultSelected={lingoletteCredentials.languageLevel.toString()}
+              defaultSelected={lingoletteCredential.languageLevel.toString()}
               options={[
                 { label: "Unknown", value: "0" },
                 { label: "A1", value: "1" },
@@ -99,7 +99,7 @@ async function Page() {
               name="grammatical-gender"
               id="grammatical-gender"
               defaultSelected={
-                userProfile.grammatical_gender ?? "prefer-not-to-say"
+                user.grammatical_gender ?? "prefer-not-to-say"
               }
               options={[
                 { label: "Male", value: "male" },
