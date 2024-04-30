@@ -42,16 +42,16 @@ function SideNav() {
   }, [pathName, onClose]);
 
   return (
-    <nav className="backdrop-blur-lg border-1 border-white bg-white/[10%] md:h-full flex md:flex-col justify-between md:justify-normal  md:items-start text-white py-4 px-4 md:px-0 rounded-[10px] mx-auto">
+    <nav className="backdrop-blur-lg border-1 border-white bg-white/[10%] lg:h-full flex lg:flex-col justify-between lg:justify-normal  lg:items-start text-white py-4 px-4 lg:px-0 rounded-[10px] mx-auto">
       <Image
         src={logo}
         width={158}
         height={33}
         alt="Dawn logo"
-        className="md:mb-28 md:mx-auto"
+        className="lg:mb-28 md:mx-auto"
       />
 
-      <div className="hidden md:flex flex-col gap-[18px] w-full">
+      <div className="hidden lg:flex flex-col gap-[18px] w-full">
         {navLinks.map((navLink, i) => (
           <Link
             key={i}
@@ -70,13 +70,13 @@ function SideNav() {
         ))}
       </div>
 
-      <div className="hidden md:block mt-auto ms-7">
+      <div className="hidden lg:block mt-auto ms-7">
         <SignOutButton />
         {/* <Button className="px-7" onClick={signOut}><LogoutIcon />Log out</Button> */}
       </div>
 
 
-      <div className="md:hidden">
+      <div className="lg:hidden">
         <Button onClick={onOpen}>
           <HamburgerIcon pathFill="white" />
         </Button>

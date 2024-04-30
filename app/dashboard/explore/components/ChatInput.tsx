@@ -38,7 +38,7 @@ function ChatInput({
   return (
     <form
       onSubmit={handleSubmit}
-      className="w-full overflow-hidden rounded-lg border bg-background"
+      className="w-full overflow-hidden rounded-lg border bg-background "
       x-chunk="dashboard-03-chunk-1"
     >
       <Label htmlFor="message" className="sr-only">
