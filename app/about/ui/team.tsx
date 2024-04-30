@@ -31,7 +31,23 @@ const team = [
     img: "https://utfs.io/f/b4e50210-3c49-4875-a514-7df2fcf08159-vuz077.JPG",
   },
   {
-    name: "Kelvin Clark",
+    name: "Reginald Osei-Marfoh",
+    role: "Chief Product Officer",
+    linkedIn: "https://www.linkedin.com/in/reginald-osei-marfoh-514bab1a9/",
+    img: "/user.png"
+  },{
+    name: "Leo",
+    role: "UI Designer",
+    linkedIn: "#",
+    img: "/user.png"
+  },{
+    name: "Bolaji",
+    role: "UX Designer",
+    linkedIn: "#",
+    img: "/user.png"
+  },
+  {
+    name: "Kelvin Clark Owusu",
     role: "Full Stack & AI Developer",
     linkedIn: "https://www.linkedin.com/in/kelvin-clark-owusu-3b6778194/",
     img: "https://utfs.io/f/c2cd9015-e3c3-4027-9289-3bb6edfc7679-dgtgc1.JPG",
