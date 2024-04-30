@@ -25,7 +25,7 @@ function ChatSection({
       {messages.map((msg) => (
         <div key={msg.id} className="grid grid-cols-[auto_1fr] gap-2 my-3">
           {msg.role === "user" ? <Avatar /> : <Avatar name="AIDA" />}
-          <p className="rounded-md h-max py-1 px-3">{msg.content}</p>
+          <p className="rounded-md py-1 px-3">{msg.content}</p>
         </div>
       ))}
       <div ref={messagesEndRef} />
