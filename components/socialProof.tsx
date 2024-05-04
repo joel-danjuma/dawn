@@ -11,7 +11,7 @@ const SocialProof = () => {
       <h3 className="text-center">
         We Collaborate With 250+ Leading Universities Companies and Backers
       </h3>
-      <div className="lg:w-full flex justify-center items-center flex-row gap-[32px]">
+      <div className="lg:w-full lg:flex grid grid-flow-row grid-cols-2 place-items-center lg:justify-center lg:items-center lg:flex-row gap-[32px] space-y-4">
         {/* <Logo1/> */}
         <Image src={UCL} height={"200"} width={"200"} alt="UCL"></Image>
         <Image
