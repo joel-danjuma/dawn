@@ -9,9 +9,13 @@ import { CompassIcon } from "@/public/icons/compass";
 import Link from "next/link";
 import clsx from "clsx";
 import { usePathname, useRouter } from "next/navigation";
-import { Button } from "@nextui-org/react";
+import { Button, Modal, ModalBody, ModalContent, useDisclosure } from "@nextui-org/react";
 import { createClient } from "@/utils/supabase/client";
 import { SignOutButton } from "@/components/signout-button";
+import { useEffect } from "react";
+import { LogoutIcon } from "@/public/icons/Logoout";
+import { signOut } from "next-auth/react";
+import { HamburgerIcon } from "@/public/icons/Hamburger";
 // import { LogoutIcon } from "@/public/icons/Logoout";
 
 type NavLink = {
@@ -29,25 +33,25 @@ const navLinks: NavLink[] = [
 
 function SideNav() {
   const pathName = usePathname();
-  // const router = useRouter();
+  const router = useRouter();
+  const { isOpen, onOpen, onClose } = useDisclosure();
 
-  // function signOut() {
-  //   createClient()
-  //     .auth.signOut()
-  //     .then(() => router.push("/"));
-  // }
+  useEffect(() => {
+    // closeNav onPathChange
+    onClose();
+  }, [pathName, onClose]);
 
   return (
-    <nav className="backdrop-blur-lg border-1 border-white bg-white/[10%] h-full flex flex-col items-start text-white py-4 rounded-[10px]">
+    <nav className="backdrop-blur-lg border-1 border-white bg-white/[10%] lg:h-full flex lg:flex-col justify-between lg:justify-normal  lg:items-start text-white py-4 px-4 lg:px-0 rounded-[10px] mx-auto">
       <Image
         src={logo}
         width={158}
         height={33}
         alt="Dawn logo"
-        className="mb-28 mx-auto"
+        className="lg:mb-28 md:mx-auto"
       />
 
-      <div className="flex flex-col gap-[18px] w-full">
+      <div className="hidden lg:flex flex-col gap-[18px] w-full">
         {navLinks.map((navLink, i) => (
           <Link
             key={i}
@@ -66,10 +70,46 @@ function SideNav() {
         ))}
       </div>
 
-      <div className="mt-auto ms-7">
+      <div className="hidden lg:block mt-auto ms-7">
         <SignOutButton />
         {/* <Button className="px-7" onClick={signOut}><LogoutIcon />Log out</Button> */}
       </div>
+
+
+      <div className="lg:hidden">
+        <Button onClick={onOpen}>
+          <HamburgerIcon pathFill="white" />
+        </Button>
+      </div>
+
+      <Modal
+        placement="center"
+        isOpen={isOpen}
+        onClose={onClose}
+        className="w-[80%]"
+      >
+        <ModalContent>
+          <ModalBody className="px-9">
+            {navLinks.map((navLink, i) => (
+              <Link
+                key={i}
+                href={navLink.href}
+                className={clsx(
+                  "flex gap-3 items-center transition-colors py-[5px] px-[7px] rounded-md",
+                  {
+                    "bg-clip-text text-transparent bg-gradient-to-r from-[#CC00E3] from-2% to-[#70007D]/[54%]":
+                      navLink.href == pathName,
+                  }
+                )}
+              >
+                <navLink.icon />
+                {navLink.title}
+              </Link>
+            ))}
+            <SignOutButton />
+          </ModalBody>
+        </ModalContent>
+      </Modal>
     </nav>
   );
 }

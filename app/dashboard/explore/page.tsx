@@ -7,11 +7,10 @@ export default function ExplorePage() {
   const { messages, input, handleInputChange, handleSubmit, isLoading } =
     useChat();
   return (
-    <main className="relative flex-col j h-full max-w-[1120px] min-w-[1064px] gap-4 overflow-auto md:grid-cols-2 lg:grid-cols-3">
-      <div className="absolute top-0 w-full h-full">
-        <div className="relative flex h-full max-h-[80vh] justify-start flex-col rounded-xl bg-muted/50 p-4 lg:col-span-2 overflow-auto">
+    <main className="lg:grid lg:grid-rows-[1fr_auto]  lg:max-w-[1120px] h-full">
+      <div className="w-full h-[83%] lg:h-[75vh] my-3 lg:my-0">
+        <div className="h-full overflow-auto rounded-xl bg-muted/50 p-4">
           <ChatSection messages={messages} isLoading={isLoading} />
-          <div className="flex-1" />
         </div>
       </div>
       <ChatInput
