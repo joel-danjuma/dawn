@@ -1,7 +1,7 @@
 import { Button } from "@nextui-org/react";
 // import heroImg from "../public/hero.svg";
 import Image from "next/image";
-import img from "../public/heroImg.jpg";
+import img from "@/public/heroImg.jpg";
 
 import Link from "next/link";
 
