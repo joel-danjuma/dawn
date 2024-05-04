@@ -74,6 +74,10 @@ const config = {
       if (token.sub && session.user) {
         session.user.id = token.sub;
       }
+      if (token && session.user) {
+        session.user.nativeLanguage = token.userLanguage as string;
+        session.user.targetLanguage = token.targetLanguage as string;
+      }
       if (token.role && session.user) {
         session.user.role = token.role as UserRole;
       }
@@ -89,8 +93,15 @@ const config = {
           id: token.sub,
         },
       });
+      const lingo = await db.lingoletteCredential.findUnique({
+        where: {
+          userid: token.sub,
+        },
+      });
 
       if (!existingUser) return token;
+      token.userLanguage = lingo?.nativeLng;
+      token.targetLanguage = lingo?.targetLng;
       token.role = existingUser.role;
       return token;
     },

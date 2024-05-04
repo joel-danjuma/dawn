@@ -1,7 +1,8 @@
 import { Button } from "@nextui-org/react";
 // import heroImg from "../public/hero.svg";
 import Image from "next/image";
-import img from "../public/hero-img.png";
+import img from "../public/heroImg.jpg";
+
 import Link from "next/link";
 
 const heroImg = process.env.HERO_IMG || img;
@@ -14,7 +15,7 @@ const features = [
 
 const Hero = () => {
   return (
-    <section className="flex lg:flex-row flex-col p-4 justify-between lg:gap-[180px] gap-[60px]">
+    <section className="flex lg:flex-row flex-col p-4 justify-between lg:gap-[120px] gap-[60px]">
       <div className="w-full text-start flex-col space-y-[32px]">
         <h1 className="font-bold text-[18px]">INTRODUCING DAWN AI</h1>
         <h2 className="lg:text-7xl text-3xl font-bold">
@@ -48,15 +49,15 @@ const Hero = () => {
               Join Waitlist
             </Link>
           </Button>
-          <Link href={"/about"}>Learn More</Link>
+          <Link href={"/dashboard"}>Learn More</Link>
         </div>
       </div>
       <div className="w-full flex justify-center items-center relative">
         <Image
           src={heroImg}
           alt="img"
-          height={974}
-          width={894}
+          height={1200}
+          width={1200}
           className="z-10"
         />
       </div>

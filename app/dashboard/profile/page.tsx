@@ -1,42 +1,39 @@
-import { createClient } from "@/utils/supabase/server";
+// import { createClient } from "@/utils/supabase/server";
 import { Header } from "./ui/Header";
 import { Input, Select } from "./ui/FormFields";
 import { redirect } from "next/navigation";
 import { db } from "@/lib/db";
 import { SubmitButton } from "./ui/SubmitButton";
 import { updateProfile } from "@/app/actions/auth/profile";
+import { auth } from "@/auth";
 
 async function Page() {
-  const supabase = createClient();
-  const {
-    error,
-    data: { user },
-  } = await supabase.auth.getUser();
+  const session = await auth();
 
-  if (error || user === null) {
+  if (!session?.user) {
     redirect("/login");
   }
 
   const userProfile = await db.user.findUnique({
-    where: { id: user.id },
+    where: { id: session?.user.id },
     include: { LingoletteCredential: true },
   });
 
-  if (!userProfile) {
-    // implement proper logging
-    console.error(`User profile null for user id = ${user.id}`);
-    console.error(`That shouldn't be happening...redirecting`);
-    redirect("/");
-  }
+  // if (!userProfile) {
+  //   // implement proper logging
+  //   console.error(`User profile null for user id = ${session?.user.id}`);
+  //   console.error(`That shouldn't be happening...redirecting`);
+  //   redirect("/");
+  // }
 
-  const lingoletteCredentials = userProfile.LingoletteCredential;
+  const lingoletteCredentials = userProfile?.LingoletteCredential;
 
-  if (!lingoletteCredentials) {
-    // implement proper loggin
-    console.error(`LingoletteCredentials not found for user id = ${user.id}`);
-    console.error("That shouldn't be happening...redirecting");
-    redirect("/");
-  }
+  // if (!lingoletteCredentials) {
+  //   // implement proper loggin
+  //   console.error(`LingoletteCredentials not found for user id = ${user.id}`);
+  //   console.error("That shouldn't be happening...redirecting");
+  //   redirect("/");
+  // }
 
   return (
     <>
@@ -45,7 +42,7 @@ async function Page() {
         <div className="grid grid-cols-[auto_1fr] gap-5 border-1 border-white/20 rounded-md p-10 md:w-[601px] my-7">
           <div className="flex flex-col gap-7">
             <label htmlFor="name">Name</label>
-            <label htmlFor="native-language">Naive language</label>
+            <label htmlFor="native-language">Native language</label>
             <label htmlFor="language-studying">Language studying</label>
             <label htmlFor="level">Level</label>
             <label htmlFor="grammatical-gender">Grammatical gender</label>
@@ -56,12 +53,12 @@ async function Page() {
               type="text"
               id="name"
               name="name"
-              value={userProfile.name || ""}
+              value={userProfile?.name || ""}
             />
             <Select
               name="naitve-language"
               id="naitve-language"
-              defaultSelected={lingoletteCredentials.nativeLng}
+              defaultSelected={lingoletteCredentials?.nativeLng}
               options={[
                 { label: "Igbo", value: "ig" },
                 { label: "Yoruba", value: "yo" },
@@ -71,7 +68,7 @@ async function Page() {
             <Select
               name="language-studying"
               id="language-studying"
-              defaultSelected={lingoletteCredentials.targetLng}
+              defaultSelected={lingoletteCredentials?.targetLng}
               options={[
                 { label: "English", value: "en" },
                 { label: "Catalan", value: "ca" },
@@ -83,7 +80,7 @@ async function Page() {
             <Select
               name="level"
               id="level"
-              defaultSelected={lingoletteCredentials.languageLevel.toString()}
+              defaultSelected={lingoletteCredentials?.languageLevel.toString()}
               options={[
                 { label: "Unknown", value: "0" },
                 { label: "A1", value: "1" },
@@ -99,7 +96,7 @@ async function Page() {
               name="grammatical-gender"
               id="grammatical-gender"
               defaultSelected={
-                userProfile.grammatical_gender ?? "prefer-not-to-say"
+                userProfile?.grammatical_gender ?? "prefer-not-to-say"
               }
               options={[
                 { label: "Male", value: "male" },

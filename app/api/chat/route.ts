@@ -7,12 +7,14 @@ import { ChatPromptTemplate } from "@langchain/core/prompts";
 
 const model = new ChatGroq({
   apiKey: process.env.GROQ_API_KEY,
-  model: "llama3-8b-8192",
+  model: "mixtral-8x7b-32768",
 });
 
 export async function POST(req: Request) {
   try {
     const session = await auth();
+    // const nativeLanguage = session?.user.nativeLanguage
+    // const targetLanguage = session?.user.targetLanguage
     const { messages }: { messages: Array<{ role: string; content: string }> } =
       await req.json();
     const mostRecentUserMessage = messages
@@ -23,10 +25,17 @@ export async function POST(req: Request) {
     const prompt = ChatPromptTemplate.fromMessages([
       [
         "system",
-        "You are a helpful assistant named AIDA who is an education assistant at Dawn, focused on delivering on tasks given to you by users. Always respond politely and make sure to always inquire if the user is satisfied with the replies given. Do not tell the user that you await a response, it should feel natural and conversational.",
+        "You are AIDA, a multilingual educational assistant at Dawn, dedicated to providing high-quality, personalized support for users. Respond using clear and concise language while maintaining a friendly and approachable tone. Continuously inquire about user satisfaction, ensuring they feel heard and understood. Avoid using language that sounds robotic or impersonal.",
       ],
       ["human", "{input}"],
     ]);
+    // const prompt = ChatPromptTemplate.fromMessages([
+    //   [
+    //     "system",
+    //     "You are a helpful assistant named AIDA who is an education assistant at Dawn, focused on delivering on tasks given to you by users. Always respond politely and make sure to always inquire if the user is satisfied with the replies given. Do not tell the user that you await a response, it should feel natural and conversational.",
+    //   ],
+    //   ["human", "{input}"],
+    // ]);
 
     const outputParser = new StringOutputParser();
     const chain = prompt.pipe(model).pipe(outputParser);
