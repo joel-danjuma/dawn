@@ -16,7 +16,7 @@ const features = [
 const Hero = () => {
   return (
     <section className="flex lg:flex-row flex-col p-4 justify-between lg:gap-[40px] gap-[60px]">
-      <div className="lg:w-[40%] w-full text-start flex-col space-y-[32px]">
+      <div className="w-full text-start flex-col space-y-[32px]">
         <h1 className="font-bold text-[18px]">INTRODUCING DAWN AI</h1>
         <h2 className="lg:text-7xl text-3xl font-bold">
           Revolutionizing <br />
@@ -52,13 +52,13 @@ const Hero = () => {
           <Link href={"/dashboard"}>Learn More</Link>
         </div>
       </div>
-      <div className="lg:w-[60%] w-full aspect-auto rounded-xl flex justify-center items-center relative">
+      <div className="w-full aspect-auto rounded-xl flex justify-center items-center relative">
         <Image
           src={heroImg}
           alt="img"
-          // height={1200}
-          // width={1200}
-          fill
+          height={1200}
+          width={1200}
+          // fill
           className="z-10"
         />
       </div>
