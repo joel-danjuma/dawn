@@ -13,7 +13,7 @@ const team = [
     img: "https://utfs.io/f/b804492c-d74c-45e2-89f7-4162a344c590-1xcj24.JPG",
   },
   {
-    name: "Adekunle Adeyemi",
+    name: "Oluwabukola Dada",
     role: "Co-Founder & Head of Educational Development",
     linkedIn: "https://www.linkedin.com/in/oluwabukola-dada-134424260/",
     img: "https://utfs.io/f/e1d3ad2c-879b-4c37-a9aa-64a1a2dd7cb6-bqhoyo.jpg",
@@ -34,17 +34,19 @@ const team = [
     name: "Reginald Osei-Marfoh",
     role: "Chief Product Officer",
     linkedIn: "https://www.linkedin.com/in/reginald-osei-marfoh-514bab1a9/",
-    img: "/user.png"
-  },{
+    img: "/user.png",
+  },
+  {
     name: "Leo",
     role: "UI Designer",
     linkedIn: "#",
-    img: "/user.png"
-  },{
+    img: "/user.png",
+  },
+  {
     name: "Bolaji",
     role: "UX Designer",
     linkedIn: "#",
-    img: "/user.png"
+    img: "/user.png",
   },
   {
     name: "Kelvin Clark Owusu",

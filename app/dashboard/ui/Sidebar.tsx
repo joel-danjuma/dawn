@@ -9,7 +9,13 @@ import { CompassIcon } from "@/public/icons/compass";
 import Link from "next/link";
 import clsx from "clsx";
 import { usePathname, useRouter } from "next/navigation";
-import { Button, Modal, ModalBody, ModalContent, useDisclosure } from "@nextui-org/react";
+import {
+  Button,
+  Modal,
+  ModalBody,
+  ModalContent,
+  useDisclosure,
+} from "@nextui-org/react";
 import { createClient } from "@/utils/supabase/client";
 import { SignOutButton } from "@/components/signout-button";
 import { useEffect } from "react";
@@ -42,7 +48,7 @@ function SideNav() {
   }, [pathName, onClose]);
 
   return (
-    <nav className="backdrop-blur-lg border-1 border-white bg-white/[10%] lg:h-full flex lg:flex-col justify-between lg:justify-normal  lg:items-start text-white py-4 px-4 lg:px-0 rounded-[10px] mx-auto">
+    <nav className="backdrop-blur-lg border-1 border-white bg-white/[10%] lg:h-full flex lg:flex-col justify-between lg:justify-normal  lg:items-start text-white py-4 px-4 min-w-2xl lg:px-0 rounded-[10px] mx-auto">
       <Image
         src={logo}
         width={158}
@@ -74,7 +80,6 @@ function SideNav() {
         <SignOutButton />
         {/* <Button className="px-7" onClick={signOut}><LogoutIcon />Log out</Button> */}
       </div>
-
 
       <div className="lg:hidden">
         <Button onClick={onOpen}>
