@@ -42,13 +42,15 @@ function SideNav() {
   const router = useRouter();
   const { isOpen, onOpen, onClose } = useDisclosure();
 
+
   useEffect(() => {
     // closeNav onPathChange
     onClose();
   }, [pathName, onClose]);
 
   return (
-    <nav className="backdrop-blur-lg border-1 border-white bg-white/[10%] lg:h-full flex lg:flex-col justify-between lg:justify-normal  lg:items-start text-white py-4 px-4 min-w-2xl lg:px-0 rounded-[10px] mx-auto">
+<nav className="backdrop-blur-lg border-1 border-white bg-white/[10%] lg:h-full flex lg:flex-col justify-between lg:justify-normal  lg:items-start text-white py-4 px-4 min-w-2xl lg:px-0 rounded-[10px] mx-auto">
+
       <Image
         src={logo}
         width={158}
@@ -58,6 +60,7 @@ function SideNav() {
       />
 
       <div className="hidden lg:flex flex-col gap-[18px] w-full">
+
         {navLinks.map((navLink, i) => (
           <Link
             key={i}
@@ -75,8 +78,7 @@ function SideNav() {
           </Link>
         ))}
       </div>
-
-      <div className="hidden lg:block mt-auto ms-7">
+    <div className="hidden lg:block mt-auto ms-7">
         <SignOutButton />
         {/* <Button className="px-7" onClick={signOut}><LogoutIcon />Log out</Button> */}
       </div>
@@ -86,7 +88,6 @@ function SideNav() {
           <HamburgerIcon pathFill="white" />
         </Button>
       </div>
-
       <Modal
         placement="center"
         isOpen={isOpen}
@@ -111,7 +112,7 @@ function SideNav() {
                 {navLink.title}
               </Link>
             ))}
-            <SignOutButton />
+  <SignOutButton />
           </ModalBody>
         </ModalContent>
       </Modal>
