@@ -1,60 +1,99 @@
-import { NextRequest, NextResponse } from "next/server";
-import { OpenAIStream, StreamingTextResponse } from "ai";
-import crypto from "crypto";
+import { streamText } from "ai";
+import { createOpenAI } from "@ai-sdk/openai";
 
-export async function POST(req: NextRequest, res: NextResponse) {
-  const random = crypto.randomBytes(32).toString("hex"),
-    hash = crypto
-      .createHmac("sha256", process.env.LINGOLETTE_AUTH_SECRET || "")
-      .update(random)
-      .digest("hex");
+const groq = createOpenAI({
+  baseURL: "https://api.groq.com/openai/v1",
+  apiKey: process.env.GROQ_API_KEY,
+});
+const model = groq("llama3-70b-8192");
 
-  const response = await fetch("https://lingolette.com/api/binary", {
-    method: "POST",
-    cache: "no-cache",
-    keepalive: true,
-    headers: {
-      "Content-Type": "application/json",
-      "x-api-version": "1",
-      "x-random": random,
-      "x-auth-id": process.env.LINGOLETTE_AUTH_ID || "",
-      "x-auth-key": hash,
-    },
-    body: JSON.stringify({
-      method: "startChat",
-      data: {
-        timeStamp: new Date(),
-        useVoiceOut: false,
-      },
-    }),
+export async function POST(req: Request) {
+  const { messages } = await req.json();
+
+  const stream = await streamText({
+    model,
+    system:
+      "You are a helpful assistant named AIDA who is an education assistant at Dawn, focused on delivering on tasks given to you by users. Always respond politely and make sure to always inquire if the user is satisfied with the replies given. Do not tell the user that you await a response, it should feel natural and conversational.",
+    messages,
   });
-
-  // const stream = response.body;
-
-  // if (!stream) {
-  //   // Handle the case where stream is null, e.g., by returning an error response
-  //   return new Response("Stream is null", {
-  //     status: response.status,
-  //   });
-  // }
-  // return new Response("Succesful", {
-  //   status: response.status,
-  // });
-
-  if (!response.ok) {
-    console.log("It failed boss");
-    // res.status(response.status).json({ error: "Failed to fetch data" });
-    return new Response("Failed to fetch data", {
-      status: response.status,
-    });
-  }
-  const stream = response.body;
-
-  if (!stream) {
-    // Handle the case where stream is null, e.g., by returning an error response
-    return new Response("Stream is null", {
-      status: response.status,
-    });
-  }
-  return new StreamingTextResponse(stream);
+  return stream.toAIStreamResponse();
 }
+
+// import { auth } from "@/auth";
+// import { Message } from "ai";
+// import { StreamingTextResponse } from "ai";
+// import { ChatGroq } from "@langchain/groq";
+// import { BufferMemory } from "langchain/memory";
+// import { StringOutputParser } from "@langchain/core/output_parsers";
+// import { ChatPromptTemplate } from "@langchain/core/prompts";
+// import { ConversationChain } from "langchain/chains";
+// import { UpstashRedisChatMessageHistory } from "@langchain/community/stores/message/upstash_redis";
+
+// const model = new ChatGroq({
+//   apiKey: process.env.GROQ_API_KEY,
+//   model: "llama3-70b-8192",
+// });
+
+// export async function POST(req: Request) {
+//   try {
+//     const session = await auth();
+//     // const nativeLanguage = session?.user.nativeLanguage
+//     // const targetLanguage = session?.user.targetLanguage
+//     const { messages }: { messages: Array<{ role: string; content: string }> } =
+//       await req.json();
+//     const mostRecentUserMessage = messages
+//       .slice()
+//       .reverse()
+//       .find((message) => message.role === "user");
+//     const input = mostRecentUserMessage?.content;
+
+//     // const memory = new BufferMemory({
+//     //   chatHistory: new UpstashRedisChatMessageHistory({
+//     //     sessionId: session?.user.id as string,
+//     //     config: {
+//     //       url: "https://still-garfish-34854.upstash.io",
+//     //       token: process.env.UPSTASH_TOKEN,
+//     //     },
+//     //   }),
+//     // });
+//     // const prompt = ChatPromptTemplate.fromMessages([
+//     //   [
+//     //     "system",
+//     //     "You are AIDA, a multilingual educational assistant at Dawn, dedicated to providing high-quality, personalized support for users. Respond using clear and concise language while maintaining a friendly and approachable tone. Continuously inquire about user satisfaction, ensuring they feel heard and understood. Avoid using language that sounds robotic or impersonal.",
+//     //   ],
+//     //   ["human", "{input}"],
+//     // ]);
+//     const prompt = ChatPromptTemplate.fromMessages([
+//       [
+//         "system",
+//         "You are a helpful assistant named AIDA who is an education assistant at Dawn, focused on delivering on tasks given to you by users. Always respond politely and make sure to always inquire if the user is satisfied with the replies given. Do not tell the user that you await a response, it should feel natural and conversational.",
+//       ],
+//       ["human", "{input}"],
+//     ]);
+//     const outputParser = new StringOutputParser();
+//     const chain = prompt.pipe(model).pipe(outputParser);
+//     // const chain = new ConversationChain({
+//     //   llm: model,
+//     //   memory,
+//     //   prompt,
+//     // });
+//     // const chain = runnable.pipe(outputParser)
+//     const response = await chain.stream({
+//       input,
+//     });
+//     // const response = await chain.call({
+//     //   input
+//     // })
+//     let stream = new StreamingTextResponse(response);
+//     return stream;
+//   } catch (error) {
+//     console.error(error);
+//     // Return an error response
+//     return new Response(JSON.stringify({ error: error }), {
+//       status: 500,
+//       headers: {
+//         "Content-Type": "application/json",
+//       },
+//     });
+//   }
+// }

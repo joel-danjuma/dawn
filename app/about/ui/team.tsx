@@ -13,7 +13,7 @@ const team = [
     img: "https://utfs.io/f/b804492c-d74c-45e2-89f7-4162a344c590-1xcj24.JPG",
   },
   {
-    name: "Adekunle Adeyemi",
+    name: "Oluwabukola Dada", 
     role: "Co-Founder & Head of Educational Development",
     linkedIn: "https://www.linkedin.com/in/oluwabukola-dada-134424260/",
     img: "https://utfs.io/f/e1d3ad2c-879b-4c37-a9aa-64a1a2dd7cb6-bqhoyo.jpg",
@@ -29,13 +29,31 @@ const team = [
     role: "Project Manager",
     linkedIn: "https://www.linkedin.com/in/fasobu-adekemi/",
     img: "https://utfs.io/f/b4e50210-3c49-4875-a514-7df2fcf08159-vuz077.JPG",
+    {
+    name: "Reginald Osei-Marfoh",
+    role: "Chief Product Officer",
+    linkedIn: "https://www.linkedin.com/in/reginald-osei-marfoh-514bab1a9/",
+    img: "/user.png",
   },
   {
-    name: "Kelvin Clark",
-    role: "Full Stack & AI Developer",
+    name: "Leo",
+    role: "UI Designer",
+    linkedIn: "#",
+    img: "/user.png",
+  },
+  {
+    name: "Bolaji",
+    role: "UX Designer",
+    linkedIn: "#",
+    img: "/user.png",
+  },
+  {
+    name: "Kelvin Clark Owusu
+       role: "Full Stack & AI Developer",
     linkedIn: "https://www.linkedin.com/in/kelvin-clark-owusu-3b6778194/",
     img: "https://utfs.io/f/c2cd9015-e3c3-4027-9289-3bb6edfc7679-dgtgc1.JPG",
   },
+ 
   // {
   //   name: "Abi Joseph",
   //   role: "Brand Designer",

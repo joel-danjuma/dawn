@@ -1,26 +1,36 @@
-import { login } from "@/app/actions/auth/action";
-import { Button, Input, input } from "@nextui-org/react";
+import {
+  Card,
+  CardContent,
+  CardDescription,
+  CardHeader,
+  CardTitle,
+} from "@/components/ui/card";
 import Link from "next/link";
-import React from "react";
+import GoogleLogin from "../ui/social";
+import LoginForm from "./ui/loginForm";
 
-const LogIn = () => {
+export default function Login() {
   return (
-    <div className="grid place-items-center h-screen">
-      <form className="flex gap-2 flex-col bg-white/5 border-2 border-white/20 rounded-lg p-10" action={login}>
-        <label htmlFor="email">Email</label>
-        <input type="email" name="email" id="email" className="outline-none p-2 bg-transparent border-1 border-white/20 rounded-md" required/>
-
-        <label htmlFor="password">Password</label>
-        <input type="password" name="password" id="password" className="outline-none p-2 bg-transparent border-1 border-white/20 rounded-md" required/>
-        <Button role="submit" type="submit">
-          Log In
-        </Button>
-        <Button>
-          <Link href="/usedawn">Sign Up</Link>
-        </Button>
-      </form>
-    </div>
+    <section className="grid place-items-center h-screen">
+      <Card className="mx-auto max-w-sm">
+        <CardHeader>
+          <CardTitle className="text-2xl">Login</CardTitle>
+          <CardDescription>
+            Enter your email below to login to your account
+          </CardDescription>
+        </CardHeader>
+        <CardContent>
+          <LoginForm />
+          <div className="bg-gradient-to-r from-transparent via-neutral-300 dark:via-neutral-700 to-transparent my-8 h-[1px] w-full" />
+          <GoogleLogin />
+          <div className="mt-4 text-center text-sm">
+            Don&apos;t have an account?{" "}
+            <Link href="/signup" className="underline">
+              Sign up
+            </Link>
+          </div>
+        </CardContent>
+      </Card>
+    </section>
   );
-};
-
-export default LogIn;
+}
