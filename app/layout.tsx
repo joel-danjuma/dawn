@@ -4,7 +4,7 @@ import Nav from "@/components/navbar";
 import { Providers } from "./providers";
 import { Inter } from "next/font/google";
 import { siteConfig } from "@/config/site";
-import Footer from "@/components/footer";
+import { Analytics } from "@vercel/analytics/react";
 
 const inter = Inter({ subsets: ["latin"] });
 
@@ -59,7 +59,10 @@ export default function RootLayout({
           <div className="main">
             <div className="gradient" />
           </div>
-          <main className="max-w-[2560px]">{children}</main>
+          <main className="max-w-[2560px]">
+            {children}
+            <Analytics />
+          </main>
         </Providers>
       </body>
     </html>
