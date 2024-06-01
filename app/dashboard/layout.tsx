@@ -1,6 +1,4 @@
 "use server";
-
-// import { createClient } from "@/utils/supabase/server";
 import { SideNav } from "./ui/Sidebar";
 import { redirect } from "next/navigation";
 import { DashboardContextCreator } from "./ui/DashboardContextCreator";
@@ -25,7 +23,7 @@ async function DashboardLayout({ children }: { children: React.ReactNode }) {
   const token = session?.user.token;
 
   return (
- <div className="lg:grid lg:grid-cols-[auto_1fr] lg:grid-rows-1 w-full h-screen relative p-3 md:p-4 gap-4 md:gap-12 overflow-hidden">
+    <div className="lg:grid lg:grid-cols-[auto_1fr] lg:grid-rows-1 w-full h-screen relative p-3 md:p-4 gap-4 md:gap-12 overflow-hidden">
       <div className="lg:block lg:w-max">
         <SideNav />
       </div>
