@@ -1,14 +1,4 @@
 "use client";
-
-import logo from "@/public/logo.svg";
-import Image from "next/image";
-import { HomeIcon } from "@/public/icons/home";
-import { FeedbackIcon } from "@/public/icons/feedback";
-import { UserIcon } from "@/public/icons/user";
-import { CompassIcon } from "@/public/icons/compass";
-import Link from "next/link";
-import clsx from "clsx";
-import { usePathname, useRouter } from "next/navigation";
 import {
   Button,
   Modal,
@@ -16,12 +6,23 @@ import {
   ModalContent,
   useDisclosure,
 } from "@nextui-org/react";
-import { createClient } from "@/utils/supabase/client";
-import { SignOutButton } from "@/components/signout-button";
+import clsx from "clsx";
+import Link from "next/link";
+import Image from "next/image";
 import { useEffect } from "react";
-import { LogoutIcon } from "@/public/icons/Logoout";
+import logo from "@/public/logo.svg";
 import { signOut } from "next-auth/react";
+import { HomeIcon } from "@/public/icons/home";
+import { UserIcon } from "@/public/icons/user";
+import { LogoutIcon } from "@/public/icons/Logoout";
+import { CompassIcon } from "@/public/icons/compass";
+import { FeedbackIcon } from "@/public/icons/feedback";
+import { createClient } from "@/utils/supabase/client";
+import { usePathname, useRouter } from "next/navigation";
 import { HamburgerIcon } from "@/public/icons/Hamburger";
+import { DawnToolsIcon } from "@/public/icons/dawnTools";
+import { SignOutButton } from "@/components/signout-button";
+import { ChatbotsIcon } from "@/public/icons/chatbots";
 // import { LogoutIcon } from "@/public/icons/Logoout";
 
 type NavLink = {
@@ -35,13 +36,14 @@ const navLinks: NavLink[] = [
   { title: "Explore", icon: CompassIcon, href: "/dashboard/explore" },
   { title: "Feedback", icon: FeedbackIcon, href: "" },
   { title: "Profile", icon: UserIcon, href: "/dashboard/profile" },
+  { title: "Dawn Tools", icon: DawnToolsIcon, href: "/dashboard/tools" },
+  { title: "Chatbots", icon: ChatbotsIcon, href: "/dashboard/chatbots" },
 ];
 
 function SideNav() {
   const pathName = usePathname();
-  const router = useRouter();
+  // const router = useRouter();
   const { isOpen, onOpen, onClose } = useDisclosure();
-
 
   useEffect(() => {
     // closeNav onPathChange
@@ -49,8 +51,7 @@ function SideNav() {
   }, [pathName, onClose]);
 
   return (
-<nav className="backdrop-blur-lg border-1 border-white bg-white/[10%] lg:h-full flex lg:flex-col justify-between lg:justify-normal  lg:items-start text-white py-4 px-4 min-w-2xl lg:px-0 rounded-[10px] mx-auto">
-
+    <nav className="backdrop-blur-lg border-1 border-white bg-white/[10%] lg:h-full flex lg:flex-col justify-between lg:justify-normal  lg:items-start text-white py-4 px-4 w-[200px] lg:px-0 rounded-[10px] p-4">
       <Image
         src={logo}
         width={158}
@@ -60,7 +61,6 @@ function SideNav() {
       />
 
       <div className="hidden lg:flex flex-col gap-[18px] w-full">
-
         {navLinks.map((navLink, i) => (
           <Link
             key={i}
@@ -78,9 +78,8 @@ function SideNav() {
           </Link>
         ))}
       </div>
-    <div className="hidden lg:block mt-auto ms-7">
+      <div className="hidden w-full lg:flex justify-center mt-auto p-4">
         <SignOutButton />
-        {/* <Button className="px-7" onClick={signOut}><LogoutIcon />Log out</Button> */}
       </div>
 
       <div className="lg:hidden">
@@ -112,7 +111,7 @@ function SideNav() {
                 {navLink.title}
               </Link>
             ))}
-  <SignOutButton />
+            <SignOutButton />
           </ModalBody>
         </ModalContent>
       </Modal>
