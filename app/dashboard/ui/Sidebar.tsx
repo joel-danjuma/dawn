@@ -9,6 +9,7 @@ import {
 import clsx from "clsx";
 import Link from "next/link";
 import Image from "next/image";
+import ai from "@/public/ai.png";
 import { useEffect } from "react";
 import logo from "@/public/logo.svg";
 import { signOut } from "next-auth/react";
@@ -57,26 +58,32 @@ function SideNav() {
         width={158}
         height={33}
         alt="Dawn logo"
-        className="lg:mb-28 md:mx-auto"
+        className="lg:mb-[64px] md:mx-auto"
       />
 
-      <div className="hidden lg:flex flex-col gap-[18px] w-full">
+      <div className="hidden lg:flex flex-col gap-[14px] w-full px-4">
         {navLinks.map((navLink, i) => (
           <Link
             key={i}
             href={navLink.href}
             className={clsx(
-              "ms-7 flex gap-3 items-center transition-colors py-[5px] px-[7px] rounded-s-[10px]",
+              "gap-3 flex transition-colors py-2 px-4 rounded-lg",
               {
                 "bg-gradient-to-r from-[#CC00E3] from-2% to-[#70007D]/[54%]":
                   navLink.href == pathName,
               }
             )}
           >
-            <navLink.icon />
-            {navLink.title}
+            <div className="flex gap-4 text-md justify-start items-center w-full">
+              <navLink.icon />
+              {navLink.title}
+            </div>
           </Link>
         ))}
+      </div>
+      <div className="mt-8 flex flex-col gap-2 items-center">
+        <Image src={ai} alt="AI Image" width={180} height={100} />
+        <p>Dawn Teachers</p>
       </div>
       <div className="hidden w-full lg:flex justify-center mt-auto p-4">
         <SignOutButton />
