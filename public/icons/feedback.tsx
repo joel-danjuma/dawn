@@ -1,8 +1,8 @@
 import { SVGProps } from ".";
 
 function Feedback({
-  width = 35,
-  height = 35,
+  width = 30,
+  height = 30,
   parentFill = "none",
   pathFill = "white",
 }: SVGProps) {
