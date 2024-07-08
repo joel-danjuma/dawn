@@ -1,15 +1,28 @@
 "use client";
-
+import React from "react";
 import Image from "next/image";
 import { features, favourite, allTools } from "@/data";
 import Link from "next/link";
+import { Card } from "@nextui-org/react";
 import { title } from "process";
 import button from "@/public/Button.png";
 import { useEffect, useState } from "react";
+import {
+  Modal,
+  ModalContent,
+  ModalHeader,
+  ModalBody,
+  ModalFooter,
+  Button,
+  useDisclosure,
+} from "@nextui-org/react";
+import BipGenerator from "@/components/bipgenerator";
+
 // import { usePathname } from "next/navigation"
 
 const Landing = () => {
   const [isMobile, setIsMobile] = useState(false);
+  const { isOpen, onOpen, onOpenChange } = useDisclosure();
   useEffect(() => {
     const handleResize = () => {
       setIsMobile(window.innerWidth < 768); //Define mobile screen width less than 768px
@@ -80,17 +93,49 @@ const Landing = () => {
 
       <div className="mt-24">
         <h2 className="regular-20 ml-8">All Tools</h2>
-        <div className="grid md:grid-cols-2 lg:grid-cols-3 max-sm:text-center gap-4 mt-5">
+        <div className="grid md:grid-cols-2 lg:grid-cols-3 max-sm:text-justify gap-4 mt-5">
           {allTools.map((tool) => {
             const { id, title, desc, href } = tool;
             const text = isMobile ? desc.substring(0, 50) + "..." : desc;
             return (
-              <Link key={id} href={href} className="box">
-                <div className="rounded-lg p-4 bg-black h-[200px]">
-                  <h4 className="regular-15">{title}</h4>
-                  <p className="regular-12 mt-5   "> {text}</p>
-                </div>
-              </Link>
+              <Card
+                isPressable
+                onPress={onOpen}
+                key={id}
+                className="bg-black h-[200px] p-2 text-start"
+              >
+                <h4 className="regular-15">{title}</h4>
+                <p className="regular-12 mt-5   "> {text}</p>
+
+                <Modal
+                  backdrop="blur"
+                  size="sm"
+                  isOpen={isOpen}
+                  onOpenChange={onOpenChange}
+                >
+                  <ModalContent>
+                    {(onClose) => (
+                      <>
+                        <ModalBody className="mt-10">
+                          <BipGenerator />
+                        </ModalBody>
+                        <ModalFooter>
+                          <Button
+                            color="danger"
+                            variant="light"
+                            onPress={onClose}
+                          >
+                            Close
+                          </Button>
+                          <Button color="primary" onPress={onClose}>
+                            Action
+                          </Button>
+                        </ModalFooter>
+                      </>
+                    )}
+                  </ModalContent>
+                </Modal>
+              </Card>
             );
           })}
         </div>

@@ -12,6 +12,8 @@ import intellectual from "@/public/intellectual.png";
 import student from "@/public/student.png";
 import communication from "@/public/communication.png";
 import community from "@/public/community.png";
+import BipGenerator from "@/components/bipgenerator";
+import Rewriter from "@/components/rewriter";
 
 export const navItems = [
   { id: 1, name: "Home", img: home, href: "/" },
@@ -61,6 +63,7 @@ export const allTools = [
     id: 1,
     title: " Text Rewriter ",
     desc: "Seemlessly Rewrite Texts to Create Unique Content For Lessons, Assignments and Assessments.",
+    component: "Rewriter",
     href: "/dawnschool/rewriter",
   },
 
@@ -68,6 +71,7 @@ export const allTools = [
     id: 2,
     title: "Curriculum Generator  ",
     desc: "Design Comprehensive and Customized Curriculums Allignee With Educational Standards And Learning Objectives. ",
+    component: "Curriculum",
     href: "/dawnschool/curriculum",
   },
 
@@ -76,6 +80,7 @@ export const allTools = [
     title: "Informative Test",
     desc: "Access A Vast Library Of Informative Texts Across Various Subjects To Enrich Lesson Plans And Provide Addional Resources To Students",
     href: "/dawnschool/informative",
+    component: "Informative",
   },
 
   {
@@ -83,6 +88,7 @@ export const allTools = [
     title: "Professional Email ",
     desc: "Create And Manage Professional Communication With Students, Parents And Colleagues Directly Within The Platform. ",
     href: "/dawnschool/professional",
+    component: "Professional",
   },
 
   {
@@ -90,6 +96,7 @@ export const allTools = [
     title: " IEP Generator  ",
     desc: "Generate Individualized Education Programs (IEPs) Tailored To Students' Specific Needs and Learning Styles. ",
     href: "/dawnschool/iepgenerator",
+    component: "Iepgenerator",
   },
 
   {
@@ -97,6 +104,7 @@ export const allTools = [
     title: "Lesson Plan  ",
     desc: " Develop Detailed Lesson Plans With Interactive Elements, Multimedia Integration, And Differentiated Instruction Strategies. ",
     href: "/dawnschool/lessonplan",
+    component: "Lessonplan",
   },
 
   {
@@ -104,6 +112,7 @@ export const allTools = [
     title: " Rubric Generator",
     desc: "Create Clear and Structured Rubrics For Assessing Student Work, Providing Specific Feedback, And Tracking Progress.  ",
     href: "/dawnschool/rubic",
+    component: "Rubic",
   },
 
   {
@@ -111,6 +120,7 @@ export const allTools = [
     title: "Academic Content  ",
     desc: " Access Curated Academic Content, Including Articles,Videos And Simulations, To Enhance Teaching Materials And Student Engagement.",
     href: "/dawnschool/academic",
+    component: "Academic",
   },
 
   {
@@ -118,6 +128,7 @@ export const allTools = [
     title: "Student Work & Feedback   ",
     desc: " Collect, Review, And Provide Feedback On Student Assignments, Projects, And Assessments Efficiently.",
     href: "/dawnschool/feedback",
+    component: "Feedback",
   },
 
   {
@@ -125,6 +136,7 @@ export const allTools = [
     title: " Assessment Grader  ",
     desc: "Automatically Grade Assessments, Quizzes, And Assignments Based on Pre-Defined Criteria and Rubrics. ",
     href: "/rewriter",
+    component: "Rewriter",
   },
 
   {
@@ -132,6 +144,7 @@ export const allTools = [
     title: " Mathematics Solver ",
     desc: " Assist Students in Solving Complex Math Problems And Equations, Providing Step-By-Step Explanations And Solutions.",
     href: "/rewriter",
+    component: "Rewriter",
   },
 
   {
@@ -139,6 +152,7 @@ export const allTools = [
     title: " Past Question Request: Facilitate ",
     desc: "Students' Access To Pass Exam Questions And Practice Materials For Better Preparation. ",
     href: "/rewriter",
+    component: "Rewriter",
   },
 
   {
@@ -146,6 +160,7 @@ export const allTools = [
     title: " Text And Context Translator  ",
     desc: " Translate Texts into Different Languages And Provide Contextual Understanding To Support Language Learners.",
     href: "/rewriter",
+    component: "Rewriter",
   },
 
   {
@@ -153,6 +168,7 @@ export const allTools = [
     title: "Article Proofreader   ",
     desc: " Enhance Students' Writing Skills By Offering Grammar, Punctuation, And Style Suggestions In Real Time.",
     href: "/dawnschool/rewriter",
+    component: "Rewriter",
   },
 
   {
@@ -160,6 +176,7 @@ export const allTools = [
     title: " Vocabulary List Generator ",
     desc: " Create Customized Vocabulary Lists And Quizzes To Improve Students' Language Proficiency.",
     href: "/rewriter",
+    component: "Rewriter",
   },
 
   {
@@ -167,6 +184,7 @@ export const allTools = [
     title: "Group Work Generator ",
     desc: " Facilitate Collaborative Learning Experiences By Assigning Group Tasks, Managing Discussions, And Tracking Contributions.",
     href: "/dawnschool/groupwork",
+    component: "Groupwork",
   },
 
   {
@@ -174,6 +192,7 @@ export const allTools = [
     title: " Science Lab  ",
     desc: " Virtualize Laboratory Experiments And Simulations For Hands-On-Learning  Experiences In Science Subjects. ",
     href: "/dawnschool/sciencelab",
+    component: "Sciencelab",
   },
 
   {
@@ -181,6 +200,7 @@ export const allTools = [
     title: "Syllabus Generator   ",
     desc: "Build Structured Course Syllabi  With Clear Objectives, Learning Outcomes, And Assessments Strategies. ",
     href: "/dawnschool/syllabusgenerator",
+    component: "Syllabusgenerator",
   },
 
   {
@@ -188,6 +208,7 @@ export const allTools = [
     title: " BIP Generator  ",
     desc: "Develop Behavior Intervention Plans (BIPs) To Support Students With Behavioral Challenges And Promote Positive Learning Environments. ",
     href: "/dawnschool/bipgenerator",
+    component: "Bipgenerator",
   },
 
   {
@@ -195,6 +216,7 @@ export const allTools = [
     title: " Social Stories. ",
     desc: "Create Social Stories To Help Students With Autism Spectrum Disorder (ASD) Navigate Social Situations And Develop Social Skills. ",
     href: "/dawnschool/socialstories",
+    component: "Socialstories",
   },
 
   {
@@ -202,6 +224,7 @@ export const allTools = [
     title: "Letter Of Recommendation  ",
     desc: " Generate Personalized Letters Of Recommendation For Students Based On Their Academic Achievements And Qualities.",
     href: "/dawnschool/letter",
+    component: "Letter",
   },
 
   {
@@ -209,6 +232,7 @@ export const allTools = [
     title: "AI Co-Teacher  ",
     desc: "Collaborate With An AI-Powered Virtual Co-Teacher To Enhance Instructional Delivery, Classroom Management, And Student Support. ",
     href: "/dawnschool/coteacher",
+    component: "Coteacher",
   },
 
   {
@@ -216,6 +240,7 @@ export const allTools = [
     title: "Digital Literacy Coach  ",
     desc: "Provide Guidance And Resources To Improve Students' Digital Literacy Skills, Including Internet Safety, Research Techniques And Digital Citizenship. ",
     href: "/dawnschool/digitalcoach",
+    component: "Digitalcoach",
   },
 
   {
@@ -223,5 +248,6 @@ export const allTools = [
     title: "Research Assistance  ",
     desc: " Assist Students In Conducting Research, Organizing Data, And Citing Sources Effectively For Academic Projects.",
     href: "/dawnschool/research",
+    component: "Research",
   },
 ];
