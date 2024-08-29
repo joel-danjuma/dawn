@@ -9,7 +9,7 @@ const RewriterPage = () => {
   const [input_field, setInputField] = React.useState("");
 
   const { handleInputChange, handleSubmit, messages, isLoading } = useChat({
-    api: "http://dawnaistudy.com/api/text-rewriter",
+    api: "https://dawnaistudy.com/api/text-rewriter",
     body: {
       text: input_field,
     },
