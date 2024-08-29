@@ -1,6 +1,6 @@
 import { SVGProps } from ".";
 
-function User({width = 35, height = 35, parentFill = "none"}: SVGProps) {
+function User({ width = 30, height = 30, parentFill = "none" }: SVGProps) {
   return (
     <svg
       width={width}

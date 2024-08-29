@@ -1,54 +1,39 @@
-"use server"
-
-import { createClient } from "@/utils/supabase/server";
+"use server";
 import { SideNav } from "./ui/Sidebar";
 import { redirect } from "next/navigation";
 import { DashboardContextCreator } from "./ui/DashboardContextCreator";
 import { db } from "@/lib/db";
-import { LingoletteClient } from "@/lib/lingolette";
+// import { LingoletteClient } from "@/lib/lingolette";
+import { auth } from "@/auth";
 
 async function DashboardLayout({ children }: { children: React.ReactNode }) {
-  const authClient = createClient();
+  const session = await auth();
 
-  const {
-    error,
-    data: { user },
-  } = await authClient.auth.getUser();
+  const user = await db.user.findUnique({
+    where: {
+      id: session?.user.id,
+    },
+  });
 
   if (!user) {
     redirect("/login");
   }
 
-  const lingoletteCredentials = await db.lingoletteCredential.findUnique({
-    where: { userid: user!!.id },
-  });
-
-  if (!lingoletteCredentials) {
-    console.error("Failed to fetch lingolette credentials");
-    return redirect("/error?error=Error fetching user credentials")
-  }
-
-  const tokenResult = await LingoletteClient.call("org", "createUserSession", {
-    userId: lingoletteCredentials?.id,
-  });
-
-  if (!tokenResult.data) {
-    console.error("Lingolette error", tokenResult);
-    return redirect("/error?error=Failed to create user and ai session. Try again later");
-  }
-
-  const token = tokenResult.data as { token: string };
+  // const token = tokenResult.data as { token: string };
+  const token = session?.user.token;
 
   return (
-    <div className="md:flex md:flex-row w-full h-screen relative p-3 md:p-4 gap-12 overflow-hidden">
-      <div className="lg:block md:w-[270px]">
+    <div className="lg:grid lg:grid-cols-[auto_1fr] lg:grid-rows-1 w-full h-screen relative p-3 md:p-4 gap-4 md:gap-12">
+      <div className="lg:block lg:w-max">
         <SideNav />
       </div>
 
-      <div className="overflow-auto h-[92%] md:h-full bg-transparent">
-        <DashboardContextCreator user={user} token={token.token}>
-          {children}
-        </DashboardContextCreator>
+      <div className="h-[90%] lg:h-full bg-transparent overflow-auto">
+        {token && (
+          <DashboardContextCreator user={user} token={token}>
+            {children}
+          </DashboardContextCreator>
+        )}
       </div>
     </div>
   );

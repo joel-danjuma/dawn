@@ -43,16 +43,41 @@ class Lingolette {
       },
     };
 
+    // return new Promise((resolve, reject) => {
+    //   const req = https.request(
+    //     `https://${API_HOST}/api/${endpoint}`,
+    //     options,
+    //     (res) => {
+    //       let data = "";
+
+    //       res.on("data", (chunk) => (data += chunk));
+    //       res.on("error", (e) => reject(e));
+    //       res.on("end", () => resolve(JSON.parse(data)));
+    //     }
+    //   );
+
+    //   req.write(payloadString);
+    //   req.end();
+    // });
     return new Promise((resolve, reject) => {
       const req = https.request(
         `https://${API_HOST}/api/${endpoint}`,
         options,
         (res) => {
-          let data = "";
+          let data = ""; // Use a local variable instead of res.data
+          // res.json is not a standard property of IncomingMessage, so it's removed
 
           res.on("data", (chunk) => (data += chunk));
-          res.on("error", (e) => reject(e));
-          res.on("end", () => resolve(JSON.parse(data)));
+          res.on("error", (e) => reject(e)); // Use reject instead of resolve for errors
+          res.on("end", () => {
+            console.log("Raw response data: ", data); // Log the raw response data
+            try {
+              resolve(JSON.parse(data)); // Attempt to parse the data
+            } catch (error) {
+              console.error("Error parsing JSON:", error); // Log any parsing errors
+              reject(error); // Reject the promise with the parsing error
+            }
+          });
         }
       );
 

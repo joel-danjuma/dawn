@@ -1,8 +1,8 @@
 import { SVGProps } from ".";
 
 function Home({
-  width = 35,
-  height = 35,
+  width = 30,
+  height = 30,
   pathFill = "white",
   parentFill = "none",
 }: SVGProps) {

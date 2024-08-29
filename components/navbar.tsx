@@ -23,7 +23,7 @@ const Nav = () => {
         isMenuOpen={isMenuOpen}
         onMenuOpenChange={setIsMenuOpen}
         maxWidth="full"
-        className=" mx-auto container px-0 py-4 flex justify-between"
+        className="mx-auto container px-4 py-4 flex justify-between"
       >
         <NavbarContent justify="start">
           <Link href={"/"}>

@@ -1,9 +1,13 @@
+import { auth } from "@/auth";
+
 const prompt_suggesstions = [
   "I want to enhance my lessons",
   "I want to enhance my lessons",
   "I want to learn a new course",
   "Discuss best practices in teaching",
 ];
+
+const session = await auth();
 
 function Intro({
   onPromptClicked,
@@ -12,7 +16,9 @@ function Intro({
 }) {
   return (
     <>
-      <h3 className="hidden text-[33px] font-[600]">Hello Fancy</h3>
+
+ <h3 className="text-[33px] font-[600]">Hello</h3>
+
 
       <div className="bg-[#9A4FFF]/[10%] rounded-[7px] mt-12 w-full">
         <p className="text-center text-[19px] p-4">
@@ -34,7 +40,6 @@ function Intro({
             <p>{prompt}</p>
           </div>
         ))}
-        
       </div>
     </>
   );

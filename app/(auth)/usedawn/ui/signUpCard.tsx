@@ -126,7 +126,7 @@ function SignUpCard() {
       formdata.set("password", password);
       formdata.set("client_description", clientDesc);
       formdata.set("course", course);
-      await signup(formdata);
+      // await signup(formdata);
     });
   }
 
