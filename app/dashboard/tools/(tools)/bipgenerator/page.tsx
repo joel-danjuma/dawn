@@ -57,7 +57,7 @@ const BipGeneratorPage = () => {
           value={input_field}
           minRows={2}
           onChange={handleInputChange}
-          placeholder="Paste the text you want to rewrite here..."
+          placeholder="Brief description of student's strengths, behavioral challenges, and other relevant information..."
           className="w-full resize-none border-0 shadow-none focus-visible:ring-0"
         />
 
