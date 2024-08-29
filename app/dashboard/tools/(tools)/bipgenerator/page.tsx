@@ -1,12 +1,25 @@
-import BipGenerator from '@/components/bipgenerator'
-import React from 'react'
+"use client";
+import { ChatSection } from "@/app/dashboard/explore/components/ChatSection";
+import BipGenerator from "@/components/bipgenerator";
+import { useChat } from "ai/react";
 
-const page = () => {
+const BipGeneratorPage = () => {
+  const { input, handleInputChange, handleSubmit, messages, isLoading } =
+    useChat({
+      api: "/api/bipgenerator",
+    });
+
   return (
     <>
-      <BipGenerator/>
+      <ChatSection messages={messages} isLoading={isLoading} />
+      <label>Grade Level</label>
+      <BipGenerator
+        handleSubmit={handleSubmit}
+        handleInputChange={handleInputChange}
+        input={input}
+      />
     </>
-  )
-}
+  );
+};
 
-export default page
+export default BipGeneratorPage;

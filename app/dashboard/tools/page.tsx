@@ -17,10 +17,22 @@ import {
   useDisclosure,
 } from "@nextui-org/react";
 import BipGenerator from "@/components/bipgenerator";
-
-// import { usePathname } from "next/navigation"
+import { ButtonGenerate } from "@/components/buttonGenerate";
+import { Iepgenerator } from "@/components/iepgenerator";
+import Informative from "@/components/informative";
+import { LessonPlaner } from "@/components/lessonplan";
+import { Professional } from "@/components/professional";
+import ResearchAssistance from "@/components/researchassistance";
+import Rewriter from "@/components/rewriter";
+import Rubic from "@/components/rubic";
+import Sciencelab from "@/components/sciencelab";
+import SyllabusGenerator from "@/components/syllabusgenerator";
+import { useRouter } from "next/navigation";
 
 const Landing = () => {
+  // modify the landing page such that it maps over the allTools array and renders a Card component for each tool
+
+  const router = useRouter();
   const [isMobile, setIsMobile] = useState(false);
   const { isOpen, onOpen, onOpenChange } = useDisclosure();
   useEffect(() => {
@@ -80,7 +92,11 @@ const Landing = () => {
             const { id, title, href, desc } = item;
             const text = isMobile ? desc.substring(0, 50) + "..." : desc;
             return (
-              <Link href={item.href} key={item.id} className="box">
+              <Link
+                href={`/dashboard/tools/${href}`}
+                key={item.id}
+                className="box"
+              >
                 <div className="rounded-lg p-4 bg-black h-[200px] ">
                   <h4 className="regular-15">{item.title}</h4>
                   <p className="regular-12 mt-5">{text}</p>
@@ -93,32 +109,34 @@ const Landing = () => {
 
       <div className="mt-24">
         <h2 className="regular-20 ml-8">All Tools</h2>
+
         <div className="grid md:grid-cols-2 lg:grid-cols-3 max-sm:text-justify gap-4 mt-5">
           {allTools.map((tool) => {
             const { id, title, desc, href } = tool;
             const text = isMobile ? desc.substring(0, 50) + "..." : desc;
-            return (
-              <Card
-                isPressable
-                onPress={onOpen}
-                key={id}
-                className="bg-black h-[200px] p-2 text-start"
-              >
-                <h4 className="regular-15">{title}</h4>
-                <p className="regular-12 mt-5   "> {text}</p>
 
+            return (
+              <Link key={id} href={`/dashboard/tools/${tool.href}`}>
+                <Card className={`bg-black h-[200px] min-w-fit p-2 text-start`}>
+                  <p className="regular-15">{tool.title}</p>
+
+                  <p className="regular-12 mt-5"> {text}</p>
+                </Card>
+              </Link>
+            );
+          })}
+        </div>
+        {/* {allTools.map((tool) => {
                 <Modal
                   backdrop="blur"
-                  size="sm"
+                  size="full"
                   isOpen={isOpen}
                   onOpenChange={onOpenChange}
                 >
                   <ModalContent>
                     {(onClose) => (
                       <>
-                        <ModalBody className="mt-10">
-                          <BipGenerator />
-                        </ModalBody>
+                        <ModalBody className="">{tool.component}</ModalBody>
                         <ModalFooter>
                           <Button
                             color="danger"
@@ -137,8 +155,7 @@ const Landing = () => {
                 </Modal>
               </Card>
             );
-          })}
-        </div>
+          })} */}
       </div>
     </section>
   );
