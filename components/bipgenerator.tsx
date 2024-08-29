@@ -1,20 +1,11 @@
 "use client";
 import { ButtonGenerate } from "./buttonGenerate";
-import { Textarea } from "@nextui-org/react";
+import { input, Textarea } from "@nextui-org/react";
 import { Input } from "@nextui-org/react";
 import { useState } from "react";
 
-// interface BipGeneratorProps {
-//   handleSubmit: (e: React.FormEvent<HTMLFormElement>) => void;
-//   handleInputChange: (
-//     e:
-//       | React.ChangeEvent<HTMLInputElement>
-//       | React.ChangeEvent<HTMLTextAreaElement>
-//   ) => void;
-//   input: string;
-// }
 interface BipGeneratorProps {
-  handleSubmit: React.FormEventHandler<HTMLFormElement>;
+  handleSubmit: (e: React.FormEvent<HTMLFormElement>) => void;
   handleInputChange: (
     e:
       | React.ChangeEvent<HTMLInputElement>
@@ -22,6 +13,18 @@ interface BipGeneratorProps {
   ) => void;
   input: string;
 }
+// interface BipGeneratorProps {
+//   handleSubmit: React.FormEventHandler<HTMLFormElement>;
+//   handleInputChange: (
+//     e:
+//       | React.ChangeEvent<HTMLInputElement>
+//       | React.ChangeEvent<HTMLTextAreaElement>
+//   ) => void;
+//   input: {
+//     grade_level: string;
+//     input: string;
+//   };
+// }
 
 const BipGenerator = ({
   handleSubmit,
@@ -29,6 +32,7 @@ const BipGenerator = ({
   input,
 }: BipGeneratorProps) => {
   const [grade_level, setGradeLevel] = useState(""); // Declare and initialize the grade_level state
+  const [input_field, setInputField] = useState(""); // Declare and initialize the input_field state
 
   const handleGradeLevelChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     setGradeLevel(e.target.value); // Update the grade_level state when the input value changes
@@ -36,7 +40,6 @@ const BipGenerator = ({
 
   return (
     <section className="w-full h-fit py-4">
-      {/* <Static /> */}
       <form onSubmit={handleSubmit} className="w-full h-fit space-y-4">
         <Input
           id="grade_level"
@@ -48,7 +51,7 @@ const BipGenerator = ({
 
         <Textarea
           id="input"
-          value={input}
+          value={input_field}
           minRows={2}
           onChange={handleInputChange}
           placeholder="Paste the text you want to rewrite here..."

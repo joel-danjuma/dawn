@@ -18,6 +18,7 @@ export async function POST(req: Request) {
 
 Inputs:
 
+
 Grade Level: [Insert grade level, e.g., 3, 6, 9, etc.]
 Input: [Insert brief description of student's strengths, behavioral challenges, and other relevant information, e.g., "Student has difficulty staying focused on academic tasks, often gets easily distracted, and has a strong interest in art and music. History of behavioral challenges, including throwing objects and interrupting peers."]
 Task:

@@ -1,4 +1,4 @@
-import { generateText } from "ai";
+import { streamText } from "ai";
 import { createOpenAI } from "@ai-sdk/openai";
 
 const groq = createOpenAI({
@@ -11,7 +11,7 @@ const model = groq("llama3-70b-8192");
 export async function POST(req: Request) {
   const { text } = await req.json();
 
-  const response = await generateText({
+  const response = await streamText({
     model,
     system: `Task: Rewrite the input text to convey the same information in a clear and concise manner, using language that is engaging and easy to understand.
 
@@ -34,7 +34,5 @@ Please ensure the rewritten text is free of grammatical errors, typos, and punct
     prompt: `rewrite the following ${text} `,
   });
 
-  return new Response(JSON.stringify(response.text), {
-    headers: { "Content-Type": "application/json" },
-  });
+  return response.toAIStreamResponse();
 }
