@@ -1,53 +1,56 @@
-import { Input } from 'postcss'
-import React from 'react'
-import Inputdiv from './input'
-import { ButtonGenerate } from './buttonGenerate'
-import { Static } from './static'
+import { Label } from "@/components/ui/label";
+import { Input } from "@/components/ui/input";
+import { Button } from "@nextui-org/react";
+import React from "react";
+import { ButtonGenerate } from "./buttonGenerate";
 
-export const Curriculum = () => {
-  return (
-    <section className=" sections">
-      <Static/>
-      <div>
-        <h2 className=" regular-h2 text-center">Curriculum Generator</h2>
-        <p className="regular-p header-p">Design Comprehensive And Customized Curriculums Aligned With Educational Standards And Learning Objectives.</p>
-      </div>
-      <div className='mt-[49px]'>
-        <div>
-          <h4 className="regular-h3 mt-[20px]  mb-[8px]">Grade Level</h4>
-          <Inputdiv />
-        </div>
-        <div>
-          <h4 className="regular-h3 mt-[20px] mb-[8px]">Subject</h4>
-          <Inputdiv />
-        </div>
-        <div>
-          <h4 className="regular-h3 mt-[20px] mb-[8px]">Course Description</h4>
-          <Inputdiv />
-        </div>
-        <div>
-          <h4 className="regular-h3 mt-[20px] mb-[8px]">Required Material</h4>
-          <Inputdiv />
-        </div>
-        <div>
-          <h4 className="regular-h3 mt-[20px] mb-[8px]">Grading Policy</h4>
-          <Inputdiv />
-        </div>
-        <div>
-          <h4 className="regular-h3 mt-[20px] mb-[8px]">Class Policy/Expectation</h4>
-          <Inputdiv />
-        </div>
-        <div>
-          <h4 className="regular-h3 mt-[20px] mb-[8px]">Course Outline/What is Covered</h4>
-          <Inputdiv />
-        </div>
-        <div>
-          <h4 className="regular-h3 mt-[20px] mb-[8px]">Additional Customization(Optional)</h4>
-          <Inputdiv />
-        </div>
+const items = [
+  { label: "Grade Level", id: "grade_level" },
+  { label: "Subject", id: "subject" },
+  { label: "Course Description", id: "course_description" },
+  { label: "Required Material", id: "required_material" },
+  { label: "Grading Policy", id: "grading_policy" },
+  { label: "Class Policy/Expectation", id: "class_policy_expectation" },
+  { label: "Course Outline/What is Covered", id: "course_outline" },
+  {
+    label: "Additional Customization(Optional)",
+    id: "additional_customization",
+  },
+];
 
-        < ButtonGenerate/>
-      </div>
-    </section>
-  )
+interface CurriculumProps {
+  handleSubmit: (e: React.FormEvent<HTMLFormElement>) => void;
+  handleInputChange: (
+    e:
+      | React.ChangeEvent<HTMLInputElement>
+      | React.ChangeEvent<HTMLTextAreaElement>
+  ) => void;
+  input: string;
 }
+
+export const Curriculum = ({
+  handleSubmit,
+  handleInputChange,
+  input,
+}: CurriculumProps) => {
+  return (
+    <section className="w-full h-screen">
+      {/* <Static /> */}
+
+      <form className="w-full h-full gap-4 mt-10" onSubmit={handleSubmit}>
+        {items.map((item) => (
+          <div className="py-4 px-2" key={item.id}>
+            <Input
+              id={item.id}
+              value={input}
+              placeholder={item.label}
+              onChange={handleInputChange}
+              className="flex gap-2 w-full bg-neutral-950 md:bg-[#222325] rounded-full md:rounded-[7px] py-3 px-[18px]"
+            ></Input>
+          </div>
+        ))}
+        <ButtonGenerate />
+      </form>
+    </section>
+  );
+};
