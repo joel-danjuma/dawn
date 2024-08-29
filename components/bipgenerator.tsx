@@ -1,10 +1,20 @@
+"use client";
 import { ButtonGenerate } from "./buttonGenerate";
 import { Textarea } from "@nextui-org/react";
-import { Label } from "./ui/label";
-import Image from "next/image";
+import { Input } from "@nextui-org/react";
+import { useState } from "react";
 
+// interface BipGeneratorProps {
+//   handleSubmit: (e: React.FormEvent<HTMLFormElement>) => void;
+//   handleInputChange: (
+//     e:
+//       | React.ChangeEvent<HTMLInputElement>
+//       | React.ChangeEvent<HTMLTextAreaElement>
+//   ) => void;
+//   input: string;
+// }
 interface BipGeneratorProps {
-  handleSubmit: (e: React.FormEvent<HTMLFormElement>) => void;
+  handleSubmit: React.FormEventHandler<HTMLFormElement>;
   handleInputChange: (
     e:
       | React.ChangeEvent<HTMLInputElement>
@@ -18,20 +28,31 @@ const BipGenerator = ({
   handleInputChange,
   input,
 }: BipGeneratorProps) => {
+  const [grade_level, setGradeLevel] = useState(""); // Declare and initialize the grade_level state
+
+  const handleGradeLevelChange = (e: React.ChangeEvent<HTMLInputElement>) => {
+    setGradeLevel(e.target.value); // Update the grade_level state when the input value changes
+  };
+
   return (
-    <section className="w-full h-fit">
+    <section className="w-full h-fit py-4">
       {/* <Static /> */}
-      <form onSubmit={handleSubmit} className="w-full h-fit">
-        <Label htmlFor="message" className="sr-only">
-          Message
-        </Label>
+      <form onSubmit={handleSubmit} className="w-full h-fit space-y-4">
+        <Input
+          id="grade_level"
+          value={grade_level}
+          onChange={handleGradeLevelChange} // Bind the handleGradeLevelChange function to the onChange event
+          placeholder="Grade Level"
+          className="w-full resize-none border-0 shadow-none focus-visible:ring-0"
+        />
+
         <Textarea
-          id="message"
+          id="input"
           value={input}
-          minRows={5}
+          minRows={2}
           onChange={handleInputChange}
           placeholder="Paste the text you want to rewrite here..."
-          className="w-full resize-none border-0 p-3 shadow-none focus-visible:ring-0"
+          className="w-full resize-none border-0 shadow-none focus-visible:ring-0"
         />
 
         <ButtonGenerate />
