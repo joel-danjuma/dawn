@@ -7,7 +7,7 @@ import { ChatSection } from "@/app/dashboard/explore/components/ChatSection";
 const RewriterPage = () => {
   const { input, handleInputChange, handleSubmit, messages, isLoading, data } =
     useChat({
-      api: "/api/rewriter",
+      api: "http://localhost:3000/api/rewriter",
     });
 
   return (
