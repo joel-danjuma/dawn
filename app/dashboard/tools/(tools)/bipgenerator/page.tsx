@@ -17,13 +17,14 @@ const BipGeneratorPage = () => {
   // ) => {
   //   setInputField(e.target.value); // Update the input_field state when the textarea value changes
   // };
-  const { handleInputChange, handleSubmit, messages, isLoading } = useChat({
-    api: "https://dawnaistudy.com/api/bip-generator",
-    body: {
-      grade_level: grade_level,
-      input: input_field,
-    },
-  });
+  const { input, handleInputChange, handleSubmit, messages, isLoading } =
+    useChat({
+      // api: "https://dawnaistudy.com/api/bip-generator",
+      api: "http://localhost:3000/api/bip-generator",
+      body: {
+        grade_level: grade_level,
+      },
+    });
 
   return (
     <>
@@ -54,7 +55,7 @@ const BipGeneratorPage = () => {
 
         <Textarea
           id="input"
-          value={input_field}
+          value={input}
           minRows={2}
           onChange={handleInputChange}
           placeholder="Brief description of student's strengths, behavioral challenges, and other relevant information..."
