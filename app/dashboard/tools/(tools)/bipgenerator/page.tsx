@@ -18,7 +18,7 @@ const BipGeneratorPage = () => {
   //   setInputField(e.target.value); // Update the input_field state when the textarea value changes
   // };
   const { handleInputChange, handleSubmit, messages, isLoading } = useChat({
-    api: "http://localhost:3000/api/bip-generator",
+    api: "http://dawnaistudy.com/api/bip-generator",
     body: {
       grade_level: grade_level,
       input: input_field,
