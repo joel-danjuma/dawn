@@ -14,6 +14,12 @@ import communication from "@/public/communication.png";
 import community from "@/public/community.png";
 import BipGenerator from "@/components/bipgenerator";
 import Rewriter from "@/components/rewriter";
+import { Iepgenerator } from "@/components/iepgenerator";
+import { Professional } from "@/components/professional";
+import Informative from "@/components/informative";
+import { Curriculum } from "@/components/curriculum";
+import { LessonPlaner } from "@/components/lessonplan";
+import Rubic from "@/components/rubic";
 
 export const navItems = [
   { id: 1, name: "Home", img: home, href: "/" },
@@ -40,21 +46,21 @@ export const favourite = [
     id: 1,
     title: "  Group Work Generator ",
     desc: "Facilitate Collaborative Learning Experiences By Assigning Group Tasks,  Managing Discussions,And Tracking Contributions. ",
-    href: "/dawnschool/groupwork",
+    href: "groupworkgenerator",
   },
 
   {
     id: 2,
     title: "BIP Generator   ",
     desc: " Develop Behaviour Intervention Plans (BIPs) To Support Students With Behavioral Challenges And Promote Positive Learning Environments.",
-    href: "/dawnschool/bipgenerator",
+    href: "bipgenerator",
   },
 
   {
     id: 3,
     title: " AI Co-Teacher  ",
     desc: "Collaborate With An AI-Powered Virtual Co-Teacher To Enhance Instructional Delivery, Classroom Management,And Student Support. ",
-    href: "/dawnschool/coteacher",
+    href: "coteacher",
   },
 ];
 
@@ -63,63 +69,63 @@ export const allTools = [
     id: 1,
     title: " Text Rewriter ",
     desc: "Seemlessly Rewrite Texts to Create Unique Content For Lessons, Assignments and Assessments.",
-    component: "Rewriter",
-    href: "/dawnschool/rewriter",
+    component: Rewriter,
+    href: "rewriter",
   },
 
   {
     id: 2,
     title: "Curriculum Generator  ",
     desc: "Design Comprehensive and Customized Curriculums Allignee With Educational Standards And Learning Objectives. ",
-    component: "Curriculum",
-    href: "/dawnschool/curriculum",
+    component: Curriculum,
+    href: "curriculum",
   },
 
   {
     id: 2,
     title: "Informative Test",
     desc: "Access A Vast Library Of Informative Texts Across Various Subjects To Enrich Lesson Plans And Provide Addional Resources To Students",
-    href: "/dawnschool/informative",
-    component: "Informative",
+    href: "informative",
+    component: Informative,
   },
 
   {
     id: 3,
     title: "Professional Email ",
     desc: "Create And Manage Professional Communication With Students, Parents And Colleagues Directly Within The Platform. ",
-    href: "/dawnschool/professional",
-    component: "Professional",
+    href: "professional",
+    component: Professional,
   },
 
   {
     id: 4,
     title: " IEP Generator  ",
     desc: "Generate Individualized Education Programs (IEPs) Tailored To Students' Specific Needs and Learning Styles. ",
-    href: "/dawnschool/iepgenerator",
-    component: "Iepgenerator",
+    href: "iepgenerator",
+    component: Iepgenerator,
   },
 
   {
     id: 5,
     title: "Lesson Plan  ",
     desc: " Develop Detailed Lesson Plans With Interactive Elements, Multimedia Integration, And Differentiated Instruction Strategies. ",
-    href: "/dawnschool/lessonplan",
-    component: "Lessonplan",
+    href: "lessonplan",
+    component: LessonPlaner,
   },
 
   {
     id: 6,
     title: " Rubric Generator",
     desc: "Create Clear and Structured Rubrics For Assessing Student Work, Providing Specific Feedback, And Tracking Progress.  ",
-    href: "/dawnschool/rubic",
-    component: "Rubic",
+    href: "rubic",
+    component: Rubic,
   },
 
   {
     id: 7,
     title: "Academic Content  ",
     desc: " Access Curated Academic Content, Including Articles,Videos And Simulations, To Enhance Teaching Materials And Student Engagement.",
-    href: "/dawnschool/academic",
+    href: "academic",
     component: "Academic",
   },
 
@@ -127,7 +133,7 @@ export const allTools = [
     id: 8,
     title: "Student Work & Feedback   ",
     desc: " Collect, Review, And Provide Feedback On Student Assignments, Projects, And Assessments Efficiently.",
-    href: "/dawnschool/feedback",
+    href: "feedback",
     component: "Feedback",
   },
 
@@ -135,7 +141,7 @@ export const allTools = [
     id: 9,
     title: " Assessment Grader  ",
     desc: "Automatically Grade Assessments, Quizzes, And Assignments Based on Pre-Defined Criteria and Rubrics. ",
-    href: "/rewriter",
+    href: "Grader",
     component: "Rewriter",
   },
 
@@ -143,7 +149,7 @@ export const allTools = [
     id: 10,
     title: " Mathematics Solver ",
     desc: " Assist Students in Solving Complex Math Problems And Equations, Providing Step-By-Step Explanations And Solutions.",
-    href: "/rewriter",
+    href: "Mathematics-solver",
     component: "Rewriter",
   },
 
@@ -151,7 +157,7 @@ export const allTools = [
     id: 11,
     title: " Past Question Request: Facilitate ",
     desc: "Students' Access To Pass Exam Questions And Practice Materials For Better Preparation. ",
-    href: "/rewriter",
+    href: "Past-Questions-Request",
     component: "Rewriter",
   },
 
