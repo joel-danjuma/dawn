@@ -9,8 +9,8 @@ const RewriterPage = () => {
   const [input_field, setInputField] = React.useState("");
 
   const { handleInputChange, handleSubmit, messages, isLoading } = useChat({
-    // api: "https://dawnaistudy.com/api/text-rewriter",
-    api: "http://localhost:3000/api/bip-generator",
+    api: "https://dawnaistudy.com/api/text-rewriter",
+    // api: "http://localhost:3000/api/bip-generator",
     body: {
       text: input_field,
     },
