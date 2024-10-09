@@ -1,23 +1,20 @@
-# Use an official Alpine Linux image as a base
-FROM node:18-alpine
+# Use an official Node.js runtime as the base image
+FROM node:14
 
-# Set the working directory to /app
+# Set the working directory in the container
 WORKDIR /app
 
-# Copy the package.json file
+# Copy package.json and package-lock.json to the working directory
 COPY package*.json ./
 
-# Install dependencies
+# Install application dependencies
 RUN npm install
 
-# Copy the remaining files
+# Copy the rest of the application code to the working directory
 COPY . .
 
-# Build the application
-RUN npm run build
-
-# Expose the port that the app will use
+# Expose a port for the application to listen on
 EXPOSE 3000
 
-# Run the command to start the app
-CMD ["npm", "run", "start"]
+# Define the command to run the application
+CMD [ "npm", "start" ]

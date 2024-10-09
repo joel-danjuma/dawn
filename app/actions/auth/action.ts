@@ -3,11 +3,22 @@ import * as z from "zod";
 import bcrypt from "bcryptjs";
 import { db } from "@/lib/db";
 import { signIn } from "@/auth";
+import { streamText } from "ai";
 import { AuthError } from "next-auth";
 import { LoginSchema } from "@/schemas";
-import { RegisterSchema } from "@/schemas";
 import { redirect } from "next/navigation";
+import { RegisterSchema } from "@/schemas";
 import { revalidatePath } from "next/cache";
+import { createOpenAI } from "@ai-sdk/openai";
+import { createStreamableValue } from "ai/rsc";
+import { CurriculumGeneratorSchema } from "./../../../schemas/index";
+
+const groq = createOpenAI({
+  baseURL: "https://api.groq.com/openai/v1",
+  apiKey: process.env.GROQ_API_KEY,
+});
+const model = groq("llama3-70b-8192");
+
 import { DEFAULT_LOGIN_REDIRECT } from "@/routes";
 // import { LingoletteClient } from "@/lib/lingolette";
 
@@ -134,69 +145,24 @@ export const signup = async (values: z.infer<typeof RegisterSchema>) => {
   }
 };
 
-// SIGN UP FOR USEDAWN IMPLEMENTATION
+export async function generateCurriculum(
+  values: z.infer<typeof CurriculumGeneratorSchema>
+) {
+  const stream = createStreamableValue("");
 
-// export const signup = async (formData: FormData) => {
-//   let user = null;
-//   const credentials = {
-//     email: formData.get("email"),
-//     password: formData.get("password"),
-//   };
+  (async () => {
+    const { textStream } = await streamText({
+      model,
+      prompt:
+        "Generate a curriculum for a course on the topic of 'Mathematics' for a 'Grade 5' student.",
+    });
 
-//   const validatedFields = RegisterSchema.safeParse(credentials);
-//   if (!validatedFields.success) {
-//     let errorMessage = "";
-//     validatedFields.error.issues.forEach((issue) => {
-//       errorMessage = errorMessage + issue.path[0] + ": " + issue.message + ". ";
-//     });
-//     return {
-//       error: errorMessage,
-//     };
-//   }
-//   const { email, password } = validatedFields.data;
-//   const hashedPassword = await bcrypt.hash(password, 10);
-//   try {
-//     const existingUser = await db.user.findUnique({
-//       where: {
-//         email,
-//       },
-//     });
-//     if (existingUser) {
-//       return {
-//         error: "User Account Exists",
-//       };
-//     } else {
-//       user = (await signIn("credentials", {
-//         email,
-//         password: hashedPassword,
-//         redirectTo: DEFAULT_LOGIN_REDIRECT,
-//       })) as User;
-//       if (user !== null) {
-//         await db.user.update({
-//           where: {
-//             id: user.id,
-//           },
-//           data: {
-//             client_description: formData.get("client_description") as string,
-//             course: formData.get("course") as string,
-//           },
-//         });
-//       }
-//       return {
-//         success: "User Created",
-//       };
-//     }
-//   } catch (error) {
-//     if (error instanceof AuthError) {
-//       switch (error.type) {
-//         case "CredentialsSignin":
-//           return { error: "Credentials Error" };
-//         default:
-//           return { error: "Something went wrong!" };
-//       }
-//     }
-//     throw error;
-//   }
-//   revalidatePath("/", "layout");
-//   redirect("/loading");
-// };
+    for await (const delta of textStream) {
+      stream.update(delta);
+    }
+
+    stream.done();
+  })();
+
+  return { output: stream.value };
+}

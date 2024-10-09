@@ -12,16 +12,17 @@ const BipGeneratorPage = () => {
   const handleGradeLevelChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     setGradeLevel(e.target.value); // Update the grade_level state when the input value changes
   };
-  // const handleInputFieldChange = (
-  //   e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>
-  // ) => {
-  //   setInputField(e.target.value); // Update the input_field state when the textarea value changes
-  // };
+  const handleInputFieldChange = (
+    e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>
+  ) => {
+    setInputField(e.target.value); // Update the input_field state when the textarea value changes
+  };
   const { handleInputChange, handleSubmit, messages, isLoading } = useChat({
+    // api: "https://dawnaistudy.com/api/bip-generator",
     api: "http://localhost:3000/api/bip-generator",
     body: {
-      grade_level: grade_level,
       input: input_field,
+      grade_level: grade_level,
     },
   });
 
@@ -56,8 +57,8 @@ const BipGeneratorPage = () => {
           id="input"
           value={input_field}
           minRows={2}
-          onChange={handleInputChange}
-          placeholder="Paste the text you want to rewrite here..."
+          onChange={handleInputFieldChange}
+          placeholder="Brief description of student's strengths, behavioral challenges, and other relevant information..."
           className="w-full resize-none border-0 shadow-none focus-visible:ring-0"
         />
 

@@ -17,11 +17,11 @@ const CurriculumPage = () => {
           Educational Standards And Learning Objectives.
         </p>
       </div>
-      <Curriculum
+      {/* <CurriculumGenerator
         handleSubmit={handleSubmit}
         handleInputChange={handleInputChange}
         input={input}
-      />
+      /> */}
     </>
   );
 };
